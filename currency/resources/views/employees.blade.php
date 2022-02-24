@@ -8,15 +8,10 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                      @if(Auth::user()->hasRole('admin'))
-                    <h4 class="card-title"> جميع الموظفين</h4>
-
-                    @endif
-                      @if(Auth::user()->hasRole('bank'))
+                   
                     <h4 class="card-title"> الموظفين</h4>
                     <p class="card-description"> موظفي <code class="rtl">بنك الخرطوم</code>
                     </p>
-                    @endif
                     <button type="button" class="btn btn-twitter" data-bs-toggle="modal" data-bs-target="#exampleModal">
                  اضافة موظف
                 </button>
@@ -35,7 +30,7 @@
                             <tbody>
                               @foreach($role as $r)
                               @if($r->user_id == '')
-        <td>ahmed</td>
+                              <td>ahmed</td>
                                     <tr>
                                         <td>{{ $r->user_type }} </td>
                                        
