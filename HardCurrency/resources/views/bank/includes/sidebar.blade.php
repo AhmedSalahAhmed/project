@@ -9,20 +9,20 @@
                   <!--change to offline or busy as needed-->
                 </div>
                 <div class="nav-profile-text d-flex flex-column">
-                  <span class="font-weight-bold mb-2">{{ Auth::user()->name }}</span>
+                  <span class="font-weight-bold mb-2">{{ Auth::user()->employee_name }}</span>
                   <span class="text-secondary text-small">{{ Auth::user()->email}}</span>
                 </div>
                 <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('centralbank/currency')}}">
+              <a class="nav-link" href="{{ url('bank/dashboard')}}">
                 <span class="menu-title">  اسعار الصرف</span>
                 <i class="mdi mdi-cash menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('centralbank/statistics') }}">
+              <a class="nav-link" href="#">
                 <span class="menu-title"> الإحصائيات</span>
                 <i class="mdi mdi-chart-bar menu-icon"></i>
                 
@@ -35,15 +35,9 @@
                 
               </a>
             </li>
+          
             <li class="nav-item">
-              <a class="nav-link" href="{{url('centralbank/banks')}}">
-                <span class="menu-title"> البنوك</span>
-                <i class=" mdi mdi-bank  menu-icon"></i>
-                
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('centralbank/employee')}}">
+              <a class="nav-link" href="#">
                 <span class="menu-title"> مدراء البنوك</span>
                 <i class=" mdi mdi-account-multiple  menu-icon"></i>
                 

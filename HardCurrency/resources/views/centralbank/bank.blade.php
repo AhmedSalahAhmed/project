@@ -25,13 +25,13 @@
                         </div>
                         <div class="modal-body">
                     
-                        <form action="{{ route('bank.store') }}" method="post" class="forms-sample">
+                        <form action="{{ route('banks.store') }}" method="post" class="forms-sample">
                             @csrf
                                         
                                         <div class="form-group row">
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label">إسم البنك </label>
                                             <div class="col-sm-9">
-                                            <input type="text" name="name" class="form-control"  placeholder=" إسم البنك">
+                                            <input type="text" name="bank_name" class="form-control"  placeholder=" إسم البنك">
                                             </div>
                                         </div>
                                         <!-- <div class="form-group row">
@@ -86,7 +86,7 @@
                           <td class="py-1">
                             <img src="{{$bank->logo}}" alt="image" />
                           </td>
-                          <td> {{$bank->name}}</td>
+                          <td> {{$bank->bank_name}}</td>
                           
                           <td>{{$bank->address}}</td>
                           <td>{{$bank->created_at}}</td>
@@ -96,7 +96,7 @@
                             </button> 
                             </td>
                             <td>
-                            <form method="post" action="{{route('bank.destroy',$bank->id)}}">
+                            <form method="post" action="{{route('banks.destroy',$bank->id)}}">
                             @method('delete')
                             @csrf
                             <button type="submit" class="btn btn-danger btn-sm">حذف</button>
@@ -116,14 +116,14 @@
                                 
                                 
 
-                            <form action="{{ route('bank.update', $bank->id) }}" method="POST">
+                            <form action="{{ route('banks.update', $bank->id) }}" method="POST">
 
                             @csrf
 
                                 @method('put')
                                 
-                                <input type="text" name="name" class="form-control mb-3" placeholder=" العملة " value="{{$bank->name}}">
-                                <input type="text" name="address" class="form-control mb-3" placeholder="سعر البيع " value="{{$bank->address}}">
+                                <input type="text" name="bank_name" class="form-control mb-3" placeholder=" اسم البنك " value="{{$bank->bank_name}}">
+                                <input type="text" name="address" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->address}}">
                                 
 
                                 

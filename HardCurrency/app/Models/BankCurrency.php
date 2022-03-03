@@ -50,7 +50,7 @@ class BankCurrency extends Model
      */
     public function currency(): BelongsTo
     {
-        return $this->belongsTo(Currency::class)->select('id','name')->withDefault();
+        return $this->belongsTo(Currency::class)->select('id','currency_name')->withDefault();
     }
 
     /**

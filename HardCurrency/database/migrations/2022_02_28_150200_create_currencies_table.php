@@ -15,9 +15,9 @@ class CreateCurrenciesTable extends Migration
     {
         Schema::create('currencies', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->bigInteger('sale_price')->default(0);
-            $table->bigInteger('buy_price')->default(0);
+            $table->string('currency_name')->nullable();
+            $table->double('sale_price')->default(0);
+            $table->double('buy_price')->default(0);
             $table->timestamps();
         });
     }

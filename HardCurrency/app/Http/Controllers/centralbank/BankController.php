@@ -40,14 +40,14 @@ class BankController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'bank_name' => 'required',
             'logo' => 'required',
             'address' => 'required',
         ]);
         Bank::create($request->all());
         // Alert::success('تم ', 'تم اضافة  بنك جديد للنظام بنجاح');
      
-        return redirect()->route('bank.index');
+        return redirect()->route('banks.index');
     }
 
     /**
@@ -85,7 +85,7 @@ class BankController extends Controller
     {
         $bank->update($request->all());
         // Alert::success('تهانينا !!', 'تم تعديل بيانات البنك بنجاح');
-        return redirect()->route('bank.index');
+        return redirect()->route('banks.index');
     }
 
     /**
@@ -100,7 +100,7 @@ class BankController extends Controller
     {
        
         $bank->delete();
-        return redirect()->route('bank.index')
+        return redirect()->route('banks.index')
         ->withSuccess(__('Bank delete successfully.'));
     }
 }

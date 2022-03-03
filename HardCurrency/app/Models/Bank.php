@@ -24,7 +24,7 @@ class Bank extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
+        'bank_name',
         'logo',
         'type',
         'address'

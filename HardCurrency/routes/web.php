@@ -19,36 +19,33 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::group(['prefix' => 'centralbank'], function() {
 
-Route::get('/centralbank', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => 'auth'], function(){
-    Route::resource('centralbank/bank', centralbank\BankController::class);       
-    Route::resource('centralbank/employee', centralbank\EmployeesController::class);       
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::resource('statistics', centralbank\StatisticsController::class);
+
+    Route::resource('banks', centralbank\BankController::class);       
+    Route::resource('currency', centralbank\CurrencyController::class);       
+
+    Route::resource('employee', centralbank\EmployeesController::class);       
+
+    });
 });
-// Route::prefix('employee')->group(function() {
 
-//     Route::group(['middleware' => 'employee.guest'],  function(){
-//         Route::view('/login','employee.login')->name('employee.login');
-//         // Route::post('/login', ['EmployeeController'::class, 'authenticate'])->name('employee.auth');
-//     Route::post('/login', 'Auth\EmployeeController@login')->name('employee.auth');
-
-
-//     });
-//     Route::group(['middleware' => 'employee.auth'],  function(){
-//         Route::get('/dashboard', ['dashboardController'::class, 'dashboard'])->name('employee.dashboard');
-
-//     });
     
-Route::group(['prefix' => 'employee'], function() {
+Route::group(['prefix' => 'bank'], function() {
     Route::group(['middleware' => 'employee.guest'], function(){
-        Route::view('/login','employee.login')->name('employee.login');
-        Route::post('/login',[App\Http\Controllers\EmployeeController::class, 'authenticate'])->name('employee.auth');
+        Route::view('/login','bank.login')->name('employee.login');
+        Route::post('/login',[App\Http\Controllers\bank\EmployeeController::class, 'authenticate'])->name('employee.auth');
     });
 
-    Route::group(['middleware' => 'employee.auth'], function(){
-        Route::get('/dashboard',[App\Http\Controllers\EmployeeDashboardController::class, 'dashboard'])->name('employee.dashboard');
-        Route::get('/logout', [App\Http\Controllers\EmployeeController::class, 'logout'])->name('employee.logout');
+    Route::group(['middleware' => 'employee.auth' ], function(){
+        Route::get('/dashboard',[App\Http\Controllers\bank\EmployeeDashboardController::class, 'index'])->name('employee.dashboard');
+        Route::get('/logout', [App\Http\Controllers\bank\EmployeeController::class, 'logout'])->name('employee.logout');
+        Route::resource('bank', bank\EmployeeDashboardController::class);       
+
 
     });
 });

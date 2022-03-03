@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-class Employee extends Authenticatable
+class Employee extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -25,7 +26,7 @@ class Employee extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'employee_name',
         'email',
         'bank_id',
         'user_type',

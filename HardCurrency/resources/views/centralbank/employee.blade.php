@@ -19,6 +19,15 @@
                                   </ul>
                               </div>
                           @endif  
+                          <!-- Display message -->
+
+                        @if (session('success'))
+
+                        <div class="alert alert-success">
+                            {{ session('success')}}
+                        </div>
+
+                        @endif
                     <h4 class="card-title"> الموظفين </h4>
                     <p class="card-description">    <code class="rtl">مدراء</code>البنوك
                     </p>
@@ -46,7 +55,7 @@
                                             <option value="">إختار أحد البنوك المُسَجَلة</option>
 
                                                 @foreach($banks as $bank)
-                                                <option value="{{$bank->id}}">{{$bank->name}}</option>
+                                                <option value="{{$bank->id}}">{{$bank->bank_name}}</option>
                                                 @endforeach
                                             </select>
                                             </div>
@@ -56,7 +65,7 @@
                                         <div class="form-group row">
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> الإسم </label>
                                             <div class="col-sm-9">
-                                            <input type="text" name="name" class="form-control"  placeholder=" اسم مدير البنك ">
+                                            <input type="text" name="employee_name" class="form-control"  placeholder=" اسم مدير البنك ">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -113,9 +122,9 @@
 
                         <tr>
                           <td class="py-1">
-                          {{$employee->name}}
+                          {{$employee->employee_name}}
                           </td>
-                          <td> {{$employee->bank_id}}</td>
+                          <td> {{$employee->bank_name}}</td>
                           
                           <td>{{$employee->email}}</td>
                           <td>
@@ -150,7 +159,7 @@
 
                                 @method('put')
                                 
-                                <input type="text" name="name" class="form-control mb-3" placeholder=" اسم الموظف " value="{{$employee->name}}">
+                                <input type="text" name="employee_name" class="form-control mb-3" placeholder=" اسم الموظف " value="{{$employee->employee_name}}">
                                 <input type="email" name="email" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$employee->email}}">
                                 
 

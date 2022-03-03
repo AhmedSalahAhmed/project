@@ -16,7 +16,7 @@ class CreateEmployeesTable extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->foreignId('bank_id')->nullable()->constrained('banks')->onDelete('cascade');
-            $table->string('name')->nullable();
+            $table->string('employee_name')->nullable();
             $table->string('email')->nullable()->unique();
             $table->string('password')->nullable();
             $table->string('national_id')->nullable();

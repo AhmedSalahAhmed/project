@@ -20,7 +20,10 @@ class EmployeesController extends Controller
     public function index()
     {
         $banks = Bank::all();
-        $employees = Employee::all();
+        
+        $employees = Employee::join('banks', 'employees.bank_id', '=', 'banks.id')
+               ->get(['employees.*', 'banks.bank_name']);
+            //    return $employees;
         return view('centralbank.employee', compact('employees','banks'));
     }
 
@@ -44,7 +47,7 @@ class EmployeesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string',
+            'employee_name' => 'required|string',
             'bank_id' => 'required|exists:banks,id',
             'email' => 'required|email|unique:employees,email',
             'date_of_birth' => 'nullable|date',
@@ -53,14 +56,15 @@ class EmployeesController extends Controller
         ]);
         $employee = Employee::create([
             'bank_id' => $request->bank_id,
-            'name' => $request->name,
+            'employee_name' => $request->employee_name,
             'email' => $request->email,
             'user_type' => 'admin',
             'date_of_birth' => $request->date_of_birth,
             'national_id' => $request->national_id,
             'password' => Hash::make($request->password),
         ]);
-        return redirect()->route('employee.index');
+        return redirect()->route('employee.index')
+        ->with('success','تمت تســجيل مدير بنك بنجاح');
 
     }
 
@@ -97,7 +101,7 @@ class EmployeesController extends Controller
     public function update(Request $request, Employee $employee)
     {
         $request->validate([
-            'name' => 'required|string',
+            'employee_name' => 'required|string',
             // 'bank_id' => 'required|exists:banks,id',
             'email' => 'required|email',
             'date_of_birth' => 'nullable|date',
@@ -105,7 +109,7 @@ class EmployeesController extends Controller
             // 'password' => 'required|string',
         ]);
         $employee->update([
-            'name' => $request->name,
+            'employee_name' => $request->employee_name,
             'user_type' => 'admin',
             'date_of_birth' => $request->date_of_birth,
             'national_id' => $request->national_id,
@@ -122,7 +126,9 @@ class EmployeesController extends Controller
                 'password' => Hash::make($request->password),
             ]);
         }
-        return redirect()->route('employee.index');
+        return redirect()->route('employee.index')
+        ->with('success','تمت تعديل بيانات المدير  بنجاح');
+        
 
     }
 
@@ -137,6 +143,8 @@ class EmployeesController extends Controller
     public function destroy(Employee $employee)
     {
         $employee->delete();
-        return redirect()->route('employee.index');
+        return redirect()->route('employee.index')
+        ->with('success','تم حذف الســـجل');
+        
     }
 }
