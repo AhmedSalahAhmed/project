@@ -40,7 +40,8 @@ class BankCurrency extends Model
      */
     public function bank(): BelongsTo
     {
-        return $this->belongsTo(Bank::class)->select('id','name','logo')->withDefault();
+        return $this->belongsTo(Bank::class);
+        // return $this->belongsTo(Bank::class)->select('id','bank_name','logo')->withDefault();
     }
 
     /**
@@ -50,7 +51,13 @@ class BankCurrency extends Model
      */
     public function currency(): BelongsTo
     {
-        return $this->belongsTo(Currency::class)->select('id','currency_name')->withDefault();
+        return $this->belongsTo(Currency::class);
+        // return $this->belongsTo(Currency::class)->select('id','currency_name')->withDefault();
+    }
+    public function currency_price()
+    {
+        return $this->belongsTo(CurrencyPrice::class);
+       
     }
 
     /**

@@ -18,14 +18,7 @@ class Transaction extends Model
      */
     protected $table = 'transactions';
 
-    protected $with = ['transactional','bank_currency'];
-
-    public static $operation_names = [
-        'deposit' => 'إيداع',
-        'withdraw' => 'سحب',
-        'transfer' => 'تحويل بنكي'
-    ];
-
+  
     /**
      * The attributes that are mass assignable.
      *
@@ -38,38 +31,20 @@ class Transaction extends Model
         'client_name',
         'client_phone',
         'id_number',
-        'price',
-        'transactional_type',
-        'transactional_id',
-        'qte'
+        'amount',
     ];
 
-    /**
-     * Get the bank that owns the Transaction
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function bank(): BelongsTo
+ 
+    public function bank()
     {
-        return $this->belongsTo(Bank::class)->withDefault();
+        return $this->hasOne(Bank::class);
     }
 
-    /**
-     * Get the bank_currency that owns the Transaction
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function bank_currency(): BelongsTo
+  
+    public function bank_currency()
     {
-        return $this->belongsTo(BankCurrency::class,)->select('id','currency_id')->with('currency');
+        return $this->belongsTo(BankCurrency::class,);
     }
 
 
-    public function transactional(){
-        return $this->morphTo(__FUNCTION__,'transactional_type','transactional_id')->select('id','name','email');
-    }
-
-    public static function get_the_price($type, BankCurrency $bank_currency){
-        return $type == 'deposit' ? $bank_currency->sale_price : $bank_currency->buy_price;
-    }
 }

@@ -16,9 +16,14 @@ class CreateBanksTable extends Migration
         Schema::create('banks', function (Blueprint $table) {
             $table->id();
             $table->string('bank_name')->nullable()->unique();
-            $table->enum('type',['main','branch'])->default('main');
+            $table->string('email')->unique();
+            $table->string('phone_number');
+            $table->foreignId('branch_id')->constrained('branches')->nullable()
+            ->onDelete('cascade')->onUpdate('cascade');
             $table->string('logo')->nullable();
-            $table->text('address')->nullable();
+            $table->text('state')->nullable();
+            $table->text('city')->nullable();
+            $table->text('district')->nullable();
             $table->timestamps();
         });
     }

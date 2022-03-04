@@ -15,13 +15,11 @@ class CreateEmployeesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('bank_id')->nullable()->constrained('banks')->onDelete('cascade');
+            $table->foreignId('bank_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('employee_name')->nullable();
             $table->string('email')->nullable()->unique();
             $table->string('password')->nullable();
-            $table->string('national_id')->nullable();
             $table->enum('user_type',['user','admin'])->default('user');
-            $table->date('date_of_birth')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

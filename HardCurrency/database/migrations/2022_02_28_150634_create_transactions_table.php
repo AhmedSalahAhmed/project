@@ -20,9 +20,9 @@ class CreateTransactionsTable extends Migration
             $table->string('client_name')->nullable();
             $table->string('client_phone')->nullable();
             $table->string('id_number')->nullable();
-            $table->bigInteger('qte')->default(0);
-            $table->foreignId('fk_bank')->nullable()->constrained('banks')->onDelete('cascade');
-            $table->enum('type',['deposit','withdraw','transfer'])->nullable();
+            $table->bigInteger('amount')->default(0);
+            $table->foreignId('bank_fk')->nullable()->constrained('banks')->onDelete('cascade');
+            $table->foreignId('bank_currency_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

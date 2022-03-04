@@ -43,6 +43,7 @@ class Bank extends Model
         return $this->hasMany(BankCurrency::class,);
     }
 
+
     /**
      * Get all of the employees for the Bank
      *
@@ -58,9 +59,14 @@ class Bank extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function transactions(): HasMany
+    public function transactions()
     {
-        return $this->hasMany(Transaction::class);
+        return $this->belongsTo(Transaction::class);
+    }
+
+    public function branches()
+    {
+        return $this->hasMany(Branch::class);
     }
 
     // /**

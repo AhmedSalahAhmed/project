@@ -38,4 +38,8 @@ class Currency extends Model
     {
         return $this->hasMany(BankCurrency::class,);
     }
+    public function currency_prices()
+    {
+        return $this->hasOne(CurrencyPrice::class,);
+    }
 }
