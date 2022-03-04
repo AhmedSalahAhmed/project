@@ -30,8 +30,6 @@ class Employee extends Authenticatable implements MustVerifyEmail
         'email',
         'bank_id',
         'user_type',
-        'date_of_birth',
-        'national_id',
         'password'
     ];
 

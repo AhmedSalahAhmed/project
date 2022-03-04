@@ -19,6 +19,7 @@ class CreateCurrencyPricesTable extends Migration
             ->onUpdate('cascade');
             $table->double('sale_price')->default(0);
             $table->double('buy_price')->default(0);
+            $table->timestamp('currency_date')->useCurrent();
             $table->timestamps();
         });
     }

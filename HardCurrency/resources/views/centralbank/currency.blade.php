@@ -39,10 +39,9 @@
                             <thead>
                                 <tr>                       
                                     <th scope="col">العملة </th>
-                                    <th scope="col">سعر الشراء </th>
-                                    <th scope="col">سعر البيع </th>
-                                    <th scope="col"> المتوسط </th>
-                                    <th scope="col">تعـــديل سعر الصرف</th>
+                                    <th scope="col">الرمز  </th>
+                                    <th scope="col">العلامة  </th>
+                                    <th scope="col">تعـــديل  </th>
                                     <th scope="col">  حذف العملة</th>
                                 </tr>
                             </thead>
@@ -51,9 +50,8 @@
                                 <tr>
                                     
                                     <td>{{$currency->currency_name}}</td>
-                                    <td>{{$currency->buy_price}}</td>
-                                    <td>{{$currency->sale_price}}</td>
-                                    <td>{{($currency->buy_price + $currency->sale_price) / 2}}</td>
+                                    <td>{{$currency->abbreviation}}</td>
+                                    <td>{{$currency->symbol}}</td>
                                     <td>
                                     <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{$currency->id}}">
                                     تعديل
@@ -93,8 +91,8 @@
                                     @method('put')
                                     
                                     <input type="text" name="currency_name" class="form-control mb-3" placeholder=" العملة " value="{{$currency->currency_name}}" disabled="disabled">
-                                    <input type="text" name="buy_price" class="form-control mb-3" placeholder="سعر الشراء " value="{{$currency->buy_price}}">
-                                    <input type="text" name="sale_price" class="form-control mb-3" placeholder="سعر البيع " value="{{$currency->sale_price}}">
+                                    <input type="text" name="abbreviation" class="form-control mb-3" placeholder="سعر الشراء " value="{{$currency->abbreviation}}">
+                                    <input type="text" name="symbol" class="form-control mb-3" placeholder="سعر البيع " value="{{$currency->symbol}}">
                                     
 
                                     
@@ -147,8 +145,8 @@
                   @csrf
                      
                      <input type="text" name="currency_name" class="form-control mb-3" placeholder=" العملة ">
-                     <input type="text" name="buy_price" class="form-control mb-3" placeholder="سعر الشراء ">
-                     <input type="text" name="sale_price" class="form-control mb-3" placeholder="سعر البيع ">
+                     <input type="text" name="abbreviation" class="form-control mb-3" placeholder=" الرمز ">
+                     <input type="text" name="symbol" class="form-control mb-3" placeholder="العلامة  ">
                      <button class="btn btn-twitter float-end px-5" type="submit">تم</button>
 
                  </form>

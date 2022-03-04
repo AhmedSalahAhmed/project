@@ -28,10 +28,22 @@
                         <form action="{{ route('banks.store') }}" method="post" class="forms-sample">
                             @csrf
                                         
-                                        <div class="form-group row">
+                            <div class="form-group row">
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label">إسم البنك </label>
                                             <div class="col-sm-9">
                                             <input type="text" name="bank_name" class="form-control"  placeholder=" إسم البنك">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">البريد الالكتروني </label>
+                                            <div class="col-sm-9">
+                                            <input type="email" name="email" class="form-control"  placeholder=" البريد الالكتروني">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">رقم الهاتف </label>
+                                            <div class="col-sm-9">
+                                            <input type="text" name="phone" class="form-control"  placeholder=" رقم الهاتف">
                                             </div>
                                         </div>
                                         <!-- <div class="form-group row">
@@ -51,9 +63,21 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> العنوان</label>
+                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> الولاية</label>
                                             <div class="col-sm-9">
-                                            <input type="text" name="address" class="form-control"  placeholder="العنوان ">
+                                            <input type="text" name="state" class="form-control"  placeholder="الولاية ">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">المدينة </label>
+                                            <div class="col-sm-9">
+                                            <input type="text" name="city" class="form-control"  placeholder=" المدينة">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">المحلية </label>
+                                            <div class="col-sm-9">
+                                            <input type="text" name="district" class="form-control"  placeholder=" المحلية">
                                             </div>
                                         </div>
                                         
@@ -73,6 +97,7 @@
                         <tr>
                           <th> شعار البنك </th>
                           <th> اسم البنك </th>
+                          <th> البريدالإلكتروني  </th>
                           <th>  العنوان </th>
                           <th> تاريخ الإنضمام للنظام  </th>
                           <th> تعديل    </th>
@@ -87,8 +112,9 @@
                             <img src="{{$bank->logo}}" alt="image" />
                           </td>
                           <td> {{$bank->bank_name}}</td>
+                          <td> {{$bank->email}}</td>
                           
-                          <td>{{$bank->address}}</td>
+                          <td>{{$bank->state}},{{$bank->city}},{{$bank->district}}</td>
                           <td>{{$bank->created_at}}</td>
                           <td>
                             <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{$bank->id}}">
@@ -123,7 +149,11 @@
                                 @method('put')
                                 
                                 <input type="text" name="bank_name" class="form-control mb-3" placeholder=" اسم البنك " value="{{$bank->bank_name}}">
-                                <input type="text" name="address" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->address}}">
+                                <input type="text" name="email" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->email}}">
+                                <input type="text" name="phone" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->phone}}">
+                                <input type="text" name="state" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->state}}">
+                                <input type="text" name="city" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->city}}">
+                                <input type="text" name="district" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->district}}">
                                 
 
                                 

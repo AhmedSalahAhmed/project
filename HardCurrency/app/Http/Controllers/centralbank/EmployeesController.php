@@ -48,10 +48,8 @@ class EmployeesController extends Controller
     {
         $request->validate([
             'employee_name' => 'required|string',
-            'bank_id' => 'required|exists:banks,id',
+            'bank_id' => 'required|exists:banks,id|unique',
             'email' => 'required|email|unique:employees,email',
-            'date_of_birth' => 'nullable|date',
-            'national_id' => 'nullable|string',
             'password' => 'required|string',
         ]);
         $employee = Employee::create([
@@ -59,8 +57,6 @@ class EmployeesController extends Controller
             'employee_name' => $request->employee_name,
             'email' => $request->email,
             'user_type' => 'admin',
-            'date_of_birth' => $request->date_of_birth,
-            'national_id' => $request->national_id,
             'password' => Hash::make($request->password),
         ]);
         return redirect()->route('employee.index')
@@ -104,15 +100,11 @@ class EmployeesController extends Controller
             'employee_name' => 'required|string',
             // 'bank_id' => 'required|exists:banks,id',
             'email' => 'required|email',
-            'date_of_birth' => 'nullable|date',
-            'national_id' => 'nullable|string',
             // 'password' => 'required|string',
         ]);
         $employee->update([
             'employee_name' => $request->employee_name,
             'user_type' => 'admin',
-            'date_of_birth' => $request->date_of_birth,
-            'national_id' => $request->national_id,
         ]);
 
         if ($request->email != $employee->email) {

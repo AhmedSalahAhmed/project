@@ -44,21 +44,22 @@ class CurrencyController extends Controller
     {
         $request->validate([
             'currency_name' => 'required',
-            'buy_price' => 'required',
-            'sale_price' => 'required',
+            'abbreviation' => 'required',
 
         ]);
-        $stored = Currency::create($request->all());
-        $banks = Bank::all();
+        
+        Currency::create($request->all());
+        // $stored = Currency::create($request->all());
+        // $banks = Bank::all();
 
-        foreach( $banks as $bank){
-            BankCurrency::create([
-                "bank_id" => $bank->id, 
-                "currency_id" => $stored->id,
-                "buy_price" => $stored->buy_price, 
-                "sale_price" => $stored->sale_price 
-            ]);
-        }
+        // foreach( $banks as $bank){
+        //     BankCurrency::create([
+        //         "bank_id" => $bank->id, 
+        //         "currency_id" => $stored->id,
+        //         "buy_price" => $stored->buy_price, 
+        //         "sale_price" => $stored->sale_price 
+        //     ]);
+        // }
 
         Alert::success('تهانينا !!', 'تم اضافة  عملة جديدة بنجاح');
      
@@ -97,8 +98,8 @@ class CurrencyController extends Controller
     public function update(Request $request, Currency $currency)
     {
         $request->validate([
-            'buy_price' => 'required',
-            'sale_price' => 'required',
+            'abbreviation' => 'required',
+            'symbol' => 'required',
 
 
         ]);

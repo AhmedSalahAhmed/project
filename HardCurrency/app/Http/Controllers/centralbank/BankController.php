@@ -41,8 +41,12 @@ class BankController extends Controller
     {
         $request->validate([
             'bank_name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
             'logo' => 'required',
-            'address' => 'required',
+            'state' => 'required',
+            'city' => 'required',
+            'district' => 'required',
         ]);
         Bank::create($request->all());
         // Alert::success('تم ', 'تم اضافة  بنك جديد للنظام بنجاح');
@@ -83,6 +87,16 @@ class BankController extends Controller
      */
     public function update(Request $request, Bank $bank)
     {
+        $request->validate([
+            'bank_name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'logo' => 'required',
+            'state' => 'required',
+            'city' => 'required',
+            'district' => 'required',
+        ]);
+        
         $bank->update($request->all());
         // Alert::success('تهانينا !!', 'تم تعديل بيانات البنك بنجاح');
         return redirect()->route('banks.index');

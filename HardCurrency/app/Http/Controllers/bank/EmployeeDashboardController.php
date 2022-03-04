@@ -56,7 +56,7 @@ class EmployeeDashboardController extends Controller
             'id_number' => 'required',
             'qte' => 'required',
             'type' => 'required',
-            // 'currency' => 'required',
+            'currency' => 'required',
         ]);
         Transaction::create($request->all());
 

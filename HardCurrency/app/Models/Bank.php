@@ -25,9 +25,12 @@ class Bank extends Model
      */
     protected $fillable = [
         'bank_name',
+        'email',
+        'phone',
         'logo',
-        'type',
-        'address'
+        'state',
+        'city',
+        'district',
     ];
 
     protected $with = ['currencies'];

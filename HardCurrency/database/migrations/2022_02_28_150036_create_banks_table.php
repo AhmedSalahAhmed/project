@@ -17,13 +17,13 @@ class CreateBanksTable extends Migration
             $table->id();
             $table->string('bank_name')->nullable()->unique();
             $table->string('email')->unique();
-            $table->string('phone_number');
-            $table->foreignId('branch_id')->constrained('branches')->nullable()
-            ->onDelete('cascade')->onUpdate('cascade');
+            $table->string('phone');
+            // $table->foreignId('branch_id')->constrained('branches')->nullable()
+            // ->onDelete('cascade')->onUpdate('cascade');
             $table->string('logo')->nullable();
-            $table->text('state')->nullable();
-            $table->text('city')->nullable();
-            $table->text('district')->nullable();
+            $table->string('state')->nullable();
+            $table->string('city')->nullable();
+            $table->string('district')->nullable();
             $table->timestamps();
         });
     }

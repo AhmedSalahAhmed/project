@@ -74,18 +74,7 @@
                                             <input type="email" name="email" class="form-control" id="floatingInput"  placeholder="البريد الالكتروني ">
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> تاريخ الميلاد</label>
-                                            <div class="col-sm-9">
-                                            <input type="date" name="date_of_birth" class="form-control"  placeholder=" تاريخ الميلاد ">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> الرقم الوطني</label>
-                                            <div class="col-sm-9">
-                                            <input type="text" name="national_id" class="form-control"  placeholder=" الرقم الوطني ">
-                                            </div>
-                                        </div>
+                                       
                                         <div class="form-group row">
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> كلمة المرور</label>
                                             <div class="col-sm-9">

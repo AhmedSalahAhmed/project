@@ -25,8 +25,8 @@ class Currency extends Model
      */
     protected $fillable = [
         'currency_name',
-        'buy_price',
-        'sale_price',
+        'abbreviation',
+        'symbol',
     ];
 
     /**
