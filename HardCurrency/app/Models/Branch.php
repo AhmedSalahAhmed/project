@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Branch extends Model
@@ -26,8 +28,14 @@ class Branch extends Model
         'phone_number'
     ];
 
-    public function bank()
+     /**
+     * Get the bank that owns the Employee
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function bank(): BelongsTo
     {
-        return $this->belongsTo(Bank::class);
+        return $this->belongsTo(Bank::class)->withDefault();
     }
+    
 }

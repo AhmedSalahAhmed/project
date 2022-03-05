@@ -8,6 +8,7 @@ use App\Models\Currency;
 use App\Models\BankCurrency;
 use App\Models\Bank;
 use Alert;
+use App\Models\CurrencyPrice;
 
 class CurrencyController extends Controller
 {
@@ -19,8 +20,7 @@ class CurrencyController extends Controller
     public function index()
     {
         $currencies = Currency::oldest()->paginate(7);
-		return view('centralbank.currency',compact('currencies'))->with('i', (request()->input('page', 1) - 1) * 7);
-        
+        return view('centralbank.currency', compact('currencies'))->with('i', (request()->input('page', 1) - 1) * 7);
     }
 
     /**
@@ -31,7 +31,7 @@ class CurrencyController extends Controller
     public function create()
     {
         $currencies = Currency::all();
-        return view('centralbank.currency' , compact('currencies'));
+        return view('centralbank.currency', compact('currencies'));
     }
 
     /**
@@ -47,22 +47,19 @@ class CurrencyController extends Controller
             'abbreviation' => 'required',
 
         ]);
-        
-        Currency::create($request->all());
-        // $stored = Currency::create($request->all());
-        // $banks = Bank::all();
 
-        // foreach( $banks as $bank){
-        //     BankCurrency::create([
-        //         "bank_id" => $bank->id, 
-        //         "currency_id" => $stored->id,
-        //         "buy_price" => $stored->buy_price, 
-        //         "sale_price" => $stored->sale_price 
-        //     ]);
-        // }
+        // Currency::create($request->all());
+        $stored = Currency::create($request->all());
+        // $banks = Bank::all();
+        // return $stored->id;
+        CurrencyPrice::create([
+            "currency_id" => $stored->id,
+            "sale_price" => 0,
+            "buy_price" => 0,
+        ]);
 
         Alert::success('تهانينا !!', 'تم اضافة  عملة جديدة بنجاح');
-     
+
         return redirect()->route('currency.index');
     }
 
@@ -112,7 +109,7 @@ class CurrencyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-  * @param  \App\Models\Currency  $currency
+     * @param  \App\Models\Currency  $currency
      * @return \Illuminate\Http\Response
      */
     public function destroy(Currency $currency)
@@ -121,5 +118,5 @@ class CurrencyController extends Controller
 
         return redirect()->route('currency.index')
             ->withSuccess(__('تم حذف العملة بنجاح'));
-    }  
+    }
 }

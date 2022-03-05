@@ -16,7 +16,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('bank/dashboard')}}">
+              <a class="nav-link" href="{{ url('manager/dashboard')}}">
                 <span class="menu-title">  اسعار الصرف</span>
                 <i class="mdi mdi-cash menu-icon"></i>
               </a>
@@ -37,8 +37,8 @@
             </li>
           
             <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span class="menu-title"> مدراء البنوك</span>
+              <a class="nav-link" href="{{url('manager/employees')}}">
+                <span class="menu-title"> الموظفين </span>
                 <i class=" mdi mdi-account-multiple  menu-icon"></i>
                 
               </a>

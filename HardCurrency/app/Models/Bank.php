@@ -56,6 +56,20 @@ class Bank extends Model
     {
         return $this->hasMany(Employee::class);
     }
+    public function managers(): HasMany
+    {
+        return $this->hasMany(Manager::class);
+    }
+
+    /**
+     * Get all of the employees for the Bank
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function branches(): HasMany
+    {
+        return $this->hasMany(Branch::class);
+    }
 
     /**
      * Get all of the transactions for the Bank
@@ -67,10 +81,6 @@ class Bank extends Model
         return $this->belongsTo(Transaction::class);
     }
 
-    public function branches()
-    {
-        return $this->hasMany(Branch::class);
-    }
 
     // /**
     //  * Get,Set the logo

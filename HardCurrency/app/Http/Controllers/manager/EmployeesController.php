@@ -56,7 +56,6 @@ class EmployeesController extends Controller
             'bank_id' => $bank_id,
             'employee_name' => $request->employee_name,
             'email' => $request->email,
-            'user_type' => 'admin',
             'password' => Hash::make($request->password),
         ]);
         return redirect()->route('employees.index')

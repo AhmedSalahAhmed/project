@@ -23,12 +23,13 @@ Auth::routes();
 Route::group(['prefix' => 'centralbank'], function() {
 
 Route::group(['middleware' => 'auth'], function(){
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    
 
 Route::resource('statistics', centralbank\StatisticsController::class);
 
     Route::resource('banks', centralbank\BankController::class);       
     Route::resource('currency', centralbank\CurrencyController::class);       
+    Route::resource('price', centralbank\PriceController::class);       
 
     Route::resource('managers', centralbank\ManagersController::class);       
 

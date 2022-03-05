@@ -17,7 +17,13 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url('centralbank/currency')}}">
-                <span class="menu-title">  اسعار الصرف</span>
+                <span class="menu-title">   العملات</span>
+                <i class="mdi mdi-cash menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('centralbank/price')}}">
+                <span class="menu-title">  اسعار العملات</span>
                 <i class="mdi mdi-cash menu-icon"></i>
               </a>
             </li>
@@ -43,7 +49,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{url('centralbank/employee')}}">
+              <a class="nav-link" href="{{url('centralbank/managers')}}">
                 <span class="menu-title"> مدراء البنوك</span>
                 <i class=" mdi mdi-account-multiple  menu-icon"></i>
                 

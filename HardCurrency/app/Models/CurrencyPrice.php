@@ -16,6 +16,7 @@ class CurrencyPrice extends Model
     protected $fillable = [
         'buy_price',
         'sale_price',
+        'currency_id',
         
     ];
 

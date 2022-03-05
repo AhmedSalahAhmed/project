@@ -15,10 +15,10 @@
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <!-- End layout styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
