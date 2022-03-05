@@ -1,9 +1,9 @@
 
-@include('centralbank.includes.header')
+@include('manager.includes.header')
 
-@include('centralbank.includes.navbar')
+@include('manager.includes.navbar')
 
-@include('centralbank.includes.sidebar')
+@include('manager.includes.sidebar')
  
    
 <div class="col-lg-12 grid-margin stretch-card">
@@ -29,8 +29,8 @@
 
                         @endif
                     <h4 class="card-title"> الموظفين </h4>
-                    <p class="card-description">    <code class="rtl">مدراء</code>البنوك
-                    </p>
+                    <!-- <p class="card-description">    <code class="rtl">مدراء</code>البنوك
+                    </p> -->
                     <button type="button" class="btn btn-twitter" data-bs-toggle="modal" data-bs-target="#addModal">
                     اضافة موظف
                     </button>
@@ -44,28 +44,15 @@
                         </div>
                         <div class="modal-body">
                     
-                        <form action="{{ route('employee.store') }}" method="post" class="forms-sample" autocomplete="off">
+                        <form action="{{ route('employees.store') }}" method="post" class="forms-sample" autocomplete="off">
                             @csrf
                                         
-                            <div class="form-group row">
-                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> البنك</label>
-                                            <div class="col-sm-9">
-                                                
-                                            <select name="bank_id" id="" class="form-select">
-                                            <option value="">إختار أحد البنوك المُسَجَلة</option>
-
-                                                @foreach($banks as $bank)
-                                                <option value="{{$bank->id}}">{{$bank->bank_name}}</option>
-                                                @endforeach
-                                            </select>
-                                            </div>
-                        
-                                        </div>
+                       
                                        
                                         <div class="form-group row">
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> الإسم </label>
                                             <div class="col-sm-9">
-                                            <input type="text" name="employee_name" class="form-control"  placeholder=" اسم مدير البنك ">
+                                            <input type="text" name="employee_name" class="form-control"  placeholder=" اسم الموظف  ">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -122,7 +109,7 @@
                             </button> 
                             </td>
                             <td>
-                            <form method="post" action="{{route('employee.destroy',$employee->id)}}">
+                            <form method="post" action="{{route('employees.destroy',$employee->id)}}">
                             @method('delete')
                             @csrf
                             <button type="submit" class="btn btn-danger btn-sm">حذف</button>
@@ -142,7 +129,7 @@
                                 
                                 
 
-                            <form action="{{ route('employee.update', $employee->id) }}" method="POST">
+                            <form action="{{ route('employees.update', $employee->id) }}" method="POST">
 
                             @csrf
 
@@ -174,5 +161,5 @@
                                    
 
              
-@extends('centralbank.includes.footer')
+@extends('manager.includes.footer')
    

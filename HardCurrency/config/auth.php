@@ -50,6 +50,10 @@ return [
             'driver' => 'session',
             'provider' => 'employees',
         ],
+        'manager' => [
+            'driver' => 'session',
+            'provider' => 'managers',
+        ],
         'employee-api' => [
             'driver' => 'token',
             'provider' => 'employees',
@@ -82,6 +86,12 @@ return [
         'employees' => [
             'driver' => 'eloquent',
             'model' => App\Models\Employee::class,
+        ],
+
+
+        'managers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Manager::class,
         ],
 
         // 'users' => [
@@ -125,6 +135,6 @@ return [
     |
     */
 
-    'password_timeout' => 10800,
+    'password_timeout' => 600,
 
 ];

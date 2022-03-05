@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\centralbank;
+namespace App\Http\Controllers\manager;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -24,7 +24,7 @@ class EmployeesController extends Controller
         $employees = Employee::join('banks', 'employees.bank_id', '=', 'banks.id')
                ->get(['employees.*', 'banks.bank_name']);
             //    return $employees;
-        return view('centralbank.employee', compact('employees','banks'));
+        return view('manager.employee', compact('employees'));
     }
 
     /**
@@ -35,7 +35,7 @@ class EmployeesController extends Controller
     public function create()
     {
         $employees = Employee::all();
-        return view('centeralbank.bank' , compact('employees'));
+        return view('centeralbank.Employee' , compact('employees'));
     }
 
     /**
@@ -46,20 +46,20 @@ class EmployeesController extends Controller
      */
     public function store(Request $request)
     {
+        $bank_id = request()->user()->bank_id;
         $request->validate([
             'employee_name' => 'required|string',
-            'bank_id' => 'required|exists:banks,id|unique',
             'email' => 'required|email|unique:employees,email',
             'password' => 'required|string',
         ]);
         $employee = Employee::create([
-            'bank_id' => $request->bank_id,
+            'bank_id' => $bank_id,
             'employee_name' => $request->employee_name,
             'email' => $request->email,
             'user_type' => 'admin',
             'password' => Hash::make($request->password),
         ]);
-        return redirect()->route('employee.index')
+        return redirect()->route('employees.index')
         ->with('success','تمت تســجيل مدير بنك بنجاح');
 
     }
@@ -118,7 +118,7 @@ class EmployeesController extends Controller
                 'password' => Hash::make($request->password),
             ]);
         }
-        return redirect()->route('employee.index')
+        return redirect()->route('employees.index')
         ->with('success','تمت تعديل بيانات المدير  بنجاح');
         
 
@@ -135,7 +135,7 @@ class EmployeesController extends Controller
     public function destroy(Employee $employee)
     {
         $employee->delete();
-        return redirect()->route('employee.index')
+        return redirect()->route('employees.index')
         ->with('success','تم حذف الســـجل');
         
     }

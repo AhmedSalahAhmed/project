@@ -5,7 +5,7 @@
   <meta name=viewport content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <title>Employee</title>
+  <title>Bank Admin</title>
 </head>
 <body style="background-color:whitesmoke">
     <div class="container">
@@ -13,9 +13,9 @@
           <div class="col-md-4">
             <div class="card">
               <div class="card-body">
-                <form id="sign_in_adm" method="POST" action="{{ route('employee.auth') }}">
+                <form id="sign_in_adm" method="POST" action="{{ route('manager.auth') }}">
                 @csrf
-                <h1>Bank User Login</h1>
+                <h1>Bank Admin Login</h1>
                 <div >
                   <input type="email" name=email class="form-control" placeholder="Email Address" value="{{ old('email') }}" required autofocus>
                 </div>

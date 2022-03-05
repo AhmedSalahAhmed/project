@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmployeesTable extends Migration
+class CreateManagersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateEmployeesTable extends Migration
      */
     public function up()
     {
-        Schema::create('employees', function (Blueprint $table) {
+        Schema::create('managers', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('bank_id')->nullable()->constrained()->onDelete('cascade');
-            $table->string('employee_name')->nullable();
+            $table->string('manager_name')->nullable();
             $table->string('email')->nullable()->unique();
             $table->string('password')->nullable();
-            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateEmployeesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employees');
+        Schema::dropIfExists('managers');
     }
 }

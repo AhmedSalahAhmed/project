@@ -19,6 +19,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+//central Bank Routes
 Route::group(['prefix' => 'centralbank'], function() {
 
 Route::group(['middleware' => 'auth'], function(){
@@ -29,12 +30,28 @@ Route::resource('statistics', centralbank\StatisticsController::class);
     Route::resource('banks', centralbank\BankController::class);       
     Route::resource('currency', centralbank\CurrencyController::class);       
 
-    Route::resource('employee', centralbank\EmployeesController::class);       
+    Route::resource('managers', centralbank\ManagersController::class);       
 
     });
 });
 
-    
+//Bank Managers Routes
+Route::group(['prefix' => 'manager'], function() {
+    Route::group(['middleware' => 'manager.guest'], function(){
+        Route::view('/login','manager.login')->name('manager.login');
+        Route::post('/login',[App\Http\Controllers\manager\ManagerController::class, 'authenticate'])->name('manager.auth');
+    });
+
+    Route::group(['middleware' => 'manager.auth' ], function(){
+        Route::get('/dashboard',[App\Http\Controllers\manager\ManagerDashboardController::class, 'index'])->name('manager.dashboard');
+        Route::resource('employees', manager\EmployeesController::class);       
+        Route::get('/logout', [App\Http\Controllers\manager\ManagerController::class, 'logout'])->name('manager.logout');
+        Route::resource('manager', manager\ManagerDashboardController::class);       
+
+
+    });
+});
+//Bank Employees Routes
 Route::group(['prefix' => 'bank'], function() {
     Route::group(['middleware' => 'employee.guest'], function(){
         Route::view('/login','bank.login')->name('employee.login');
