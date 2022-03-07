@@ -19,6 +19,8 @@ class CreateBranchesTable extends Migration
             $table->string('state');
             $table->string('city');
             $table->string('phone_number');
+            $table->foreignId('bank_id')->nullable()->constrained('banks')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

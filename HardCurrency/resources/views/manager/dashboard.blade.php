@@ -51,22 +51,22 @@
     </tr>
 </thead>
 <tbody>
-    @foreach ($bankcurrencies as $currency) 
+    @foreach ($bankcurrencies as $bankcurrency) 
     <tr>
         
-        <td>{{$currency->currency_name}}</td>
-        <td>{{$currency->buy_price}}</td>
-        <td>{{$currency->sale_price}}</td>
-        <td>{{($currency->buy_price + $currency->sale_price) / 2}}</td>
+        <td>{{$bankcurrency->currency_name}}</td>
+        <td>{{$bankcurrency->buy_price}}</td>
+        <td>{{$bankcurrency->sale_price}}</td>
+        <td>{{($bankcurrency->buy_price + $bankcurrency->sale_price) / 2}}</td>
         <td>
-        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{$currency->id}}">
+        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{$bankcurrency->id}}">
         تعديل
         </button> 
         </td>
        
     </tr>
     <!-- Edit Modal -->
-    <div class="modal fade" id="editModal{{$currency->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editModal{{$bankcurrency->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -78,18 +78,15 @@
         
         
 
-    <form action="{{ route('managers.update', $currency->id) }}" method="POST">
+    <form action="{{ route('manager.update', $bankcurrency->id) }}" method="POST">
 
     @csrf
 
         @method('put')
         
-        <input type="text" name="currency_name" class="form-control mb-3" placeholder=" العملة " value="{{$currency->currency_name}}" disabled="disabled">
-        <input type="text" name="buy_price" class="form-control mb-3" placeholder="سعر الشراء " value="{{$currency->buy_price}}">
-        <input type="text" name="sale_price" class="form-control mb-3" placeholder="سعر البيع " value="{{$currency->sale_price}}">
-        
-
-        
+        <input type="text" name="currency_name" class="form-control mb-3" placeholder=" العملة " value="{{$bankcurrency->currency_name}}" disabled="disabled">
+        <input type="text" name="buy_price" class="form-control mb-3" placeholder="سعر الشراء " value="{{$bankcurrency->buy_price}}">
+        <input type="text" name="sale_price" class="form-control mb-3" placeholder="سعر البيع " value="{{$bankcurrency->sale_price}}">
 
         <button class="btn btn-twitter float-end px-5" type="submit">تم</button>
 

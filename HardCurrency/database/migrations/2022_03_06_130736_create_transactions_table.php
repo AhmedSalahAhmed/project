@@ -13,16 +13,18 @@ class CreateTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('transactions');
-
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+
             $table->string('client_name')->nullable();
             $table->string('client_phone')->nullable();
             $table->string('id_number')->nullable();
             $table->bigInteger('amount')->default(0);
+            $table->bigInteger('total');
             $table->foreignId('bank_fk')->nullable()->constrained('banks')->onDelete('cascade');
-            $table->foreignId('bank_currency_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('employee_id')->nullable()->constrained('employees')->onDelete('cascade');
+            $table->foreignId('bank_currency_id')->nullable()->constrained('bank_currencies')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

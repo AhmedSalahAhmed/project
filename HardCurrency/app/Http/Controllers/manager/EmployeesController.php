@@ -103,7 +103,7 @@ class EmployeesController extends Controller
         ]);
         $employee->update([
             'employee_name' => $request->employee_name,
-            'user_type' => 'admin',
+            
         ]);
 
         if ($request->email != $employee->email) {

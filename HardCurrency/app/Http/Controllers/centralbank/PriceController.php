@@ -75,6 +75,7 @@ class PriceController extends Controller
         ]);
         print_r($request->all());
         CurrencyPrice::create($request->all());
+        dd($request->all());   
 
         Alert::success('تهانينا !!', 'تم اضافة  عملة جديدة بنجاح');
      

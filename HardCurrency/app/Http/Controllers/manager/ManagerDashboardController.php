@@ -50,14 +50,17 @@ class ManagerDashboardController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+
             'client_name' => 'required',
             'client_phone' => 'required',
-            
             'id_number' => 'required',
             'qte' => 'required',
             'type' => 'required',
             'currency' => 'required',
+
         ]);
+
+
         Transaction::create($request->all());
 
         // $account->balance = $amm;
@@ -86,7 +89,7 @@ class ManagerDashboardController extends Controller
      */
     public function edit(Currency $currency)
     {
-        return view('manager.dashboard', compact('currencies'));
+        return view('manager.dashboard', compact('currency'));
         
     }
 
@@ -94,10 +97,10 @@ class ManagerDashboardController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Currency  $currency
+     * @param  \App\Models\BankCurrency  $manager
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Currency $currency)
+    public function update(Request $request, BankCurrency $manager)
     {
         $request->validate([
             'buy_price' => 'required',
@@ -105,7 +108,7 @@ class ManagerDashboardController extends Controller
 
         ]);
 
-        $currency->update($request->all());
+        $manager->update($request->all());
         Alert::success('تهانينا !!', 'تم تعديل بيانات العملة بنجاح');
         return redirect()->route('manager.index');
     }

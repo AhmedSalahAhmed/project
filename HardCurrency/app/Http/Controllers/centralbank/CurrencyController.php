@@ -54,8 +54,9 @@ class CurrencyController extends Controller
         // return $stored->id;
         CurrencyPrice::create([
             "currency_id" => $stored->id,
-            "sale_price" => 0,
-            "buy_price" => 0,
+        ]);
+        BankCurrency::create([
+            "currency_id" => $stored->id,
         ]);
 
         Alert::success('تهانينا !!', 'تم اضافة  عملة جديدة بنجاح');

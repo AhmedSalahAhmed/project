@@ -60,23 +60,38 @@
                                        </div>
                                    </div>
                                    <div class="form-group row">
-                                       <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> المبلغ</label>
+                                       <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> نوع العملة</label>
                                        <div class="col-sm-9">
-                                       <input type="text" name="qte" class="form-control"  placeholder=" المبلغ">
-                                       </div>
-                   
-                                   </div>
-                                   <div class="form-group row">
-                                       <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> نوع العملية</label>
-                                       <div class="col-sm-9">
-                                       <select name="type" id="" class="form-select">
-                                           <option value="">   اختار العملية   </option>
-                                           <option value="deposit">ايداع</option>
-                                           <option value="withdraw"> سحب</option>
+                                       <select name="bank_currency_id" id="currency" class="form-select">
+                                            <option value="">   اختار العملة   </option>
+
+                                            @foreach ($bankcurrencies as $bankcurrency) 
+                                           
+                                           <option id="option" value="{{$bankcurrency->currency_id}}">{{$bankcurrency->currency_name}}</option>
+                                            <input type="text" name="buy_price" id="buyprice"value="{{$bankcurrency->buy_price}}" hidden>
+                                            @endforeach
+
                                        </select>
                                        </div>
                    
                                    </div>
+                                   <div class="form-group row">
+                                       <label for="exampleInputEmail2" class="col-sm-3 col-form-label">  المبلغ  </label>
+                                       <div class="col-sm-9">
+                                       <input type="text" name="amount" class="form-control"  placeholder="  المبلغ بالعملة الاجنبية" onkeyup="mult(this.value);">
+                                       <input type="text" id="sdgamount" name="total"hidden>
+
+                                       </div>
+                   
+                                   </div>
+                                   <div class="form-group row">
+                                       <label  for="exampleInputEmail2" class="col-sm-3 col-form-label">  المجموع  :  </label>
+                                       <div class="col-sm-9">
+                                       <input id="total" type="text" name="total" class="form-control" placeholder=" المبلغ بالجنيه السوداني" disabled>
+                                       </div>
+                   
+                                   </div>
+                              
                                    
                                    <button class="btn btn-twitter float-end px-5" type="submit">تم</button>
 
@@ -117,26 +132,23 @@
         <th scope="col">سعر الشراء </th>
         <th scope="col">سعر البيع </th>
         <th scope="col"> المتوسط </th>
-        <th scope="col">تعـــديل سعر الصرف</th>
     </tr>
 </thead>
 <tbody>
-    @foreach ($bankcurrencies as $currency) 
+    @foreach ($bankcurrencies as $bankcurrency) 
     <tr>
         
-        <td>{{$currency->currency_name}}</td>
-        <td>{{$currency->buy_price}}</td>
-        <td>{{$currency->sale_price}}</td>
-        <td>{{($currency->buy_price + $currency->sale_price) / 2}}</td>
-        <td>
-        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{$currency->id}}">
-        تعديل
-        </button> 
-        </td>
+        <td>{{$bankcurrency->currency_name}}</td>
+        <td>{{$bankcurrency->buy_price}}</td>
+        <td>{{$bankcurrency->sale_price}}</td>
+        <td>{{($bankcurrency->buy_price + $bankcurrency->sale_price) / 2}}</td>
+        
        
     </tr>
-    <!-- Edit Modal -->
-    <div class="modal fade" id="editModal{{$currency->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@endforeach
+
+    <!-- Edit Modal
+    <div class="modal fade" id="editModal{{$bankcurrency->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -148,18 +160,15 @@
         
         
 
-    <form action="{{ route('bank.update', $currency->id) }}" method="POST">
+    <form action="{{ route('bank.update', $bankcurrency->id) }}" method="POST">
 
     @csrf
 
         @method('put')
         
-        <input type="text" name="currency_name" class="form-control mb-3" placeholder=" العملة " value="{{$currency->currency_name}}" disabled="disabled">
-        <input type="text" name="buy_price" class="form-control mb-3" placeholder="سعر الشراء " value="{{$currency->buy_price}}">
-        <input type="text" name="sale_price" class="form-control mb-3" placeholder="سعر البيع " value="{{$currency->sale_price}}">
-        
-
-        
+        <input type="text" name="currency_name" class="form-control mb-3" placeholder=" العملة " value="{{$bankcurrency->currency_name}}" disabled="disabled">
+        <input type="text" name="buy_price" class="form-control mb-3" placeholder="سعر الشراء " value="{{$bankcurrency->buy_price}}">
+        <input type="text" name="sale_price" class="form-control mb-3" placeholder="سعر البيع " value="{{$bankcurrency->sale_price}}">
 
         <button class="btn btn-twitter float-end px-5" type="submit">تم</button>
 
@@ -170,14 +179,28 @@
     
     </div>
 </div>
-</div>
+</div> -->
 <!-- End Edit Modal -->
-@endforeach
+<script>
+                       function mult(value){
+                           var buy = document.getElementById('buyprice').value;
+                           var x =  value*buy;
+
+                           var select = document.getElementById('currency');
+                           var opt = select.options[select.selectedIndex].value;
+                           if($currency->id == opt)
+                           {
+
+                           document.getElementById('total').value = opt;
+                           document.getElementById('sdgamount').value = x;
+                           }
+                       }
+                   </script>
 </tbody>
 </table> 
                 </div>
-                   
-               <div class="d-felx justify-content-center">
-                 
-               </div>
+                  
+               
+
+              
 @include('bank.includes.footer')

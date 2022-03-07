@@ -63,7 +63,7 @@
                                 @foreach ($prices as $price)
 
                                 <td>{{$price->currency->currency_name}}</td>
-                                <td>1 {{$price->currency->abbreviation}}</td>
+                                <td>{{$price->currency->abbreviation}}</td>
                                 <td>{{$price->buy_price}}</td>
                                 <td>{{$price->sale_price}}</td>
                                 <td>{{$price->currency_date}}</td>
