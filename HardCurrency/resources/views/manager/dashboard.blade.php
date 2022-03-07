@@ -47,6 +47,7 @@
         <th scope="col">سعر الشراء </th>
         <th scope="col">سعر البيع </th>
         <th scope="col"> المتوسط </th>
+        <th scope="col"> الرصيد </th>
         <th scope="col">تعـــديل سعر الصرف</th>
     </tr>
 </thead>
@@ -58,6 +59,7 @@
         <td>{{$bankcurrency->buy_price}}</td>
         <td>{{$bankcurrency->sale_price}}</td>
         <td>{{($bankcurrency->buy_price + $bankcurrency->sale_price) / 2}}</td>
+        <td>{{$bankcurrency->balance}} {{$bankcurrency->symbol}}</td>
         <td>
         <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{$bankcurrency->id}}">
         تعديل

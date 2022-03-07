@@ -20,17 +20,16 @@ class EmployeeDashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {  
+    {
         $currencies = Currency::all();
         $transactions = Transaction::all();
         $bankcurrencies = BankCurrency::join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
-        ->get(['bank_currencies.*', 'currencies.currency_name']);
-            // $tc = Transaction::join('bank_currencies', 'transaction.bank_currency_id', '=', 'bank_currencies.id')
-            // ->get(['transaction.*', 'bank_currencies.currency_name']);
+            ->get(['bank_currencies.*', 'currencies.currency_name']);
+        // $tc = Transaction::join('bank_currencies', 'transaction.bank_currency_id', '=', 'bank_currencies.id')
+        // ->get(['transaction.*', 'bank_currencies.currency_name']);
         // return $transactions;
-        
-		return view('bank.dashboard',compact('bankcurrencies', 'currencies'));
-        
+
+        return view('bank.dashboard', compact('bankcurrencies', 'currencies'));
     }
 
     /**
@@ -40,7 +39,6 @@ class EmployeeDashboardController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**
@@ -50,24 +48,40 @@ class EmployeeDashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
-        // $request->validate([
-        //     'client_name' => 'required',
-        //     'client_phone' => 'required',
-        //     'amount' => 'required',
-        //     'bank_currency_id' => 'required',
-            
-        // ]);
-        // dd($request->all());   
-        
+    {
+        $bank_id = request()->user()->bank_fk;
 
-        Transaction::create($request->all());
+        $bankcurrency = BankCurrency::find($request->input('bank_currency_id'));
+        if (!$bankcurrency) {
+            return back()->withErrors(['bankcurrency' => ' يجب إختيار العملة المطلوبة ']);
+        }
+        $am = $request->amount;
+        $request->validate([
+            'client_name' => 'required',
+            'client_phone' => 'required',
+            'amount' => 'required',
+            'bank_currency_id' => 'required',
+            'sdgamount' => 'required',
 
-        // $account->balance = $amm;
+        ]);
+
+
+        Transaction::create([
+
+            'bank_currency_id' => $request->bank_currency_id,
+            'client_name' => $request->client_name,
+            'client_phone' => $request->client_phone,
+            'id_number' => $request->id_number,
+            'amount' => $request->amount,
+            'sdgamount' => $request->sdgamount,
+            'employee_id' => $request->user()->id,
+        ]);
+// dd($am);
+        $bankcurrency->balance = $bankcurrency->balance +$am;
+        $bankcurrency->save();
         Alert::success('تهانينا !!', 'تمت العملية بنجاح');
-     
+
         return redirect()->route('bank.index');
-    
     }
 
     /**
@@ -90,7 +104,6 @@ class EmployeeDashboardController extends Controller
     public function edit(BankCurrency $bank_currency)
     {
         return view('bank.dashboard', compact('currencies'));
-        
     }
 
     /**
@@ -112,6 +125,4 @@ class EmployeeDashboardController extends Controller
         Alert::success('تهانينا !!', 'تم تعديل بيانات العملة بنجاح');
         return redirect()->route('bank.index');
     }
-
-    
 }

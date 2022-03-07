@@ -20,9 +20,13 @@ class ManagerDashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   $currencies = Currency::all();
+
+    {
+        $except_ids = BankCurrency::whereBankId(request()->user()->bank_id)->pluck('currency_id');
+
+        $currencies = Currency::all();
         $bankcurrencies = BankCurrency::join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
-        ->get(['bank_currencies.*', 'currencies.currency_name']);
+        ->get(['bank_currencies.*', 'currencies.currency_name','currencies.symbol']);
         // return $bankcurrencies;
         
 		return view('manager.dashboard',compact('bankcurrencies'));

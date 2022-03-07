@@ -28,11 +28,11 @@
                         </div>
 
                         @endif
-                    <h4 class="card-title"> الموظفين </h4>
+                    <h4 class="card-title"> الفروع </h4>
                     <!-- <p class="card-description">    <code class="rtl">مدراء</code>البنوك
                     </p> -->
                     <button type="button" class="btn btn-twitter" data-bs-toggle="modal" data-bs-target="#addModal">
-                    اضافة موظف
+                    اضافة فرع جديد
                     </button>
                     <!-- Add Bank Modal -->
                     <!-- Modal -->
@@ -44,7 +44,7 @@
                         </div>
                         <div class="modal-body">
                     
-                        <form action="{{ route('employees.store') }}" method="post" class="forms-sample" autocomplete="off">
+                        <form action="{{ route('branch.store') }}" method="post" class="forms-sample" autocomplete="off">
                             @csrf
                                         
                        
@@ -52,34 +52,25 @@
                                         <div class="form-group row">
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> الإسم </label>
                                             <div class="col-sm-9">
-                                            <input type="text" name="employee_name" class="form-control"  placeholder=" اسم الموظف  ">
+                                            <input type="text" name="branch_name" class="form-control"  placeholder=" اسم الفرع  ">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> البنك</label>
+                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> رقم االهاتف </label>
                                             <div class="col-sm-9">
-                                                
-                                            <select name="branch_id" id="" class="form-select">
-                                            <option value="">إختار أحد الفروع المُسَجَلة</option>
-
-                                                @foreach($branches as $branch)
-                                                <option value="{{$branch->id}}">{{$branch->branch_name}}</option>
-                                                @endforeach
-                                            </select>
-                                            </div>
-                        
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="floatingInput" class="col-sm-3 col-form-label"> البريد الإلكتروني</label>
-                                            <div class="col-sm-9">
-                                            <input type="email" name="email" class="form-control" id="floatingInput"  placeholder="البريد الالكتروني ">
+                                            <input type="text" name="phone_number" class="form-control"  placeholder=" رقم الهاتف   ">
                                             </div>
                                         </div>
-                                       
                                         <div class="form-group row">
-                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> كلمة المرور</label>
+                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> الولاية </label>
                                             <div class="col-sm-9">
-                                            <input type="password" name="password" class="form-control"  placeholder=" كلمة المرور ">
+                                            <input type="text" name="state" class="form-control"  placeholder=" الولاية   ">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> المدينة </label>
+                                            <div class="col-sm-9">
+                                            <input type="text" name="city" class="form-control"  placeholder=" المدينة   ">
                                             </div>
                                         </div>
                                        
@@ -100,30 +91,30 @@
                     <table class="table">
                       <thead>
                         <tr>
-                          <th>  الموظف </th>
-                          <th>  الفرع </th>
-                          <th> البريد الالكتروني    </th>
-                          <th> تعديل    </th>
+                          <th>  اسم الفرع </th>
+                          <th> المدينة</th>
+                          <th> رقم الهاتف</th>
+                          <th> تعديل</th>
                           <th> حذف    </th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($employees as $employee)
+                        @foreach($branches as $branch)
 
                         <tr>
                           <td class="py-1">
-                          {{$employee->employee_name}}
+                          {{$branch->branch_name}}
                           </td>
-                          <td> {{$employee->branch_name}}</td>
+                          <td> {{$branch->city}}</td>
                           
-                          <td>{{$employee->email}}</td>
+                          <td>{{$branch->phone_number}}</td>
                           <td>
-                            <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{$employee->id}}">
+                            <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{$branch->id}}">
                                 تعديل
                             </button> 
                             </td>
                             <td>
-                            <form method="post" action="{{route('employees.destroy',$employee->id)}}">
+                            <form method="post" action="{{route('branch.destroy',$branch->id)}}">
                             @method('delete')
                             @csrf
                             <button type="submit" class="btn btn-danger btn-sm">حذف</button>
@@ -131,7 +122,7 @@
                             </td> 
                         </tr>
                          <!-- Edit Modal -->
-                         <div class="modal fade" id="editModal{{$employee->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                         <div class="modal fade" id="editModal{{$branch->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             
                             <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
@@ -143,14 +134,15 @@
                                 
                                 
 
-                            <form action="{{ route('employees.update', $employee->id) }}" method="POST">
+                            <form action="{{ route('branch.update', $branch->id) }}" method="POST">
 
                             @csrf
 
                                 @method('put')
                                 
-                                <input type="text" name="employee_name" class="form-control mb-3" placeholder=" اسم الموظف " value="{{$employee->employee_name}}">
-                                <input type="email" name="email" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$employee->email}}">
+                                <input type="text" name="branch_name" class="form-control mb-3" placeholder=" اسم الفرع " value="{{$branch->branch_name}}">
+                                <input type="text" name="city" class="form-control mb-3" placeholder=" المكان  " value="{{$branch->city}}">
+                                <input type="email" name="phone_number" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$branch->phone_number}}">
                                 
 
                                 

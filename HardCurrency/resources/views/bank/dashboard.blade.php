@@ -68,7 +68,7 @@
                                             @foreach ($bankcurrencies as $bankcurrency) 
                                            
                                            <option id="option" value="{{$bankcurrency->currency_id}}">{{$bankcurrency->currency_name}}</option>
-                                            <input type="text" name="buy_price" id="buyprice"value="{{$bankcurrency->buy_price}}" hidden>
+                                            <option type="input" name="buy_price" id="buyprice"value="{{$bankcurrency->buy_price}}" hidden>
                                             @endforeach
 
                                        </select>
@@ -186,7 +186,7 @@
                            var buy = document.getElementById('buyprice').value;
                            var x =  value*buy;
 
-                           document.getElementById('total').value = x;
+                           document.getElementById('total').value = x+' جنيه  ';
                            document.getElementById('sdgamount').value = x;
                         //    var select = document.getElementById('currency');
                         //    var opt = select.options[select.selectedIndex].value;

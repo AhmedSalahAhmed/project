@@ -25,7 +25,8 @@ class Transaction extends Model
      * @var array
      */
     protected $fillable = [
-        'bank_id',
+        'bank_fk',
+        'employee_id',
         'bank_currency_id',
         'type',
         'client_name',
@@ -36,9 +37,23 @@ class Transaction extends Model
     ];
 
  
-    public function bank()
+  /**
+     * Get the bank that owns the Employee
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function bank(): BelongsTo
     {
-        return $this->hasOne(Bank::class);
+        return $this->belongsTo(Bank::class)->withDefault();
+    }
+ /**
+     * Get the bank that owns the Transaction
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function employee(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class)->withDefault();
     }
 
   

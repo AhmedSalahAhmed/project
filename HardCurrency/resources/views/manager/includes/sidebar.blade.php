@@ -17,13 +17,13 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url('manager/dashboard')}}">
-                <span class="menu-title">  اسعار الصرف</span>
+                <span class="menu-title">   العملات</span>
                 <i class="mdi mdi-cash menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span class="menu-title"> الإحصائيات</span>
+              <a class="nav-link" href="{{url('manager/branch')}}">
+                <span class="menu-title"> الفروع</span>
                 <i class="mdi mdi-chart-bar menu-icon"></i>
                 
               </a>

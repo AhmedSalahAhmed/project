@@ -46,6 +46,7 @@ Route::group(['prefix' => 'manager'], function() {
     Route::group(['middleware' => 'manager.auth' ], function(){
         Route::get('/dashboard',[App\Http\Controllers\manager\ManagerDashboardController::class, 'index'])->name('manager.dashboard');
         Route::resource('employees', manager\EmployeesController::class);       
+        Route::resource('branch', manager\BranchController::class);       
         Route::get('/logout', [App\Http\Controllers\manager\ManagerController::class, 'logout'])->name('manager.logout');
         Route::resource('manager', manager\ManagerDashboardController::class);       
 

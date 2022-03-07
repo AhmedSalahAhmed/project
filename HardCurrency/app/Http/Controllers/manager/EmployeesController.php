@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Bank;
+use App\Models\Branch;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -19,12 +20,12 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        $banks = Bank::all();
+        $branches = Branch::all();
         
-        $employees = Employee::join('banks', 'employees.bank_id', '=', 'banks.id')
-               ->get(['employees.*', 'banks.bank_name']);
+        $employees = Employee::join('branches', 'employees.branch_id', '=', 'branches.id')
+               ->get(['employees.*', 'branches.branch_name']);
             //    return $employees;
-        return view('manager.employee', compact('employees'));
+        return view('manager.employee', compact('employees', 'branches'));
     }
 
     /**
@@ -35,7 +36,7 @@ class EmployeesController extends Controller
     public function create()
     {
         $employees = Employee::all();
-        return view('centeralbank.Employee' , compact('employees'));
+        return view('manager.employee' , compact('employees'));
     }
 
     /**
@@ -46,20 +47,23 @@ class EmployeesController extends Controller
      */
     public function store(Request $request)
     {
-        $bank_id = request()->user()->bank_id;
+        $bank_id = request()->user()->bank_id;  
         $request->validate([
             'employee_name' => 'required|string',
+            'branch_id' => 'required',
             'email' => 'required|email|unique:employees,email',
             'password' => 'required|string',
         ]);
-        $employee = Employee::create([
+        Employee::create([
             'bank_id' => $bank_id,
+            'branch_id' => $request->branch_id,
             'employee_name' => $request->employee_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
         return redirect()->route('employees.index')
         ->with('success','تمت تســجيل مدير بنك بنجاح');
+        // dd($request->branch_id);
 
     }
 

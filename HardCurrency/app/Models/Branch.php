@@ -24,7 +24,7 @@ class Branch extends Model
         'branch_name',
         'state',
         'city',
-        'district',
+        'bank_id',
         'phone_number'
     ];
 
