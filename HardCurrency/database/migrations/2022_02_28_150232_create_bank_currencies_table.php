@@ -15,9 +15,12 @@ class CreateBankCurrenciesTable extends Migration
     {
         Schema::create('bank_currencies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('bank_id')->nullable()->constrained();
-            $table->foreignId('currency_id')->nullable()->constrained('currencies');
-            $table->foreignId('currency_price_id')->nullable()->constrained('currency_prices');
+            $table->foreignId('bank_id')->nullable()
+            ->constrained()->onDelete('cascade');
+            $table->foreignId('currency_id')->nullable()
+            ->constrained('currencies')->onDelete('cascade');
+            $table->foreignId('currency_price_id')->nullable()
+            ->constrained('currency_prices')->onDelete('cascade');
             $table->double('sale_price')->default(0);
             $table->double('buy_price')->default(0);
             $table->timestamps();

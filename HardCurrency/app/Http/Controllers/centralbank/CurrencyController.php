@@ -115,8 +115,8 @@ class CurrencyController extends Controller
      */
     public function destroy(Currency $currency)
     {
-        $currency->delete();
-
+        $deleted = $currency->delete();
+      
         return redirect()->route('currency.index')
             ->withSuccess(__('تم حذف العملة بنجاح'));
     }

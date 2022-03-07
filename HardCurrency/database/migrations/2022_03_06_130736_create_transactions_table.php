@@ -20,7 +20,7 @@ class CreateTransactionsTable extends Migration
             $table->string('client_phone')->nullable();
             $table->string('id_number')->nullable();
             $table->bigInteger('amount')->default(0);
-            $table->bigInteger('total');
+            $table->bigInteger('sdgamount');
             $table->foreignId('bank_fk')->nullable()->constrained('banks')->onDelete('cascade');
             $table->foreignId('employee_id')->nullable()->constrained('employees')->onDelete('cascade');
             $table->foreignId('bank_currency_id')->nullable()->constrained('bank_currencies')

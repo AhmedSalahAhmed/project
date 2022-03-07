@@ -79,7 +79,7 @@
                                        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">  المبلغ  </label>
                                        <div class="col-sm-9">
                                        <input type="text" name="amount" class="form-control"  placeholder="  المبلغ بالعملة الاجنبية" onkeyup="mult(this.value);">
-                                       <input type="text" id="sdgamount" name="total"hidden>
+                                       <input type="text" id="sdgamount" name="sdgamount"hidden>
 
                                        </div>
                    
@@ -186,14 +186,15 @@
                            var buy = document.getElementById('buyprice').value;
                            var x =  value*buy;
 
-                           var select = document.getElementById('currency');
-                           var opt = select.options[select.selectedIndex].value;
-                           if($currency->id == opt)
-                           {
-
-                           document.getElementById('total').value = opt;
+                           document.getElementById('total').value = x;
                            document.getElementById('sdgamount').value = x;
-                           }
+                        //    var select = document.getElementById('currency');
+                        //    var opt = select.options[select.selectedIndex].value;
+                        //    if($currency->id == opt)
+                        //    {
+
+                          
+                        //    }
                        }
                    </script>
 </tbody>

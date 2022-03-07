@@ -32,7 +32,7 @@ class Transaction extends Model
         'client_phone',
         'id_number',
         'amount',
-        'total',
+        'sdgamount',
     ];
 
  
