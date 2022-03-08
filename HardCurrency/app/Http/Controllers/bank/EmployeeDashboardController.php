@@ -54,9 +54,11 @@ class EmployeeDashboardController extends Controller
      */
     public function store(Request $request)
     {
-        $bank_id = request()->user()->bank_id;
+        $bank_id = Auth::user()->bank_id;
 
-        $bankcurrency = BankCurrency::find($request->input('bank_currency_id'));
+        // dd($request->all());
+
+        $bankcurrency = BankCurrency::find($request->bank_currency_id);
         if (!$bankcurrency) {
             return back()->withErrors(['bankcurrency' => ' يجب إختيار العملة المطلوبة ']);
         }
@@ -82,8 +84,7 @@ class EmployeeDashboardController extends Controller
             'employee_id' => $request->user()->id,
             'bank_id' => $bank_id,
         ]);
-// dd($am);
-        $bankcurrency->balance = $bankcurrency->balance +$am;
+        $bankcurrency->balance = $bankcurrency->balance + $am;
         $bankcurrency->save();
         Alert::success('تهانينا !!', 'تمت العملية بنجاح');
 
@@ -128,6 +129,19 @@ class EmployeeDashboardController extends Controller
         ]);
 
         $bank->update($request->all());
+        Alert::success('تهانينا !!', 'تم تعديل بيانات العملة بنجاح');
+        return redirect()->route('bank.index');
+    }
+
+    public function getTotal(Request $request)
+    {
+        $bank_id = Auth::user()->bank_id;
+        $record = BankCurrency::all()->where("bank_id", $bank_id)->where("currency_id", $request->currency_id);
+
+        // $total = $record->buy_price * $request->amount;
+        // dd($record);
+        return $record;
+
         Alert::success('تهانينا !!', 'تم تعديل بيانات العملة بنجاح');
         return redirect()->route('bank.index');
     }

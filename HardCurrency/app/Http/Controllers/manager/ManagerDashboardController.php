@@ -23,7 +23,8 @@ class ManagerDashboardController extends Controller
     public function index()
 
     {
-        $bank_id = request()->user()->bank_id;
+        $bank_id = Auth::user()->bank_id;
+
         // $except_ids = BankCurrency::whereBankId(request()->user()->bank_id)->pluck('currency_id');
 
         $currencies = Currency::all();

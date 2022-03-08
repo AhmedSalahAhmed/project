@@ -64,6 +64,7 @@ Route::group(['prefix' => 'bank'], function() {
 
     Route::group(['middleware' => 'employee.auth' ], function(){
         Route::get('/dashboard',[App\Http\Controllers\bank\EmployeeDashboardController::class, 'index'])->name('employee.dashboard');
+        Route::get('/getTotal',[App\Http\Controllers\bank\EmployeeDashboardController::class, 'getTotal'])->name('getTotal');
         Route::get('/logout', [App\Http\Controllers\bank\EmployeeController::class, 'logout'])->name('employee.logout');
         Route::resource('bank', bank\EmployeeDashboardController::class);       
 

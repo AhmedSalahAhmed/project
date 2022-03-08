@@ -67,7 +67,7 @@
 
                                         @foreach ($bankcurrencies as $bankcurrency)
 
-                                        <option id="option" value="{{$bankcurrency->currency_id}}">{{$bankcurrency->currency_name}}</option>
+                                        <option id="option" value="{{$bankcurrency->id}}">{{$bankcurrency->currency_name}}</option>
                                         @endforeach
 
                                     </select>
@@ -78,7 +78,7 @@
                             <div class="form-group row">
                                 <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> المبلغ </label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="amount" class="form-control" placeholder="  المبلغ بالعملة الاجنبية" onkeyup="mult(this.value);">
+                                    <input type="text" id="amount" name="amount" class="form-control" placeholder="  المبلغ بالعملة الاجنبية" onkeyup="mult(this.value);">
                                     <input type="text" id="sdgamount" name="sdgamount" hidden>
 
                                 </div>
@@ -146,22 +146,24 @@
                             @endforeach
 
                             <script>
+
                                 onCurrencySelected = (selected) => {
                                     console.log(selected)
                                 }
 
                                 function mult(value) {
-                                    var price = document.getElementById('currency').label;
+                                    var currency = document.getElementById('currency').value;
 
+                                    console.log(currency)
 
+                                    // console.log(price)
 
-                                    console.log(price)
+                                    var amount = document.getElementById('amount').value;
+                                    // var buy = document.getElementById('buyprice').value;
+                                    // var x = value * buy;
 
-                                    var buy = document.getElementById('buyprice').value;
-                                    var x = value * buy;
-
-                                    document.getElementById('total').value = x + ' جنيه  ';
-                                    document.getElementById('sdgamount').value = x;
+                                    // document.getElementById('total').value = x + ' جنيه  ';
+                                    // document.getElementById('sdgamount').value = x;
                                     //    var select = document.getElementById('currency');
                                     //    var opt = select.options[select.selectedIndex].value;
                                     //    if($currency->id == opt)
@@ -169,6 +171,23 @@
 
 
                                     //    }
+
+                                    $.ajax({
+                                        type:"get",
+                                        url: "{{route('getTotal')}}",
+                                        headers:{"Content-Type" :"application/json", "Accept": "application/json"},
+                                        data:{
+                                            currency_id: currency,
+                                            total: amount
+                                        },
+                                        success:(data) => {
+                                            console.log(data)
+                                        },
+                                        fail:(error) => {
+                                            console.log(error)
+                                        }
+                                    })
+
                                 }
                             </script>
                         </tbody>

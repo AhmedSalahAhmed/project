@@ -5,6 +5,9 @@ namespace App\Http\Controllers\centralbank;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Bank;
+use App\Models\BankCurrency;
+use App\Models\CurrencyPrice;
+
 class BankController extends Controller
 {
     /**
@@ -13,11 +16,9 @@ class BankController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {  
+    {
         $banks = Bank::oldest()->paginate(4);
-		return view('centralbank.bank',compact('banks'))->with('i', (request()->input('page', 1) - 1) * 4);
-        
-       
+        return view('centralbank.bank', compact('banks'))->with('i', (request()->input('page', 1) - 1) * 4);
     }
 
     /**
@@ -28,7 +29,7 @@ class BankController extends Controller
     public function create()
     {
         $banks = Bank::all();
-        return view('centeralbank.bank' , compact('banks'));
+        return view('centeralbank.bank', compact('banks'));
     }
 
     /**
@@ -48,9 +49,20 @@ class BankController extends Controller
             'city' => 'required',
             'district' => 'required',
         ]);
-        Bank::create($request->all());
+        $bank = Bank::create($request->all());
+
+        $prices = CurrencyPrice::all();
+
+        foreach ($prices as $price) {
+            BankCurrency::create([
+                "bank_id" => $bank->id,
+                "currency_id" => $price->id,
+                "buy_price" => $price->buy_price,
+                "sale_price" => $price->sale_price,
+            ]);
+        }
         // Alert::success('تم ', 'تم اضافة  بنك جديد للنظام بنجاح');
-     
+
         return redirect()->route('banks.index');
     }
 
@@ -96,7 +108,7 @@ class BankController extends Controller
             'city' => 'required',
             'district' => 'required',
         ]);
-        
+
         $bank->update($request->all());
         // Alert::success('تهانينا !!', 'تم تعديل بيانات البنك بنجاح');
         return redirect()->route('banks.index');
@@ -112,9 +124,9 @@ class BankController extends Controller
      */
     public function destroy(Bank $bank)
     {
-       
+
         $bank->delete();
         return redirect()->route('banks.index')
-        ->withSuccess(__('Bank delete successfully.'));
+            ->withSuccess(__('Bank delete successfully.'));
     }
 }
