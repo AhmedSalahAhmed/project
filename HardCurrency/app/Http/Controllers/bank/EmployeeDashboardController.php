@@ -5,6 +5,7 @@ namespace App\Http\Controllers\bank;
 use App\Http\Controllers\Controller;
 use App\Models\BankCurrency;
 use App\Models\Currency;
+use App\Models\Process;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -21,10 +22,13 @@ class EmployeeDashboardController extends Controller
      */
     public function index()
     {
+        $bank_id = Auth::user()->bank_id;
+
+        // dd($bank_id);
 
         $currencies = Currency::all();
-        $transactions = Transaction::all();
-        $bankcurrencies = BankCurrency::join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
+        $processes = Process::all();
+        $bankcurrencies = BankCurrency::where('bank_id', $bank_id)->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
             ->get(['bank_currencies.*', 'currencies.currency_name']);
         // $tc = Transaction::join('bank_currencies', 'transaction.bank_currency_id', '=', 'bank_currencies.id')
         // ->get(['transaction.*', 'bank_currencies.currency_name']);
@@ -50,7 +54,7 @@ class EmployeeDashboardController extends Controller
      */
     public function store(Request $request)
     {
-        $bank_id = request()->user()->bank_fk;
+        $bank_id = request()->user()->bank_id;
 
         $bankcurrency = BankCurrency::find($request->input('bank_currency_id'));
         if (!$bankcurrency) {
@@ -67,7 +71,7 @@ class EmployeeDashboardController extends Controller
         ]);
 
 
-        Transaction::create([
+        Process::create([
 
             'bank_currency_id' => $request->bank_currency_id,
             'client_name' => $request->client_name,
@@ -76,6 +80,7 @@ class EmployeeDashboardController extends Controller
             'amount' => $request->amount,
             'sdgamount' => $request->sdgamount,
             'employee_id' => $request->user()->id,
+            'bank_id' => $bank_id,
         ]);
 // dd($am);
         $bankcurrency->balance = $bankcurrency->balance +$am;

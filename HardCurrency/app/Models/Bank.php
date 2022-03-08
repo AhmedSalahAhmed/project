@@ -80,7 +80,15 @@ class Bank extends Model
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
-    }
+    } /**
+    * Get all of the transactions for the Bank
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    */
+   public function procceses()
+   {
+       return $this->hasMany(Process::class);
+   }
 
 
     // /**

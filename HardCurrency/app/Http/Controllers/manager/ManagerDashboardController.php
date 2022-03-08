@@ -90,19 +90,30 @@ class ManagerDashboardController extends Controller
 
 
         ]);
-        $currencyprice = CurrencyPrice::all();
-        $bercent = .75;
-        // dd();
-        if ($request->buy_price > $currencyprice) {
-            BankCurrency::create([
-                'currency_id' => $request->currency_id,
-                'buy_price' => $request->buy_price,
-                'sale_price' => $request->sale_price,
-                'bank_id' => $bank_id,
-            ]);
+        // $currencyprice = CurrencyPrice::all();
+        // $bercent = .75;
+        // // dd();
+        // if ($request->buy_price > $currencyprice ) {
+        //     BankCurrency::create([
+        //         'currency_id' => $request->currency_id,
+        //         'buy_price' => $request->buy_price,
+        //         'sale_price' => $request->sale_price,
+        //         'bank_id' => $bank_id,
+        //     ]);
 
-            Alert::success('تهانينا !!', 'تمت العملية بنجاح');
-        }
+        //     Alert::success('تهانينا !!', 'تمت العملية بنجاح');
+        // }
+        // else
+        // Alert::success('عفواً !!', '  يجب ان تتبع تعليمات تحديد السعر');
+            BankCurrency::create([
+                    'currency_id' => $request->currency_id,
+                    'buy_price' => $request->buy_price,
+                    'sale_price' => $request->sale_price,
+                    'bank_id' => $bank_id,
+                ]);
+    
+                Alert::success('تهانينا !!', 'تمت العملية بنجاح');
+            
 
 
         return redirect()->route('manager.index');

@@ -19,8 +19,6 @@ class CreateBankCurrenciesTable extends Migration
             ->constrained()->onDelete('cascade');
             $table->foreignId('currency_id')->nullable()
             ->constrained('currencies')->onDelete('cascade');
-            $table->foreignId('currency_price_id')->nullable()
-            ->constrained('currency_prices')->onDelete('cascade');
             $table->double('sale_price')->default(0);
             $table->double('buy_price')->default(0);
             $table->double('balance')->default(0);

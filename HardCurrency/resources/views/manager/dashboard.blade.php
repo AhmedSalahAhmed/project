@@ -17,61 +17,7 @@
             </ul>
         </div>
         @endif
-
-
-
-
 </div>
-
-<button type="button" class="btn btn-twitter" data-bs-toggle="modal" data-bs-target="#addModal">
-    اضافة عملة
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <strong>عفواً !!!</strong> <br> هناك بعض الاخطاء في الإدخال .<br><br>
-                    <ul dir="ltr">
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
-
-                <form action="{{ route('manager.insert') }}" method="post" autocomplete="off">
-
-                    @csrf
-                    <select name="currency_id" class="form-select">
-                        <option value=""> اختار العملة </option>
-
-                        @foreach ($currencies as $currency)
-                        
-                        <option value="{{$currency->id}}">{{$currency->currency_name}}</option>
-
-                        @endforeach
-
-                    </select>
-
-                    <input type="text" name="buy_price" class="form-control mb-3" placeholder=" سعر شراء  ">
-                    <input type="text" name="sale_price" class="form-control mb-3" placeholder=" سعر البيع ">
-                    <button class="btn btn-twitter float-end px-5" type="submit">تم</button>
-
-                </form>
-                @include('sweetalert::alert')
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Modal -->
 <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">

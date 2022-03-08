@@ -50,14 +50,20 @@ class CurrencyController extends Controller
 
         // Currency::create($request->all());
         $stored = Currency::create($request->all());
-        // $banks = Bank::all();
-        // return $stored->id;
         CurrencyPrice::create([
             "currency_id" => $stored->id,
         ]);
-        // BankCurrency::create([
-        //     "currency_id" => $stored->id,
-        // ]);
+        $banks = Bank::all();
+        foreach($banks as $bank)
+    {
+
+        BankCurrency::create([
+            "currency_id" => $stored->id,
+            "bank_id" => $bank->id,
+        ]);
+    }
+        // return $stored->id;
+        
 
         Alert::success('تهانينا !!', 'تم اضافة  عملة جديدة بنجاح');
 
