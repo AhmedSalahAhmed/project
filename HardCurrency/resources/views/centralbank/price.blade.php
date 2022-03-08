@@ -66,7 +66,7 @@
                                 <td>{{$price->currency->abbreviation}}</td>
                                 <td>{{$price->buy_price}}</td>
                                 <td>{{$price->sale_price}}</td>
-                                <td>{{$price->currency_date}}</td>
+                                <td>{{$price->currency_date->format('m-d-Y')}}</td>
                                 <td>
                                     <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{$price->id}}">
                                         تعديل

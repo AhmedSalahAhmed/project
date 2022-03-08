@@ -73,51 +73,6 @@ class ManagerDashboardController extends Controller
 
         return redirect()->route('manager.index');
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function insert(Request $request)
-    {
-        $bank_id = request()->user()->bank_id;
-        $request->validate([
-
-            'currency_id' => 'required',
-            'buy_price' => 'required',
-            'sale_price' => 'required',
-
-
-        ]);
-        // $currencyprice = CurrencyPrice::all();
-        // $bercent = .75;
-        // // dd();
-        // if ($request->buy_price > $currencyprice ) {
-        //     BankCurrency::create([
-        //         'currency_id' => $request->currency_id,
-        //         'buy_price' => $request->buy_price,
-        //         'sale_price' => $request->sale_price,
-        //         'bank_id' => $bank_id,
-        //     ]);
-
-        //     Alert::success('تهانينا !!', 'تمت العملية بنجاح');
-        // }
-        // else
-        // Alert::success('عفواً !!', '  يجب ان تتبع تعليمات تحديد السعر');
-            BankCurrency::create([
-                    'currency_id' => $request->currency_id,
-                    'buy_price' => $request->buy_price,
-                    'sale_price' => $request->sale_price,
-                    'bank_id' => $bank_id,
-                ]);
-    
-                Alert::success('تهانينا !!', 'تمت العملية بنجاح');
-            
-
-
-        return redirect()->route('manager.index');
-    }
 
     /**
      * Display the specified resource.

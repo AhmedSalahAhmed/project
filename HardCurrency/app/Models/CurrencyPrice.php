@@ -19,7 +19,7 @@ class CurrencyPrice extends Model
         'currency_id',
         
     ];
-
+    protected $dates = ['currency_date'];
     public function currency()
     {
         return $this->belongsTo(Currency::class);
