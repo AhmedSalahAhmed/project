@@ -8,6 +8,7 @@ use App\Models\Branch;
 use App\Models\Bank;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -20,14 +21,10 @@ class BranchController extends Controller
      */
     public function index()
     {
-        $banks = DB::table('banks')->select('*')->get();
         $bank_id = request()->user()->bank_id;
-        dd($banks);
-        // $branches = Branch::all();  
-        // // $branches = DB::table('branches')->select('*')->where('bank_id' ,'=' ,'1')->get();
-
-        //     //    return $branches;
-        // return view('manager.branch', compact('branches'));
+   
+        $branches = Branch::where('bank_id',$bank_id)->get();
+        return view('manager.branch', compact('branches'));
     }
 
     /**

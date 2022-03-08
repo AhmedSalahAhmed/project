@@ -5,6 +5,7 @@ namespace App\Http\Controllers\manager;
 use App\Http\Controllers\Controller;
 use App\Models\BankCurrency;
 use App\Models\Currency;
+use App\Models\CurrencyPrice;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -22,15 +23,15 @@ class ManagerDashboardController extends Controller
     public function index()
 
     {
-        $except_ids = BankCurrency::whereBankId(request()->user()->bank_id)->pluck('currency_id');
+        $bank_id = request()->user()->bank_id;
+        // $except_ids = BankCurrency::whereBankId(request()->user()->bank_id)->pluck('currency_id');
 
         $currencies = Currency::all();
-        $bankcurrencies = BankCurrency::join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
-        ->get(['bank_currencies.*', 'currencies.currency_name','currencies.symbol']);
+        $bankcurrencies = BankCurrency::where('bank_id', $bank_id)->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
+            ->get(['bank_currencies.*', 'currencies.currency_name', 'currencies.symbol']);
         // return $bankcurrencies;
-        
-		return view('manager.dashboard',compact('bankcurrencies'));
-        
+
+        return view('manager.dashboard', compact('bankcurrencies', 'currencies'));
     }
 
     /**
@@ -42,7 +43,7 @@ class ManagerDashboardController extends Controller
     {
         $transactions = Transaction::all();
 
-        return view('manager.dashboard' , compact('transactions'));
+        return view('manager.dashboard', compact('transactions'));
     }
 
     /**
@@ -69,9 +70,42 @@ class ManagerDashboardController extends Controller
 
         // $account->balance = $amm;
         Alert::success('تهانينا !!', 'تمت العملية بنجاح');
-     
+
         return redirect()->route('manager.index');
-    
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function insert(Request $request)
+    {
+        $bank_id = request()->user()->bank_id;
+        $request->validate([
+
+            'currency_id' => 'required',
+            'buy_price' => 'required',
+            'sale_price' => 'required',
+
+
+        ]);
+        $currencyprice = CurrencyPrice::all();
+        $bercent = .75;
+        // dd();
+        if ($request->buy_price > $currencyprice) {
+            BankCurrency::create([
+                'currency_id' => $request->currency_id,
+                'buy_price' => $request->buy_price,
+                'sale_price' => $request->sale_price,
+                'bank_id' => $bank_id,
+            ]);
+
+            Alert::success('تهانينا !!', 'تمت العملية بنجاح');
+        }
+
+
+        return redirect()->route('manager.index');
     }
 
     /**
@@ -94,7 +128,6 @@ class ManagerDashboardController extends Controller
     public function edit(Currency $currency)
     {
         return view('manager.dashboard', compact('currency'));
-        
     }
 
     /**
@@ -116,6 +149,4 @@ class ManagerDashboardController extends Controller
         Alert::success('تهانينا !!', 'تم تعديل بيانات العملة بنجاح');
         return redirect()->route('manager.index');
     }
-
-    
 }

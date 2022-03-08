@@ -20,11 +20,14 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        $branches = Branch::all();
-        
+        $bank_id = request()->user()->bank_id;
+
+        $branches = Branch::where('bank_id', $bank_id)->get('*'); 
+        // $registeredbranches = Branch::all();
         $employees = Employee::join('branches', 'employees.branch_id', '=', 'branches.id')
-               ->get(['employees.*', 'branches.branch_name']);
-            //    return $employees;
+            ->where('branches.bank_id' , $bank_id)->get(['employees.*', 'branches.branch_name']);
+           
+
         return view('manager.employee', compact('employees', 'branches'));
     }
 
@@ -36,7 +39,7 @@ class EmployeesController extends Controller
     public function create()
     {
         $employees = Employee::all();
-        return view('manager.employee' , compact('employees'));
+        return view('manager.employee', compact('employees'));
     }
 
     /**
@@ -47,7 +50,7 @@ class EmployeesController extends Controller
      */
     public function store(Request $request)
     {
-        $bank_id = request()->user()->bank_id;  
+        $bank_id = request()->user()->bank_id;
         $request->validate([
             'employee_name' => 'required|string',
             'branch_id' => 'required',
@@ -62,7 +65,7 @@ class EmployeesController extends Controller
             'password' => Hash::make($request->password),
         ]);
         return redirect()->route('employees.index')
-        ->with('success','تمت تســجيل مدير بنك بنجاح');
+            ->with('success', 'تمت تســجيل مدير بنك بنجاح');
         // dd($request->branch_id);
 
     }
@@ -107,7 +110,7 @@ class EmployeesController extends Controller
         ]);
         $employee->update([
             'employee_name' => $request->employee_name,
-            
+
         ]);
 
         if ($request->email != $employee->email) {
@@ -122,9 +125,7 @@ class EmployeesController extends Controller
             ]);
         }
         return redirect()->route('employees.index')
-        ->with('success','تمت تعديل بيانات المدير  بنجاح');
-        
-
+            ->with('success', 'تمت تعديل بيانات المدير  بنجاح');
     }
 
     /**
@@ -139,7 +140,6 @@ class EmployeesController extends Controller
     {
         $employee->delete();
         return redirect()->route('employees.index')
-        ->with('success','تم حذف الســـجل');
-        
+            ->with('success', 'تم حذف الســـجل');
     }
 }

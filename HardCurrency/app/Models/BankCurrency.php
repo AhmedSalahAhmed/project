@@ -29,6 +29,7 @@ class BankCurrency extends Model
         'sale_price',
         'buy_price',
         'currency_id',
+        'balance',
         'currency_price_id'
     ];
 

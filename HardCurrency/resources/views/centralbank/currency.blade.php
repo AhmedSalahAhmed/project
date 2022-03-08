@@ -72,6 +72,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- End Modal -->
 
                 <div class="table-responsive">
 

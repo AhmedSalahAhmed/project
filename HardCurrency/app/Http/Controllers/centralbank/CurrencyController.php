@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Currency;
 use App\Models\BankCurrency;
 use App\Models\Bank;
-use Alert;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\CurrencyPrice;
 
 class CurrencyController extends Controller
@@ -55,9 +55,9 @@ class CurrencyController extends Controller
         CurrencyPrice::create([
             "currency_id" => $stored->id,
         ]);
-        BankCurrency::create([
-            "currency_id" => $stored->id,
-        ]);
+        // BankCurrency::create([
+        //     "currency_id" => $stored->id,
+        // ]);
 
         Alert::success('تهانينا !!', 'تم اضافة  عملة جديدة بنجاح');
 

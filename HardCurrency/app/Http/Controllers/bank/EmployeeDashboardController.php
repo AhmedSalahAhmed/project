@@ -21,6 +21,7 @@ class EmployeeDashboardController extends Controller
      */
     public function index()
     {
+
         $currencies = Currency::all();
         $transactions = Transaction::all();
         $bankcurrencies = BankCurrency::join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')

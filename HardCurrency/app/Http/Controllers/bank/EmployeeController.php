@@ -4,7 +4,8 @@ namespace App\Http\Controllers\bank;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use Validator, Auth;
+use Validator;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {

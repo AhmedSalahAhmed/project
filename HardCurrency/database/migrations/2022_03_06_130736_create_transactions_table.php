@@ -21,7 +21,7 @@ class CreateTransactionsTable extends Migration
             $table->string('id_number')->nullable();
             $table->bigInteger('amount')->default(0);
             $table->bigInteger('sdgamount');
-            $table->foreignId('bank_fk')->nullable()->constrained('banks')->onDelete('cascade');
+            $table->foreignId('bank_id')->nullable()->constrained('banks')->onDelete('cascade');
             $table->foreignId('employee_id')->nullable()->constrained('employees')->onDelete('cascade');
             $table->foreignId('bank_currency_id')->nullable()->constrained('bank_currencies')
             ->onDelete('cascade');

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Bank extends Model
 {
@@ -39,11 +40,11 @@ class Bank extends Model
     /**
      * Get all of the currencies for the Bank
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function currencies(): HasMany
+    public function currencies(): HasOne
     {
-        return $this->hasMany(BankCurrency::class,);
+        return $this->hasOne(BankCurrency::class,);
     }
 
 

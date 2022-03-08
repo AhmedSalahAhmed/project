@@ -8,7 +8,7 @@ use App\Models\CurrencyPrice;
 use App\Models\Currency;
 use App\Models\BankCurrency;
 use App\Models\Bank;
-use Alert;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PriceController extends Controller
 {
