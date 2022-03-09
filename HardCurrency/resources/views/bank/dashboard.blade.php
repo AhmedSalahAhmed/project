@@ -79,15 +79,15 @@
                                 <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> المبلغ </label>
                                 <div class="col-sm-9">
                                     <input type="text" id="amount" name="amount" class="form-control" placeholder="  المبلغ بالعملة الاجنبية" onkeyup="mult(this.value);">
-                                    <input type="text" id="sdgamount" name="sdgamount" hidden>
+                                    <!-- <input type="text" id="sdgamount" name="sdgamount" hidden> -->
 
                                 </div>
 
                             </div>
                             <div class="form-group row">
-                                <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> المجموع : </label>
+                                <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> القيمة بالجنيه : </label>
                                 <div class="col-sm-9">
-                                    <input id="total" type="text" name="total" class="form-control" placeholder=" المبلغ بالجنيه السوداني" disabled>
+                                    <input id="sdgamount" type="text" name="sdgamount" class="form-control" placeholder=" المبلغ بالجنيه السوداني" disabled>
                                 </div>
 
                             </div>
@@ -154,7 +154,7 @@
                                 function mult(value) {
                                     var currency = document.getElementById('currency').value;
 
-                                    console.log(currency)
+                                    // console.log(currency)
 
                                     // console.log(price)
 
@@ -163,7 +163,6 @@
                                     // var x = value * buy;
 
                                     // document.getElementById('total').value = x + ' جنيه  ';
-                                    // document.getElementById('sdgamount').value = x;
                                     //    var select = document.getElementById('currency');
                                     //    var opt = select.options[select.selectedIndex].value;
                                     //    if($currency->id == opt)
@@ -182,6 +181,7 @@
                                         },
                                         success:(data) => {
                                             console.log(data)
+                                            document.getElementById('sdgamount').value = data;
                                         },
                                         fail:(error) => {
                                             console.log(error)

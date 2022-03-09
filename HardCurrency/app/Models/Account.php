@@ -16,8 +16,6 @@ class Account extends Model
     protected $fillable = [
         'balance',
         'bank_id',
-        'employee_id',
-        'bank_currency_id',
         'currency_id',
         
     ];
@@ -25,14 +23,7 @@ class Account extends Model
     {
         return $this->belongsTo(Currency::class);
     }
-    public function bank_currency()
-    {
-        return $this->belongsTo(BankCurrency::class);
-    }
-    public function employee()
-    {
-        return $this->belongsTo(Employee::class);
-    }
+   
     public function bank()
     {
         return $this->belongsTo(Bank::class);

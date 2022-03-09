@@ -63,8 +63,5 @@ class Employee extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Transaction::class);
     }
 
-   public function account()
-   {
-       return $this->hasOne(Account::class);
-   }
+ 
 }

@@ -54,13 +54,13 @@ class EmployeeDashboardController extends Controller
     public function store(Request $request)
     {
         $bank_id = Auth::user()->bank_id;
-
-        // dd($request->all());
-
+        // dd($bank_id);
+        // return $request->all();
         $bankcurrency = BankCurrency::find($request->bank_currency_id);
         if (!$bankcurrency) {
             return back()->withErrors(['bankcurrency' => ' يجب إختيار العملة المطلوبة ']);
         }
+
         $am = $request->amount;
         $request->validate([
             'client_name' => 'required',
@@ -68,25 +68,20 @@ class EmployeeDashboardController extends Controller
             'amount' => 'required',
             'bank_currency_id' => 'required',
             // 'sdgamount' => 'required',
-
         ]);
-
-
         Process::create([
-
             'bank_currency_id' => $request->bank_currency_id,
             'client_name' => $request->client_name,
             'client_phone' => $request->client_phone,
             'id_number' => $request->id_number,
             'amount' => $request->amount,
-            // 'sdgamount' => $request->sdgamount,
+            'sdgamount' => $request->buy_price * $request->amount,
             'employee_id' => $request->user()->id,
             'bank_id' => $bank_id,
         ]);
         $bankcurrency->balance = $bankcurrency->balance + $am;
         $bankcurrency->save();
         Alert::success('تهانينا !!', 'تمت العملية بنجاح');
-
         return redirect()->route('bank.index');
     }
 
@@ -135,11 +130,11 @@ class EmployeeDashboardController extends Controller
     public function getTotal(Request $request)
     {
         $bank_id = Auth::user()->bank_id;
-        $record = BankCurrency::all()->where("bank_id", $bank_id)->where("id", $request->currency_id);
+        $record = BankCurrency::where("id", $request->currency_id)->where("bank_id", $bank_id)->get();
 
         // $total = $record->buy_price * $request->amount;
         // dd($record);
-        return $record;
+        return $record[0]->buy_price * $request->total;
 
         Alert::success('تهانينا !!', 'تم تعديل بيانات العملة بنجاح');
         return redirect()->route('bank.index');

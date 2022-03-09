@@ -65,8 +65,6 @@ class BankController extends Controller
             Account::create([
                 "bank_id" => $bank->id,
                 "currency_id" => $price->id,
-
-
             ]);
         }
         

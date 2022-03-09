@@ -1,9 +1,8 @@
-@include('manager.includes.header')
+@include('bank.includes.header')
 
-@include('manager.includes.navbar')
+@include('bank.includes.navbar')
 
-@include('manager.includes.sidebar')
-
+@include('bank.includes.sidebar')
 
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
@@ -37,8 +36,7 @@
                         <th> العميل </th>
                         <th> المبلغ </th>
                         <th>العملة </th>
-                        <th> الموظف </th>
-                        <th> الفرع</th>
+                        
 
                     </tr>
                 </thead>
@@ -55,12 +53,8 @@
                         <td class="py-1">
                             {{$process->currency_name}}
                         </td>
-                        <td>
-                            {{$process->employee_name}}
-                        </td>
-                        <td>
-                            {{$process->branch_name}}
-                        </td>
+                       
+                      
 
                     </tr>
 
@@ -72,6 +66,4 @@
     </div>
 </div>
 
-
-
-@extends('manager.includes.footer')
+@extends('bank.includes.footer')
