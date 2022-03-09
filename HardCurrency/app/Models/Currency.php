@@ -42,4 +42,9 @@ class Currency extends Model
     {
         return $this->hasOne(CurrencyPrice::class,);
     }
+
+   public function account()
+   {
+       return $this->hasOne(Account::class);
+   }
 }

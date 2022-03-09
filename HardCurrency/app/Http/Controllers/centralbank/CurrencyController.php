@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\centralbank;
 
 use App\Http\Controllers\Controller;
+use App\Models\Account;
 use Illuminate\Http\Request;
 use App\Models\Currency;
 use App\Models\BankCurrency;
@@ -54,16 +55,25 @@ class CurrencyController extends Controller
             "currency_id" => $stored->id,
         ]);
         $banks = Bank::all();
-        foreach($banks as $bank)
-    {
+        foreach ($banks as $bank) {
 
-        BankCurrency::create([
-            "currency_id" => $stored->id,
-            "bank_id" => $bank->id,
-        ]);
-    }
-        // return $stored->id;
-        
+            BankCurrency::create([
+                "currency_id" => $stored->id,
+                "bank_id" => $bank->id,
+            ]);
+            Account::create([
+                
+                "currency_id" => $stored->id,
+                "bank_id" => $bank->id,
+
+    
+    
+            ]);
+        }
+       
+
+
+
 
         Alert::success('تهانينا !!', 'تم اضافة  عملة جديدة بنجاح');
 
@@ -122,7 +132,7 @@ class CurrencyController extends Controller
     public function destroy(Currency $currency)
     {
         $deleted = $currency->delete();
-      
+
         return redirect()->route('currency.index')
             ->withSuccess(__('تم حذف العملة بنجاح'));
     }

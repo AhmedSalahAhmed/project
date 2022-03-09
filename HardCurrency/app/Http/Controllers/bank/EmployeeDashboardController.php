@@ -27,7 +27,6 @@ class EmployeeDashboardController extends Controller
         // dd($bank_id);
 
         $currencies = Currency::all();
-        $processes = Process::all();
         $bankcurrencies = BankCurrency::where('bank_id', $bank_id)->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
             ->get(['bank_currencies.*', 'currencies.currency_name']);
         // $tc = Transaction::join('bank_currencies', 'transaction.bank_currency_id', '=', 'bank_currencies.id')
@@ -68,7 +67,7 @@ class EmployeeDashboardController extends Controller
             'client_phone' => 'required',
             'amount' => 'required',
             'bank_currency_id' => 'required',
-            'sdgamount' => 'required',
+            // 'sdgamount' => 'required',
 
         ]);
 
@@ -80,7 +79,7 @@ class EmployeeDashboardController extends Controller
             'client_phone' => $request->client_phone,
             'id_number' => $request->id_number,
             'amount' => $request->amount,
-            'sdgamount' => $request->sdgamount,
+            // 'sdgamount' => $request->sdgamount,
             'employee_id' => $request->user()->id,
             'bank_id' => $bank_id,
         ]);
@@ -136,7 +135,7 @@ class EmployeeDashboardController extends Controller
     public function getTotal(Request $request)
     {
         $bank_id = Auth::user()->bank_id;
-        $record = BankCurrency::all()->where("bank_id", $bank_id)->where("currency_id", $request->currency_id);
+        $record = BankCurrency::all()->where("bank_id", $bank_id)->where("id", $request->currency_id);
 
         // $total = $record->buy_price * $request->amount;
         // dd($record);

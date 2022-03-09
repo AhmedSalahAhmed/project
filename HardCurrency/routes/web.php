@@ -48,6 +48,7 @@ Route::group(['prefix' => 'manager'], function() {
         Route::get('/dashboard',[App\Http\Controllers\manager\ManagerDashboardController::class, 'index'])->name('manager.dashboard');
         Route::resource('employees', manager\EmployeesController::class);       
         Route::resource('branch', manager\BranchController::class);       
+        Route::resource('process', manager\ProcessController::class);       
         Route::get('/logout', [App\Http\Controllers\manager\ManagerController::class, 'logout'])->name('manager.logout');
         Route::post('/currency', [App\Http\Controllers\manager\ManagerDashboardController::class, 'insert'])->name('manager.insert');
         Route::resource('manager', manager\ManagerDashboardController::class);       

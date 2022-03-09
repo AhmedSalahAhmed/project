@@ -115,7 +115,7 @@
                             <td> {{$bank->bank_name}}</td>
                             <td> {{$bank->email}}</td>
 
-                            <td>{{$bank->state}},{{$bank->city}},{{$bank->district}}</td>
+                            <td>{{$bank->state}}</td>
                             <td>{{$bank->created_at}}</td>
                             <td>
                                 <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{$bank->id}}">

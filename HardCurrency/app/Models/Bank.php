@@ -90,7 +90,10 @@ class Bank extends Model
        return $this->hasMany(Process::class);
    }
 
-
+   public function account()
+   {
+       return $this->hasOne(Account::class);
+   }
     // /**
     //  * Get,Set the logo
     //  *

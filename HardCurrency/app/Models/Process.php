@@ -25,10 +25,9 @@ class Process extends Model
      * @var array
      */
     protected $fillable = [
-        'bank_fk',
+        'bank_id',
         'employee_id',
         'bank_currency_id',
-        'type',
         'client_name',
         'client_phone',
         'id_number',

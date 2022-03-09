@@ -71,4 +71,9 @@ class BankCurrency extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+
+   public function account()
+   {
+       return $this->hasOne(Account::class);
+   }
 }

@@ -24,7 +24,6 @@
             <div class="card-body">
                 <h4 class="card-title">أسعار الصرف </h4>
 
-
                 @if (session('success'))
 
                 <div class="alert alert-success">

@@ -4,7 +4,8 @@ namespace App\Http\Controllers\manager;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use Validator, Auth;
+use Illuminate\Support\Facades\Auth;
+
 
 class ManagerController extends Controller
 {

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\centralbank;
 
 use App\Http\Controllers\Controller;
+use App\Models\Account;
 use Illuminate\Http\Request;
 use App\Models\Bank;
 use App\Models\BankCurrency;
 use App\Models\CurrencyPrice;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BankController extends Controller
 {
@@ -17,8 +19,8 @@ class BankController extends Controller
      */
     public function index()
     {
-        $banks = Bank::oldest()->paginate(4);
-        return view('centralbank.bank', compact('banks'))->with('i', (request()->input('page', 1) - 1) * 4);
+        $banks = Bank::oldest()->paginate(7);
+        return view('centralbank.bank', compact('banks'))->with('i', (request()->input('page', 1) - 1) * 7);
     }
 
     /**
@@ -60,8 +62,19 @@ class BankController extends Controller
                 "buy_price" => $price->buy_price,
                 "sale_price" => $price->sale_price,
             ]);
+            Account::create([
+                "bank_id" => $bank->id,
+                "currency_id" => $price->id,
+
+
+            ]);
         }
-        // Alert::success('تم ', 'تم اضافة  بنك جديد للنظام بنجاح');
+        
+
+     
+                
+        
+        Alert::success('تم ', 'تم اضافة  بنك جديد للنظام بنجاح');
 
         return redirect()->route('banks.index');
     }

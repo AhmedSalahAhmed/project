@@ -24,8 +24,8 @@ class ManagerDashboardController extends Controller
 
     {
         $bank_id = Auth::user()->bank_id;
-
-        // $except_ids = BankCurrency::whereBankId(request()->user()->bank_id)->pluck('currency_id');
+        
+        
 
         $currencies = Currency::all();
         $bankcurrencies = BankCurrency::where('bank_id', $bank_id)->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
