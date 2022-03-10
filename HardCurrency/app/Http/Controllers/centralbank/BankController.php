@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Bank;
 use App\Models\BankCurrency;
 use App\Models\CurrencyPrice;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class BankController extends Controller
@@ -19,8 +20,8 @@ class BankController extends Controller
      */
     public function index()
     {
-        $banks = Bank::oldest()->paginate(7);
-        return view('centralbank.bank', compact('banks'))->with('i', (request()->input('page', 1) - 1) * 7);
+        $banks = Bank::latest()->paginate(10);
+        return view('centralbank.bank', compact('banks'));
     }
 
     /**
@@ -51,27 +52,49 @@ class BankController extends Controller
             'city' => 'required',
             'district' => 'required',
         ]);
-        $bank = Bank::create($request->all());
+
+        // dd($request->all());
+
+        // $request->logo = $request->file("logo")->store("images");
+
+        $bank = Bank::create([
+            "bank_name" => $request->bank_name,
+            "email" => $request->email,
+            "phone" => $request->phone,
+            "state" => $request->state,
+            "city" => $request->city,
+            "district" => $request->district,
+            "logo" => $request->file("logo")->store("images", "public")
+        ]);
+
+        // $bank = Bank::create($request->all());
+
+
+        // $bank = DB::getPdo()->lastInsertId();
+
+        // dd($bank);
 
         $prices = CurrencyPrice::all();
 
         foreach ($prices as $price) {
             BankCurrency::create([
                 "bank_id" => $bank->id,
-                "currency_id" => $price->id,
+                "currency_id" => $price->currency_id,
                 "buy_price" => $price->buy_price,
                 "sale_price" => $price->sale_price,
+                "balance" => 0
             ]);
-            Account::create([
+            Account::create([   
                 "bank_id" => $bank->id,
-                "currency_id" => $price->id,
+                "currency_id" => $price->currency_id,
+                "balance" => 0
             ]);
         }
-        
 
-     
-                
-        
+
+
+
+
         Alert::success('تم ', 'تم اضافة  بنك جديد للنظام بنجاح');
 
         return redirect()->route('banks.index');

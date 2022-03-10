@@ -17,7 +17,6 @@ class CurrencyPrice extends Model
         'buy_price',
         'sale_price',
         'currency_id',
-        
     ];
     protected $dates = ['currency_date'];
     public function currency()

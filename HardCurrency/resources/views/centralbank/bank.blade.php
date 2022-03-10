@@ -24,7 +24,7 @@
                         </div>
                         <div class="modal-body">
 
-                            <form action="{{ route('banks.store') }}" method="post" class="forms-sample">
+                            <form action="{{ route('banks.store') }}" enctype="multipart/form-data" method="post" class="forms-sample">
                                 @csrf
 
                                 <div class="form-group row">
@@ -58,13 +58,13 @@
                                 <div class="form-group row">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label">شعار البنك </label>
                                     <div class="col-sm-9">
-                                        <input type="file" name="logo" class="form-control" placeholder="شعار النك ">
+                                        <input type="file" name="logo" id="logo" class="form-control" placeholder="شعار النك "/>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> الولاية</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="state" class="form-control" placeholder="الولاية ">
+                                        <input type="text" name="state" class="form-control" placeholder="الولاية "/>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -110,7 +110,7 @@
 
                         <tr>
                             <td class="py-1">
-                                <img src="{{$bank->logo}}" alt="image" />
+                                <img src="{{asset('storage/'.$bank->logo)}}" style="width: 100px; height: 100px" alt="image" />
                             </td>
                             <td> {{$bank->bank_name}}</td>
                             <td> {{$bank->email}}</td>
@@ -173,6 +173,7 @@
 
                     </tbody>
                 </table>
+                <div>{{$banks->links()}}</div>
             </div>
         </div>
     </div>

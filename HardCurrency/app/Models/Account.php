@@ -17,7 +17,6 @@ class Account extends Model
         'balance',
         'bank_id',
         'currency_id',
-        
     ];
     public function currency()
     {
