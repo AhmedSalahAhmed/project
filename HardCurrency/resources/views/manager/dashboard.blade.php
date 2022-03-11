@@ -22,8 +22,10 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-              
-                <h4 class="card-title">العملات الأجنبية التي يتعامل بها البنك  </h4>
+
+                <h4 class="card-title"> العملات الأجنبية التي يتعامل بها البنك
+            
+                 </h4>
 
                 @if (session('success'))
 
@@ -43,7 +45,6 @@
                                 <th scope="col">سعر الشراء </th>
                                 <th scope="col">سعر البيع </th>
                                 <th scope="col"> المتوسط </th>
-                                <th scope="col"> الرصيد </th>
                                 <th scope="col">تعـــديل سعر الصرف</th>
                             </tr>
                         </thead>
@@ -55,7 +56,7 @@
                                 <td>{{$bankcurrency->buy_price}}</td>
                                 <td>{{$bankcurrency->sale_price}}</td>
                                 <td>{{($bankcurrency->buy_price + $bankcurrency->sale_price) / 2}}</td>
-                                <td>{{$bankcurrency->balance}} {{$bankcurrency->symbol}}</td>
+                              
                                 <td>
                                     <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{$bankcurrency->id}}">
                                         تعديل

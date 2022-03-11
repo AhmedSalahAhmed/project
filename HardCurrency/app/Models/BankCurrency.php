@@ -29,7 +29,6 @@ class BankCurrency extends Model
         'sale_price',
         'buy_price',
         'currency_id',
-        'balance',
     ];
 
     protected $with = ['currency'];

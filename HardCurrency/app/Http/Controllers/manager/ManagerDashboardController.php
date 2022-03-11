@@ -29,7 +29,8 @@ class ManagerDashboardController extends Controller
         
         $banks = Bank::where('id', $bank_id)->get();
         $currencies = Currency::all();
-        $bankcurrencies = BankCurrency::where('bank_id', $bank_id)->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
+        $bankcurrencies = BankCurrency::where('bank_currencies.bank_id', $bank_id)
+        ->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
             ->get(['bank_currencies.*', 'currencies.currency_name', 'currencies.symbol']);
         // return $bankcurrencies;
 

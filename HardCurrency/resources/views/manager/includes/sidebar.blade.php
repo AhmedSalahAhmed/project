@@ -13,9 +13,9 @@
           </div>
           <div class="nav-profile-text d-flex flex-column">
             <span></span>
-            <span class="font-weight-bold mb-2">{{ Auth::user()->manager_name}}</span>
+            <span class="font-weight-bold mb-2">{{ $bank->bank_name}}</span>
 
-            <span class="text-secondary text-small">{{ Auth::user()->email}}</span>
+            <span class="text-secondary text-small">{{ $bank->email}}</span>
           </div>
           @endforeach
 
@@ -25,13 +25,13 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ url('manager/dashboard')}}">
           <span class="menu-title"> العملات</span>
-          <i class="mdi mdi-cash menu-icon"></i>
+          <i class="mdi mdi-cash-multiple menu-icon"></i>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{url('manager/branch')}}">
           <span class="menu-title"> الفروع</span>
-          <i class="mdi mdi-chart-bar menu-icon"></i>
+          <i class="mdi mdi-map-marker-multiple  menu-icon"></i>
 
         </a>
       </li>
@@ -49,6 +49,13 @@
 
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{url('manager/account')}}">
+          <span class="menu-title"> خزينة العملات الأجنبية</span>
+          <i class=" mdi mdi-cash  menu-icon"></i>
+
+        </a>
+      </li>
 
 
 
@@ -57,7 +64,7 @@
         <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
           <span class="menu-title">التقارير</span>
           <i class="menu-arrow"></i>
-          <i class="mdi mdi-message menu-icon"></i>
+          <i class="mdi mdi-file-multiple menu-icon"></i>
         </a>
         <div class="collapse" id="ui-basic">
           <ul class="nav flex-column sub-menu">

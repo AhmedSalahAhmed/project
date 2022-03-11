@@ -47,6 +47,7 @@ Route::group(['prefix' => 'manager'], function () {
     Route::group(['middleware' => 'manager.auth'], function () {
         Route::get('/dashboard', [App\Http\Controllers\manager\ManagerDashboardController::class, 'index'])->name('manager.dashboard');
         Route::resource('employees', manager\EmployeesController::class);
+        Route::resource('account', manager\BankAccountController::class);
         Route::resource('branch', manager\BranchController::class);
         Route::resource('process', manager\ProcessController::class);
         Route::get('/searchcurrency', [App\Http\Controllers\manager\CurrencyReportController::class, 'searchcurrency']);

@@ -21,7 +21,7 @@ class CreateBankCurrenciesTable extends Migration
             ->constrained('currencies')->onDelete('cascade');
             $table->double('sale_price')->default(0);
             $table->double('buy_price')->default(0);
-            $table->double('balance')->default(0);
+            // $table->double('balance')->default(0);
             $table->timestamps();
         });
     }
