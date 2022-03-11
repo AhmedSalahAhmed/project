@@ -61,16 +61,19 @@ class EmployeeDashboardController extends Controller
     {
         $bank_id = Auth::user()->bank_id;
 
-        
-        
-        $bank_account = Account::where('bank_id', $bank_id)->where('currency_id' , $request->bank_currency_id)->get();
-        // dd($account);
-        // dd($bank_id);
-        // return $request->all();
-        $bankcurrency = BankCurrency::find($request->bank_currency_id);
-       
+        $currency = BankCurrency::where('bank_id', $bank_id)
+            ->where('bank_currencies.id', $request->bank_currency_id)
+            ->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
+            ->get(['bank_currencies.currency_id'])
+            ->pluck('currency_id');
+        $bank_account = Account::where('bank_id', $bank_id)
+            ->where('currency_id', $currency)->get();
+        // dd($bank_account);
 
-        // dd($account->all());
+
+
+
+        $bankcurrency = BankCurrency::find($request->bank_currency_id);
 
         if (!$bankcurrency) {
             return back()->withErrors(['bankcurrency' => ' يجب إختيار العملة المطلوبة ']);
