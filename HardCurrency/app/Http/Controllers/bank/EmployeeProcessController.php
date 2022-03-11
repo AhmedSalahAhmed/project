@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\bank;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bank;
+use App\Models\Branch;
 use App\Models\Process;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,21 +20,23 @@ class EmployeeProcessController extends Controller
     {
         $bank_id = Auth::user()->bank_id;
         $employee_id = Auth::user()->id;
+        $banks = Bank::where('id', $bank_id)->get();
+        $branches = Branch::where('id', $bank_id)->get();
 
         // dd($bank_id);
 
 
         // $processes = Process::where('bank_id' ,$bank_id)->join(
-        $processes = Process::where('processes.bank_id', $bank_id)->where('processes.employee_id' , $employee_id)
+        $processes = Process::where('processes.bank_id', $bank_id)->where('processes.employee_id', $employee_id)
             ->join(
                 'bank_currencies',
                 'processes.bank_currency_id',
                 '=',
                 'bank_currencies.id'
             )->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
+            ->orderBy('processes.id' , 'desc')
             ->get(['processes.*', 'bank_currencies.buy_price', 'currencies.currency_name', 'currencies.symbol']);
-            return view('bank.process', compact('processes'));
-        
+        return view('bank.process', compact('processes', 'banks', 'branches'));
     }
 
     /**

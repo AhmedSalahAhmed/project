@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\bank;
 
 use App\Http\Controllers\Controller;
+use App\Models\Account;
+use App\Models\Bank;
 use App\Models\BankCurrency;
+use App\Models\Branch;
 use App\Models\Currency;
 use App\Models\Process;
 use App\Models\Transaction;
@@ -23,6 +26,9 @@ class EmployeeDashboardController extends Controller
     public function index()
     {
         $bank_id = Auth::user()->bank_id;
+        $banks = Bank::where('id', $bank_id)->get();
+        $branches = Branch::where('id', $bank_id)->get();
+
 
         // dd($bank_id);
 
@@ -33,7 +39,7 @@ class EmployeeDashboardController extends Controller
         // ->get(['transaction.*', 'bank_currencies.currency_name']);
         // return $transactions;
 
-        return view('bank.dashboard', compact('bankcurrencies', 'currencies'));
+        return view('bank.dashboard', compact('bankcurrencies', 'currencies', 'banks', 'branches'));
     }
 
     /**
@@ -57,6 +63,9 @@ class EmployeeDashboardController extends Controller
         // dd($bank_id);
         // return $request->all();
         $bankcurrency = BankCurrency::find($request->bank_currency_id);
+        $account = Account::find($request->currency_id);
+        
+
         if (!$bankcurrency) {
             return back()->withErrors(['bankcurrency' => ' يجب إختيار العملة المطلوبة ']);
         }
@@ -80,7 +89,9 @@ class EmployeeDashboardController extends Controller
             'bank_id' => $bank_id,
         ]);
         $bankcurrency->balance = $bankcurrency->balance + $am;
+        $account->balance = $account->balance + $am;
         $bankcurrency->save();
+        $account->save();
         Alert::success('تهانينا !!', 'تمت العملية بنجاح');
         return redirect()->route('bank.index');
     }

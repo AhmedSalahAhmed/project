@@ -39,6 +39,8 @@
                         <th>العملة </th>
                         <th> الموظف </th>
                         <th> الفرع</th>
+                        <th> تاريخ المعاملة  </th>
+
 
                     </tr>
                 </thead>
@@ -60,6 +62,9 @@
                         </td>
                         <td>
                             {{$process->branch_name}}
+                        </td>
+                        <td>
+                            {{$process->created_at}}
                         </td>
 
                     </tr>

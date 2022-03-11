@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\manager;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bank;
 use App\Models\BankCurrency;
 use App\Models\Process;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ class ProcessController extends Controller
     public function index()
     {
         $bank_id = Auth::user()->bank_id;
+        $banks = Bank::where('id', $bank_id)->get();
 
         // dd($bank_id);
 
@@ -36,22 +38,11 @@ class ProcessController extends Controller
                 '=',
                 'employees.id'
             )->join('branches', 'employees.branch_id', '=', 'branches.id')
-            ->get(['processes.*', 'bank_currencies.buy_price', 'currencies.currency_name', 'currencies.symbol', 'employees.employee_name' ,'branches.branch_name']);
-        // $employees = Process::join(
-        //     'employees',
-        //     'processes.employee_id',
-        //     '=',
-        //     'employees.id'
-        // )
-        //     ->get(['processes.*', 'employees.employee_name']);
-        // $bank_currency_id = Process::get('bank_currency_id');
-        // $bankcurrencies = BankCurrency::where('bank_id', $bank_id)->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
-        //     ->get(['bank_currencies.*', 'currencies.currency_name']);
-        // $tc = Transaction::join('bank_currencies', 'transaction.bank_currency_id', '=', 'bank_currencies.id')
-        // ->get(['transaction.*', 'bank_currencies.currency_name']);
-        // return $transactions;
-
-        return view('manager.process', compact('processes'));
+            
+            ->orderBy('id' ,'desc')->get(['processes.*', 'bank_currencies.buy_price', 'currencies.currency_name', 'currencies.symbol', 'employees.employee_name' ,'branches.branch_name'])
+            ;
+    
+        return view('manager.process', compact('processes' , 'banks'));
     }
 
     /**

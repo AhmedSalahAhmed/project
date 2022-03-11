@@ -22,9 +22,11 @@ class BranchController extends Controller
     public function index()
     {
         $bank_id = request()->user()->bank_id;
+        $banks = Bank::where('id', $bank_id)->get();
+
    
         $branches = Branch::where('bank_id',$bank_id)->get();
-        return view('manager.branch', compact('branches'));
+        return view('manager.branch', compact('branches' ,'banks'));
     }
 
     /**

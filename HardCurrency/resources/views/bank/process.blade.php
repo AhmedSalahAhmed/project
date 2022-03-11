@@ -36,7 +36,9 @@
                         <th> العميل </th>
                         <th> المبلغ </th>
                         <th>العملة </th>
-                        
+                        <th>رقم الهاتف </th>
+                        <th> تاريخ المعاملة  </th>
+
 
                     </tr>
                 </thead>
@@ -44,17 +46,23 @@
                     @foreach($processes as $process)
 
                     <tr>
-                    <td> {{$process->client_name}}</td>
+                        <td> {{$process->client_name}}</td>
 
-                        
+
                         <td> {{$process->amount}} {{$process->symbol}}</td>
-                        
+
 
                         <td class="py-1">
                             {{$process->currency_name}}
                         </td>
-                       
-                      
+                        <td>
+                            {{$process->client_phone}}
+                        </td>
+                        <td>
+                            {{$process->created_at}}
+                        </td>
+
+
 
                     </tr>
 

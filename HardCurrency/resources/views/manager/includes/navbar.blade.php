@@ -1,9 +1,14 @@
  <!-- partial:partials/_navbar.html -->
  <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row ">
+   @foreach($banks as $bank)
+
    <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-     <a class="navbar-brand brand-logo" href="index.html"><span> صرف العملات الأجنبية </span></a>
-     <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{asset('assets/images/cbos.jpeg')}}" alt="logo" /></a>
+     <span class="navbar-brand brand-logo"> {{$bank->bank_name}} </span>
+     <a class="navbar-brand brand-logo-mini" href="index.html">
+
+       <img src="{{asset('storage/'.$bank->logo)}}" alt="profile" /></a>
    </div>
+   @endforeach
    <div class="navbar-menu-wrapper d-flex align-items-stretch">
      <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
        <span class="mdi mdi-menu"></span>
@@ -15,7 +20,7 @@
          <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
 
            <div class="nav-profile-text">
-             <p class="mb-1 text-black"> {{ Auth::user()->bank_id }}</p>
+             <p class="mb-1 text-black">{{ Auth::user()->manager_name}}</p>
            </div>
          </a>
          <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">

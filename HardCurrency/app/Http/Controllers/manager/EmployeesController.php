@@ -21,6 +21,8 @@ class EmployeesController extends Controller
     public function index()
     {
         $bank_id = request()->user()->bank_id;
+        $banks = Bank::where('id', $bank_id)->get();
+
 
         $branches = Branch::where('bank_id', $bank_id)->get('*'); 
         // $registeredbranches = Branch::all();
@@ -28,7 +30,7 @@ class EmployeesController extends Controller
             ->where('branches.bank_id' , $bank_id)->get(['employees.*', 'branches.branch_name']);
            
 
-        return view('manager.employee', compact('employees', 'branches'));
+        return view('manager.employee', compact('employees', 'branches' , 'banks'));
     }
 
     /**

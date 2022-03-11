@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\manager;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bank;
 use App\Models\BankCurrency;
 use App\Models\Currency;
 use App\Models\CurrencyPrice;
@@ -26,13 +27,13 @@ class ManagerDashboardController extends Controller
         $bank_id = Auth::user()->bank_id;
         
         
-
+        $banks = Bank::where('id', $bank_id)->get();
         $currencies = Currency::all();
         $bankcurrencies = BankCurrency::where('bank_id', $bank_id)->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
             ->get(['bank_currencies.*', 'currencies.currency_name', 'currencies.symbol']);
         // return $bankcurrencies;
 
-        return view('manager.dashboard', compact('bankcurrencies', 'currencies'));
+        return view('manager.dashboard', compact('bankcurrencies', 'currencies' ,'banks'));
     }
 
     /**

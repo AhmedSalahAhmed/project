@@ -110,7 +110,7 @@
 
                         <tr>
                             <td class="py-1">
-                                <img src="{{asset('storage/'.$bank->logo)}}" style="width: 100px; height: 100px" alt="image" />
+                                <img src="{{asset('storage/'.$bank->logo)}}" alt="image" />
                             </td>
                             <td> {{$bank->bank_name}}</td>
                             <td> {{$bank->email}}</td>
