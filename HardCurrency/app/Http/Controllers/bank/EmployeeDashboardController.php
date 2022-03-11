@@ -60,11 +60,17 @@ class EmployeeDashboardController extends Controller
     public function store(Request $request)
     {
         $bank_id = Auth::user()->bank_id;
+
+        
+        
+        $bank_account = Account::where('bank_id', $bank_id)->where('currency_id' , $request->bank_currency_id)->get();
+        // dd($account);
         // dd($bank_id);
         // return $request->all();
         $bankcurrency = BankCurrency::find($request->bank_currency_id);
-        $account = Account::find($request->currency_id);
-        
+       
+
+        // dd($account->all());
 
         if (!$bankcurrency) {
             return back()->withErrors(['bankcurrency' => ' يجب إختيار العملة المطلوبة ']);
@@ -89,9 +95,15 @@ class EmployeeDashboardController extends Controller
             'bank_id' => $bank_id,
         ]);
         $bankcurrency->balance = $bankcurrency->balance + $am;
-        $account->balance = $account->balance + $am;
         $bankcurrency->save();
-        $account->save();
+        if ($bank_account) {
+            foreach ($bank_account as $b_account) {
+                $b_account->balance = $b_account->balance + $am;
+                $b_account->save();
+            }
+        }
+
+
         Alert::success('تهانينا !!', 'تمت العملية بنجاح');
         return redirect()->route('bank.index');
     }
