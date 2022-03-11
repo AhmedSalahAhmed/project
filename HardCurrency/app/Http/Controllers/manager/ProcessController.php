@@ -40,8 +40,7 @@ class ProcessController extends Controller
             )->join('branches', 'employees.branch_id', '=', 'branches.id')
             
             ->orderBy('id' ,'desc')->get(['processes.*', 'bank_currencies.buy_price', 'currencies.currency_name', 'currencies.symbol', 'employees.employee_name' ,'branches.branch_name'])
-            ;
-    
+            ;   
         return view('manager.process', compact('processes' , 'banks'));
     }
 

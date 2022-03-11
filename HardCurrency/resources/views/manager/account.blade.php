@@ -42,6 +42,7 @@
                             <tr>
 
                                 <th scope="col">العملة </th>
+                                <th scope="col">الرمز </th>
                                 <th scope="col"> الرصيد </th>
                             </tr>
                         </thead>
@@ -50,6 +51,7 @@
                             <tr>
 
                                 <td>{{$account->currency_name}}</td>
+                                <td>{{$account->abbreviation}}</td>
                                 <td>{{$account->balance}} {{$account->symbol}}</td>
                                 
 

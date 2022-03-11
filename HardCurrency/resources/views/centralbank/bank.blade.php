@@ -133,7 +133,7 @@
                         <!-- Edit Modal -->
                         <div class="modal fade" id="editModal{{$bank->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-                            <div class="modal-dialog modal-sm">
+                            <div class="modal-dialog modal-bg">
                                 <div class="modal-content">
 
                                     <div class="modal-header">
@@ -149,12 +149,20 @@
 
                                             @method('put')
 
+                                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">اسم البنك </label>
                                             <input type="text" name="bank_name" class="form-control mb-3" placeholder=" اسم البنك " value="{{$bank->bank_name}}">
+                                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">البريد الالكتروني </label>
                                             <input type="text" name="email" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->email}}">
+                                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">الهاتف </label>
                                             <input type="text" name="phone" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->phone}}">
+                                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">الولاية </label>
                                             <input type="text" name="state" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->state}}">
-                                            <input type="text" name="city" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->city}}">
-                                            <input type="text" name="district" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->district}}">
+                                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">المدينة </label>
+                                         
+                                           <input type="text" name="city" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->city}}">
+                                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">المحلية </label>
+                                        
+                                           <input type="text" name="district" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->district}}">
 
 
 

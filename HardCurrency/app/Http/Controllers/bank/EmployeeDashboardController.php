@@ -73,13 +73,8 @@ class EmployeeDashboardController extends Controller
 
 
 
-        $bankcurrency = BankCurrency::find($request->bank_currency_id);
 
-        if (!$bankcurrency) {
-            return back()->withErrors(['bankcurrency' => ' يجب إختيار العملة المطلوبة ']);
-        }
-
-        $am = $request->amount;
+        $amount = $request->amount;
         $request->validate([
             'client_name' => 'required',
             'client_phone' => 'required',
@@ -97,17 +92,16 @@ class EmployeeDashboardController extends Controller
             'employee_id' => $request->user()->id,
             'bank_id' => $bank_id,
         ]);
-        $bankcurrency->balance = $bankcurrency->balance + $am;
-        $bankcurrency->save();
+
         if ($bank_account) {
             foreach ($bank_account as $b_account) {
-                $b_account->balance = $b_account->balance + $am;
+                $b_account->balance = $b_account->balance + $amount;
                 $b_account->save();
             }
         }
 
-
         Alert::success('تهانينا !!', 'تمت العملية بنجاح');
+
         return redirect()->route('bank.index');
     }
 
