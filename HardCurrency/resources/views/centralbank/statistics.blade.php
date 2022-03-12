@@ -94,7 +94,7 @@
                   <label class="badge badge-gradient-success">تمت</label>
                 </td>
                 <td>
-                  $users
+                
                 </td>
 
               </tr>
@@ -106,7 +106,7 @@
                 <td>
                   <label class="badge badge-gradient-warning">جاري التنفيذ</label>
                 </td>
-                <td> Dec 12, 2017 </td>
+               
 
               </tr>
               <tr>

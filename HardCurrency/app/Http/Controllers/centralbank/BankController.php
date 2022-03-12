@@ -137,14 +137,13 @@ class BankController extends Controller
             'bank_name' => 'required',
             'email' => 'required',
             'phone' => 'required',
-            'logo' => 'required',
             'state' => 'required',
             'city' => 'required',
             'district' => 'required',
         ]);
 
         $bank->update($request->all());
-        // Alert::success('تهانينا !!', 'تم تعديل بيانات البنك بنجاح');
+        Alert::success('تهانينا !!', 'تم تعديل بيانات البنك بنجاح');
         return redirect()->route('banks.index');
     }
 

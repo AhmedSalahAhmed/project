@@ -15,6 +15,15 @@
                 <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
               </a>
             </li>
+            @if(Auth::user()->type == ('admin'))
+            <li class="nav-item">
+              <a class="nav-link" href="{{url('centralbank/users')}}">
+                <span class="menu-title"> مستخدمي النظام </span>
+                <i class=" mdi mdi-account-multiple  menu-icon"></i>
+                
+              </a>
+            </li>
+            @endif
             <li class="nav-item">
               <a class="nav-link" href="{{url('centralbank/banks')}}">
                 <span class="menu-title"> البنوك</span>
@@ -38,20 +47,19 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url('centralbank/price')}}">
                 <span class="menu-title">  اسعار العملات</span>
-                <i class="mdi mdi-cash menu-icon"></i>
+                <i class="mdi mdi-chart-areaspline menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('centralbank/bankaccounts')}}">
+                <span class="menu-title">  حسابات البنوك </span>
+                <i class="mdi mdi-cash-multiple menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url('centralbank/statistics') }}">
                 <span class="menu-title"> الإحصائيات</span>
                 <i class="mdi mdi-chart-bar menu-icon"></i>
-                
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span class="menu-title"> العمليات</span>
-                <i class=" mdi mdi-settings  menu-icon"></i>
                 
               </a>
             </li>

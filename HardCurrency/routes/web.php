@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\manager\ManagerDashboardController;
-
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,8 +32,9 @@ Route::group(['prefix' => 'centralbank'], function () {
         Route::resource('banks', centralbank\BankController::class);
         Route::resource('currency', centralbank\CurrencyController::class);
         Route::resource('price', centralbank\PriceController::class);
-
+        Route::resource('bankaccounts', centralbank\BanksAccountsController::class);
         Route::resource('managers', centralbank\ManagersController::class);
+        Route::resource('users', centralbank\UsersController::class);
     });
 });
 
@@ -55,6 +56,8 @@ Route::group(['prefix' => 'manager'], function () {
         Route::get('/logout', [App\Http\Controllers\manager\ManagerController::class, 'logout'])->name('manager.logout');
         // Route::post('/currency', [App\Http\Controllers\manager\ManagerDashboardController::class, 'insert'])->name('manager.insert');
         Route::resource('manager', manager\ManagerDashboardController::class);
+        Route::resource('data', manager\StatisticsController::class);
+
     });
 });
 //Bank Employees Routes
