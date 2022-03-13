@@ -151,11 +151,7 @@
 
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label">اسم البنك </label>
                                             <input type="text" name="bank_name" class="form-control mb-3" placeholder=" اسم البنك " value="{{$bank->bank_name}}">
-                                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">البريد الالكتروني </label>
-                                            <input type="text" name="email" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->email}}">
-                                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">الهاتف </label>
-                                            <input type="text" name="phone" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->phone}}">
-                                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">الولاية </label>
+                                   <label for="exampleInputEmail2" class="col-sm-3 col-form-label">الولاية </label>
                                             <input type="text" name="state" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->state}}">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label">المدينة </label>
                                          

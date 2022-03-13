@@ -1,26 +1,17 @@
-
 @include('manager.includes.header')
 
 @include('manager.includes.navbar')
 
 @include('manager.includes.sidebar')
- 
-   
+
+
 <!-- row -->
 <div class="row">
-
     <div class="col-xl-12">
         <div class="card mg-b-20">
-
-
             <div class="card-header ">
-
                 <form action="searchcurrency" method="get" role="search" autocomplete="off">
                     @csrf
-
-             
-
-                   
                     <div class="row">
 
                         <!-- <div class="col-lg-3 mg-t-20 mg-lg-t-0" id="type">
@@ -44,15 +35,15 @@
                         </div><!-- col-4 -->
 
 
-                  
+
                     </div><br>
 
                     <div class="row">
-                    <div class="col-sm-1 col-md-1">
-                    <button class="btn btn-twitter">بحث</button>
+                        <div class="col-sm-1 col-md-1">
+                            <button class="btn btn-twitter">بحث</button>
 
                         </div>
-                    
+
                         &nbsp;
                         &nbsp;
                         &nbsp;
@@ -61,8 +52,7 @@
                         &nbsp;
                         <div class="col-sm-1 col-md-1">
                             <button class="btn btn-success print-window">طباعة</button>
-                            <input type="button" value="click"
-                    onclick="printDiv()"> 
+                            <input type="button" value="click" onclick="printDiv()">
                         </div>
                     </div>
 
@@ -72,39 +62,39 @@
             <div class="card-body">
                 <div class="table-responsive" id="GFG">
                     @if (isset($details))
-                        <table id="example" class="table key-buttons text-md-nowrap" style=" text-align: center">
-                            <thead>
-                                <tr>
-                                    <th class="border-bottom-0">#</th>
-                                    <th class="border-bottom-0">العملة</th>
-                                    <th class="border-bottom-0">سعر الشراء </th>
-                                    <th class="border-bottom-0">سعر البيع </th>
-                                    <th class="border-bottom-0"> الرصيد </th>
-                                    
+                    <table id="example" class="table key-buttons text-md-nowrap" style=" text-align: center">
+                        <thead>
+                            <tr>
+                                <th class="border-bottom-0">#</th>
+                                <th class="border-bottom-0">العملة</th>
+                                <th class="border-bottom-0">سعر الشراء </th>
+                                <th class="border-bottom-0">سعر البيع </th>
+                                <th class="border-bottom-0"> الرصيد </th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                
-                             
-                                @foreach ($currencies as $currency)
-                                
-                                   
-                                    <tr>
-                                       
-                                        <td>{{ $currency->id }} </td>
-                                        <td>{{ $currency->currency_name }}&nbsp;&nbsp;&nbsp; {{ $currency->abbreviation }}</td>
-                                        <td>{{ $currency->buy_price }}</td>
-                                        <td>{{ $currency->sale_price }}</td>
-                                        <td>{{ $currency->balance }}    {{ $currency->symbol }}</td>
-                                       
-                                    </tr>
-                                    
-                               @endforeach
-                            </tbody>
-                        </table>
 
-                  @endif
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            @foreach ($currencies as $currency)
+
+
+                            <tr>
+
+                                <td>{{ $currency->id }} </td>
+                                <td>{{ $currency->currency_name }}&nbsp;&nbsp;&nbsp; {{ $currency->abbreviation }}</td>
+                                <td>{{ $currency->buy_price }}</td>
+                                <td>{{ $currency->sale_price }}</td>
+                                <td>{{ $currency->balance }} {{ $currency->symbol }}</td>
+
+                            </tr>
+
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                    @endif
                 </div>
             </div>
         </div>
@@ -159,7 +149,6 @@
     var date = $('.fc-datepicker').datepicker({
         dateFormat: 'yy-mm-dd'
     }).val();
-
 </script>
 
 <script>
@@ -182,25 +171,23 @@
         });
 
         $('.print-window').click(function() {
-             window.print();
+            window.print();
         });
     });
-    
-        function printDiv() {
-            var divContents = document.getElementById("GFG").innerHTML;
-            var a = window.open('', '', 'height=900, width=1100');
-            a.document.write('<html>');
-            // a.document.write("<body dir='rtl' > <h1>  اسعار العملات <br><ul class='nav'><li class='nav-item nav-profile'><a href='#'' class='nav-link'><div class='nav-profile-image'><img src='{{asset('assets/images/cbos.jpeg')}}' alt='profile'><span class='login-status online'></span><!--change to offline or busy as needed--></div><div class='nav-profile-text d-flex flex-column'><span class='font-weight-bold mb-2'>{{ Auth::user()->name }}</span><span class='text-secondary text-small'>{{ Auth::user()->email}}</span></div><i class='mdi mdi-bookmark-check text-success nav-profile-badge'></i></a></li>');
-            a.document.write("<body dir='rtl' > <h1>  اسعار العملات <br></h1>@foreach($banks as $bank)<ul class='nav'><li class='nav-item nav-profile'><a href='#'' class='nav-link'><div class='nav-profile-image'><img src='{{asset('storage/'.$bank->logo)}}'  alt='profile' /><span class='login-status online'></span><!--change to offline or busy as needed--></div><div class='nav-profile-text d-flex flex-column'><span class='font-weight-bold mb-2'>{{ Auth::user()->name }}</span><span class='text-secondary text-small'>{{ Auth::user()->email}}</span></div><i class='mdi mdi-bookmark-check text-success nav-profile-badge'></i></a></li></ul>@endforeach");
-            a.document.write(divContents);
-            a.document.write('</body></html>');
-            a.document.close();
-            a.print();
-        }
-    
+
+    function printDiv() {
+        var divContents = document.getElementById("GFG").innerHTML;
+        var a = window.open('', '', 'height=900, width=1100');
+        a.document.write('<html>');
+        // a.document.write("<body dir='rtl' > <h1>  اسعار العملات <br><ul class='nav'><li class='nav-item nav-profile'><a href='#'' class='nav-link'><div class='nav-profile-image'><img src='{{asset('assets/images/cbos.jpeg')}}' alt='profile'><span class='login-status online'></span><!--change to offline or busy as needed--></div><div class='nav-profile-text d-flex flex-column'><span class='font-weight-bold mb-2'>{{ Auth::user()->name }}</span><span class='text-secondary text-small'>{{ Auth::user()->email}}</span></div><i class='mdi mdi-bookmark-check text-success nav-profile-badge'></i></a></li>');
+        a.document.write("<body dir='rtl' style='text-align:center;' > <h1>  اسعار العملات <br></h1>@foreach($banks as $bank)<ul class='nav'><li class='nav-item nav-profile'><a href='#'' class='nav-link'><div class='nav-profile-image'><img style='width:40px;' src='{{asset('storage/'.$bank->logo)}}'  alt='profile' /><span class='login-status online'></span><!--change to offline or busy as needed--></div><div class='nav-profile-text d-flex flex-column'><span class='font-weight-bold mb-2'>{{ $bank->bank_name }}</span><span class='text-secondary text-small'>{{ Auth::user()->email}}</span></div><i class='mdi mdi-bookmark-check text-success nav-profile-badge'></i></a></li></ul>@endforeach");
+        a.document.write(divContents);
+        a.document.write('</body></html>');
+        a.document.close();
+        a.print();
+    }
 </script>
 
 
-          
+
 @extends('manager.includes.footer')
-   

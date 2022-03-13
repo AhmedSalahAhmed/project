@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use App\Models\Bank;
 use App\Models\BankCurrency;
 use App\Models\CurrencyPrice;
-use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class BankController extends Controller
@@ -45,8 +44,6 @@ class BankController extends Controller
     {
         $request->validate([
             'bank_name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
             'logo' => 'required',
             'state' => 'required',
             'city' => 'required',
@@ -59,8 +56,6 @@ class BankController extends Controller
 
         $bank = Bank::create([
             "bank_name" => $request->bank_name,
-            "email" => $request->email,
-            "phone" => $request->phone,
             "state" => $request->state,
             "city" => $request->city,
             "district" => $request->district,
@@ -135,8 +130,6 @@ class BankController extends Controller
     {
         $request->validate([
             'bank_name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
             'state' => 'required',
             'city' => 'required',
             'district' => 'required',
