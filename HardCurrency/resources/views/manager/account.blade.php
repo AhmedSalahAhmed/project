@@ -40,7 +40,6 @@
                         <thead>
                             <tr></tr>
                             <tr>
-
                                 <th scope="col">العملة </th>
                                 <th scope="col">الرمز </th>
                                 <th scope="col"> الرصيد </th>

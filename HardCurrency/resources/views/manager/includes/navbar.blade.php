@@ -1,6 +1,6 @@
  <!-- partial:partials/_navbar.html -->
  <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row ">
-   @foreach($banks as $bank)
+   @foreach($banks as $bank)    
 
    <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
      <span class="navbar-brand brand-logo">مدير الفرع الرئيسي</span>

@@ -9,50 +9,53 @@
       <i class="mdi mdi-home"></i>
     </span> الإحصائيات
   </h3>
-  <form action="{{route('statistics.store')}}" method="post">
+  <form  action="{{route('statistics.store')}}" method="post">
     @csrf
     <select name="currency_id" id="" class="form-select">
-    <option value="">اختار عملة</option>
+      <option value="">اختار عملة</option>
 
       @foreach($currencies as $currency)
       <option value="{{$currency->id}}">{{$currency->currency_name}}</option>
       @endforeach
     </select>
     <br>
-    <button type="submit" class="btn btn-twitter">حساب الإحصائيات</button>
+    <button type="submit" class="btn btn-twitter">حساب العملة في كل البنوك</button>
   </form>
 </div>
 <div class="row">
   <div class="col-md-4 stretch-card grid-margin">
     <div class="card bg-gradient-danger card-img-holder text-white">
       <div class="card-body">
-        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-        <h4 class="font-weight-normal mb-3"> عدد البنوك المستخدمة            <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+        <img src="{{asset('assets/images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image" />
+        <h4 class="font-weight-normal mb-3"> عدد البنوك المستخدمة <i class="mdi mdi-chart-line mdi-24px float-right"></i>
         </h4>
         <h2 class="mb-5">{{$banks}} </h2>
-        <h6 class="card-text">زيادة بنسبة 60%</h6>
+        <!-- <h6 class="card-text">زيادة بنسبة 60%</h6> -->
       </div>
     </div>
   </div>
-  <div class="col-md-4 stretch-card grid-margin">
-    <div class="card bg-gradient-info card-img-holder text-white">
-      <div class="card-body">
-        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-        <h4 class="font-weight-normal mb-3">اجمالي مخزون العملة  <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
-        </h4>
-        <h2 class="mb-5">{{$balance}}</h2>
-        <h6 class="card-text"> نقصان بنسبة 10%</h6>
-      </div>
-    </div>
-  </div>
+
   <div class="col-md-4 stretch-card grid-margin">
     <div class="card bg-gradient-success card-img-holder text-white">
       <div class="card-body">
-        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+        <img src="{{asset('assets/images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image" />
         <h4 class="font-weight-normal mb-3">صافي الدخل الشهري <i class="mdi mdi-diamond mdi-24px float-right"></i>
         </h4>
         <h2 class="mb-5">{{$sdgamount}}</h2>
-        <h6 class="card-text">زيادة بنسبة 5%</h6>
+        <!-- <h6 class="card-text">زيادة بنسبة 5%</h6> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 stretch-card grid-margin">
+    <div class="card bg-gradient-info card-img-holder text-white">
+      <div class="card-body">
+
+        <img src="{{asset('assets/images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image" />
+        <h4 class="font-weight-normal mb-3">اجمالي مخزون العملة <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+        </h4>
+        <h2 class="mb-5">{{$balance}}</h2>
+        <!-- <h6 class="card-text"> نقصان بنسبة 10%</h6> -->
       </div>
     </div>
   </div>

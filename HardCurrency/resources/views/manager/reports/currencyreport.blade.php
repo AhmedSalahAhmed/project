@@ -4,7 +4,6 @@
 
 @include('manager.includes.sidebar')
 
-
 <!-- row -->
 <div class="row">
     <div class="col-xl-12">
@@ -28,48 +27,61 @@
                         </div>col-4 -->
 
 
-                        <div class="col-lg-3 mg-t-20 mg-lg-t-0" id="id">
-                            <p class="mg-b-10"> البحث باسم العملة المختصر</p>
+                        <div class="col-lg-4 mg-t-20 mg-lg-t-0" id="id">
+                            <p class="mg-b-10"> البحث باسم العملة\او الاسم المختصر</p>
                             <input type="text" class="form-control" id="currency_name" name="currency_name">
+                            <button class="btn btn-twitter">بحث</button>
 
                         </div><!-- col-4 -->
 
-
-
-                    </div><br>
-
-                    <div class="row">
-                        <div class="col-sm-1 col-md-1">
-                            <button class="btn btn-twitter">بحث</button>
-
+                        <div class="col-lg-3" id="start_at">
+                            <label for="exampleFormControlSelect1">من تاريخ</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </div>
+                                </div><input class="form-control" value="{{ $start_at ?? '' }}" name="start_at" placeholder="YYYY-MM-DD" type="date">
+                            </div><!-- input-group -->
                         </div>
 
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        <div class="col-sm-1 col-md-1">
-                            <button class="btn btn-success print-window">طباعة</button>
-                            <input type="button" value="click" onclick="printDiv()">
+                        <div class="col-lg-3" id="end_at">
+                            <label for="exampleFormControlSelect1">الي تاريخ</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </div>
+                                </div><input name="end_at" class="form-control" value="{{ $end_at ?? '' }}" placeholder="YYYY-MM-DD" type="date">
+                            </div><!-- input-group -->
                         </div>
-                    </div>
-
-                </form>
-
+                    
+            </div><br>
+            <div class="row">
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
             </div>
-            <div class="card-body">
-                <div class="table-responsive" id="GFG">
-                    @if (isset($details))
-                    <table id="example" class="table key-buttons text-md-nowrap" style=" text-align: center">
+            </form>
+        </div>
+        <div class="col-sm-1 col-md-1">
+            <button id="print" class="btn btn-success">طباعة</button>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                @if (isset($details))
+
+                <div class="print">
+                    <table id="print-table" class="table  key-buttons text-md-nowrap" style=" text-align: right">
                         <thead>
                             <tr>
                                 <th class="border-bottom-0">#</th>
                                 <th class="border-bottom-0">العملة</th>
                                 <th class="border-bottom-0">سعر الشراء </th>
                                 <th class="border-bottom-0">سعر البيع </th>
-                                <th class="border-bottom-0"> الرصيد </th>
 
 
                             </tr>
@@ -86,19 +98,20 @@
                                 <td>{{ $currency->currency_name }}&nbsp;&nbsp;&nbsp; {{ $currency->abbreviation }}</td>
                                 <td>{{ $currency->buy_price }}</td>
                                 <td>{{ $currency->sale_price }}</td>
-                                <td>{{ $currency->balance }} {{ $currency->symbol }}</td>
 
                             </tr>
 
                             @endforeach
                         </tbody>
                     </table>
-
-                    @endif
                 </div>
+
+
+                @endif
             </div>
         </div>
     </div>
+</div>
 </div>
 <!-- row closed -->
 </div>
@@ -151,10 +164,22 @@
     }).val();
 </script>
 
+<script src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
+<script src="{{asset('printThis.js')}}"></script>
 <script>
-    $(document).ready(function() {
+    $(document).on('click', 'button', function() {
+        var table = $('#print-table');
 
-        // $('#id').hide();
+        $('.print').printThis({
+            importCSS: true,
+            header: "<h4 style='text-align:center;'> <?php echo date('Y-m-d'); ?> </h4><h3 style='text-align:center;'>تقرير اسعار العملات</h3>",
+            
+            doctypeString: '<div><h2  style="text-align:center;">بسم الله الرحمن الرحيم</h2>@foreach($banks as $bank)<h1 style="text-align:center;"> {{$bank->bank_name}} </h1> <img style="width:10%; text-align:right;" src={{asset("storage/".$bank->logo)}} alt="profile" /> @endforeach',
+            copyTagClasses: true,
+        });
+    });
+
+    $(document).ready(function() {
 
         $('input[type="radio"]').click(function() {
             if ($(this).attr('id') == 'type_div') {
@@ -170,22 +195,12 @@
             }
         });
 
-        $('.print-window').click(function() {
-            window.print();
-        });
-    });
 
-    function printDiv() {
-        var divContents = document.getElementById("GFG").innerHTML;
-        var a = window.open('', '', 'height=900, width=1100');
-        a.document.write('<html>');
-        // a.document.write("<body dir='rtl' > <h1>  اسعار العملات <br><ul class='nav'><li class='nav-item nav-profile'><a href='#'' class='nav-link'><div class='nav-profile-image'><img src='{{asset('assets/images/cbos.jpeg')}}' alt='profile'><span class='login-status online'></span><!--change to offline or busy as needed--></div><div class='nav-profile-text d-flex flex-column'><span class='font-weight-bold mb-2'>{{ Auth::user()->name }}</span><span class='text-secondary text-small'>{{ Auth::user()->email}}</span></div><i class='mdi mdi-bookmark-check text-success nav-profile-badge'></i></a></li>');
-        a.document.write("<body dir='rtl' style='text-align:center;' > <h1>  اسعار العملات <br></h1>@foreach($banks as $bank)<ul class='nav'><li class='nav-item nav-profile'><a href='#'' class='nav-link'><div class='nav-profile-image'><img style='width:40px;' src='{{asset('storage/'.$bank->logo)}}'  alt='profile' /><span class='login-status online'></span><!--change to offline or busy as needed--></div><div class='nav-profile-text d-flex flex-column'><span class='font-weight-bold mb-2'>{{ $bank->bank_name }}</span><span class='text-secondary text-small'>{{ Auth::user()->email}}</span></div><i class='mdi mdi-bookmark-check text-success nav-profile-badge'></i></a></li></ul>@endforeach");
-        a.document.write(divContents);
-        a.document.write('</body></html>');
-        a.document.close();
-        a.print();
-    }
+    });
+</script>
+
+<script>
+
 </script>
 
 

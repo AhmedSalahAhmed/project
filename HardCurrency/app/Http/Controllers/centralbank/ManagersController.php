@@ -19,8 +19,7 @@ class ManagersController extends Controller
      */
     public function index()
     {
-        $banks = Bank::all();
-        
+        $banks = Bank::all(); 
         $managers = Manager::join('banks', 'managers.bank_id', '=', 'banks.id')
                ->get(['managers.*', 'banks.bank_name']);
             //    return $managers;

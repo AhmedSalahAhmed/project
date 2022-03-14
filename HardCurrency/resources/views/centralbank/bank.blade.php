@@ -34,37 +34,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">البريد الالكتروني </label>
-                                    <div class="col-sm-9">
-                                        <input type="email" name="email" class="form-control" placeholder=" البريد الالكتروني">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">رقم الهاتف </label>
-                                    <div class="col-sm-9">
-                                        <input type="text" name="phone" class="form-control" placeholder=" رقم الهاتف">
-                                    </div>
-                                </div>
-                                <!-- <div class="form-group row">
-                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> نوع الفرع</label>
-                                            <div class="col-sm-9">
-                                            <select name="type" id="" class="form-control">
-                                                <option value="branch">فرع </option>
-                                                <option value="main">الرئاسة</option>
-                                            </select>
-                                            </div> -->
-
-                                <!-- </div> -->
-                                <div class="form-group row">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label">شعار البنك </label>
                                     <div class="col-sm-9">
-                                        <input type="file" name="logo" id="logo" class="form-control" placeholder="شعار النك "/>
+                                        <input type="file" name="logo" id="logo" class="form-control" placeholder="شعار النك " />
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> الولاية</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="state" class="form-control" placeholder="الولاية "/>
+                                        <input type="text" name="state" class="form-control" placeholder="الولاية " />
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -98,7 +76,6 @@
                         <tr>
                             <th> شعار البنك </th>
                             <th> اسم البنك </th>
-                            <th> البريدالإلكتروني </th>
                             <th> العنوان </th>
                             <th> تاريخ الإنضمام للنظام </th>
                             <th> تعديل </th>
@@ -113,7 +90,6 @@
                                 <img src="{{asset('storage/'.$bank->logo)}}" alt="image" />
                             </td>
                             <td> {{$bank->bank_name}}</td>
-                            <td> {{$bank->email}}</td>
 
                             <td>{{$bank->state}}</td>
                             <td>{{$bank->created_at}}</td>
@@ -149,16 +125,16 @@
 
                                             @method('put')
 
-                                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">اسم البنك </label>
+                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">اسم البنك </label>
                                             <input type="text" name="bank_name" class="form-control mb-3" placeholder=" اسم البنك " value="{{$bank->bank_name}}">
-                                   <label for="exampleInputEmail2" class="col-sm-3 col-form-label">الولاية </label>
+                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">الولاية </label>
                                             <input type="text" name="state" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->state}}">
-                                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">المدينة </label>
-                                         
-                                           <input type="text" name="city" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->city}}">
-                                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">المحلية </label>
-                                        
-                                           <input type="text" name="district" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->district}}">
+                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">المدينة </label>
+
+                                            <input type="text" name="city" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->city}}">
+                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">المحلية </label>
+
+                                            <input type="text" name="district" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->district}}">
 
 
 

@@ -23,8 +23,6 @@ class StatisticsController extends Controller
         $bank_id = Auth::user()->bank_id;
         $currencies = Currency::all();
 
-        $sdg = BankCurrency::get()->pluck('buy_price', 'currency_id');
-        dd($sdg);
         $currency_id = $request->currency_id;
         $balance = Account::where('bank_id', $bank_id)->where('currency_id', 1)->sum('balance');
         dd($balance);
