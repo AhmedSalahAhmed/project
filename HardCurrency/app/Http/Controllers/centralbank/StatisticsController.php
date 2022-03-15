@@ -30,23 +30,23 @@ class StatisticsController extends Controller
     public function index(Request $request)
     {
 
-        $currencys = Currency::all();
+        // $currencys = Currency::all();
 
-        $processes = Process::all()->values();
+        // $processes = Process::all();
+        // // $processes = DB::table('processes')->get();
 
-        foreach ($processes as $process) {
-            $process->bank_currency_id = BankCurrency::find($process->bank_currency_id);
-        }
-        // $processes = (array) $processes;
-        $counted = [];
-        foreach ($currencys as $currency) {
-            $counted = $processes->filter(function ($item) use ($currency) {
-                // return $item->bank_currency_id->currency->id == 1;
-                dd($item);
-            });
-        }
+        // foreach ($processes as $process) {
+        //     $process->bank_currency_id = BankCurrency::find($process->bank_currency_id);
+        // }
+        // // $processes = (array) $processes;
+        // $counted = [];
+        // foreach ($currencys as $currency) {
+        //     $counted = $processes->filter->bank_currency_id===1;
+        // }
         // return ($counted);
-        return ($processes);
+
+        // return ($processes);
+        // //////////////////
 
         $currencies = Currency::all();
 

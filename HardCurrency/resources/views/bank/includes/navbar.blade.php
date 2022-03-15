@@ -1,4 +1,4 @@
- <!-- partial:partials/_navbar.html -->
+ <!-- partial:partials/_navbar.html
  <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row ">
    <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
      <span class="navbar-brand brand-logo">
@@ -48,5 +48,40 @@
      </button>
    </div>
  </nav>
+ partial
+ <div class="container-fluid page-body-wrapper"> -->
+
+ <nav class="navbar navbar-expand-custom navbar-mainbg fixed-top">
+   <a class="navbar-brand navbar-logo" href="#"></a>
+   <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+     <i class="fas fa-bars text-white"></i>
+   </button>
+   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+     <ul class="navbar-nav ml-auto">
+       <div class="hori-selector">
+         <div class="left"></div>
+         <div class="right"></div>
+       </div>
+       <li class="nav-item">
+         <a class="nav-link" void(0) href="dashboard"><i class="fas fa-tachometer-alt"></i>شراء عملة اجنبية</a>
+       </li>
+      
+       
+       <li class="nav-item">
+         <a class="nav-link" href="">
+         </a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" href="transaction"><i class="far fa-calendar-alt"></i>العمليات</a>
+       </li>
+   
+       <li class="nav-item">
+         <a class="nav-link" href="javascript:void(0);"><i class="far fa-copy"></i>Documents</a>
+       </li>
+    
+      
+     </ul>
+   </div>
+ </nav>
  <!-- partial -->
- <div class="container-fluid page-body-wrapper">
+ <div class="container-fluid page-body-wrapper"> 

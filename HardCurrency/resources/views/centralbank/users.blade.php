@@ -6,7 +6,7 @@
 
 
 <div class="col-lg-12 grid-margin stretch-card">
-    <div class="card">
+    <div class="card  shadow">
         <div class="card-body">
             @if ($errors->any())
             <div class="alert alert-danger">
@@ -37,34 +37,37 @@
             <!-- Modal -->
             <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exchangeModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                    <div class="modal-content shadow">
                         <div class="modal-header">
+
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body ">
 
                             <form action="{{ route('users.store') }}" method="post" class="forms-sample" autocomplete="off">
                                 @csrf
 
-                               
+
 
                                 <div class="form-group row">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> الإسم </label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="name" class="form-control" placeholder=" اسم مدير البنك ">
+                                        <input type="text" name="name" class="form-control shadow" placeholder=" اسم مدير البنك ">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="floatingInput" class="col-sm-3 col-form-label"> البريد الإلكتروني</label>
                                     <div class="col-sm-9">
-                                        <input type="email" name="email" class="form-control" id="floatingInput" placeholder="البريد الالكتروني ">
+                                        <input type="email" name="email" class="form-control shadow" id="floatingInput" placeholder="البريد الالكتروني ">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> كلمة المرور</label>
                                     <div class="col-sm-9">
-                                        <input type="password" name="password" class="form-control" placeholder=" كلمة المرور ">
+                                        <input type="password" name="password" class="form-control shadow" placeholder=" كلمة المرور ">
                                     </div>
                                 </div>
 
