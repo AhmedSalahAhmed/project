@@ -14578,6 +14578,7 @@ i {
 
 
 @media (max-width: 991px){
+  .logout{display: none;}
 	#navbarSupportedContent ul li a{
 		padding: 12px 30px;
 	}
@@ -14628,3 +14629,11 @@ i {
     border: 1px solid #4688e3;
     background-color: transparent;
     color: #4688e3; }
+
+    .logout{
+      background-color: white;
+      align-items: left;
+     padding: 15px;
+      text-decoration: none;
+      
+    }

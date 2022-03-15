@@ -19,13 +19,17 @@ class BranchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $bank_id = request()->user()->bank_id;
         $banks = Bank::where('id', $bank_id)->get();
 
    
         $branches = Branch::where('bank_id',$bank_id)->get();
+        if ($request->ajax()) {
+        return view('manager.branch', compact('branches' ,'banks'))->renderSections()['content'];
+
+        }
         return view('manager.branch', compact('branches' ,'banks'));
     }
 

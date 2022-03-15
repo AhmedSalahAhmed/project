@@ -37,6 +37,7 @@
                                 @csrf
 
                                 <div class="form-group row">
+                                    
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label">إسم العميل </label>
                                     <div class="col-sm-9">
                                         <input type="text" name="client_name" class="form-control" placeholder=" إسم العميل">

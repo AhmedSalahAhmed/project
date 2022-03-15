@@ -18,7 +18,7 @@ class EmployeesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $bank_id = request()->user()->bank_id;
         $banks = Bank::where('id', $bank_id)->get();
@@ -29,7 +29,10 @@ class EmployeesController extends Controller
         $employees = Employee::join('branches', 'employees.branch_id', '=', 'branches.id')
             ->where('branches.bank_id' , $bank_id)->get(['employees.*', 'branches.branch_name']);
            
+            if ($request->ajax()) {
+        return view('manager.employee', compact('employees', 'branches' , 'banks'))->renderSections()['content'];
 
+            }
         return view('manager.employee', compact('employees', 'branches' , 'banks'));
     }
 

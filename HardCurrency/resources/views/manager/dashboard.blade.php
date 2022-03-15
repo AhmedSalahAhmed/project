@@ -1,31 +1,27 @@
-@include('manager.includes.header')
+@extends('manager/layouts.app')
 
-@include('manager.includes.navbar')
+@section('content')
 
-@include('manager.includes.sidebar')
-
-
-<div class="page-header">
-    <h3 class="page-title">
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            عفواً <strong>{{ Auth::user()->name }} !!!</strong> <br> هناك بعض الاخطاء في الإدخال .<br><br>
-            <ul dir="ltr">
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
-</div>
-<div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
+                <div class="page-header">
+                    <h3 class="page-title">
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            عفواً <strong>{{ Auth::user()->name }} !!!</strong> <br> هناك بعض الاخطاء في الإدخال .<br><br>
+                            <ul dir="ltr">
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                </div>
 
                 <h4 class="card-title"> العملات الأجنبية التي يتعامل بها البنك
-            
-                 </h4>
+
+                </h4>
 
                 @if (session('success'))
 
@@ -56,7 +52,7 @@
                                 <td>{{$bankcurrency->buy_price}}</td>
                                 <td>{{$bankcurrency->sale_price}}</td>
                                 <td>{{($bankcurrency->buy_price + $bankcurrency->sale_price) / 2}}</td>
-                              
+
                                 <td>
                                     <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{$bankcurrency->id}}">
                                         تعديل
@@ -101,9 +97,8 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
-
-                <div class="d-felx justify-content-center">
 
                 </div>
-                @include('manager.includes.footer')
+            </div>
+        </div>
+        @endsection

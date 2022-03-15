@@ -1,9 +1,6 @@
-@include('manager.includes.header')
+@extends('manager/layouts.app')
 
-@include('manager.includes.navbar')
-
-@include('manager.includes.sidebar')
-
+@section('content')
 
 <div class="page-header">
     <h3 class="page-title">
@@ -18,7 +15,6 @@
         </div>
         @endif
 </div>
-<div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -64,4 +60,6 @@
                 <div class="d-felx justify-content-center">
 
                 </div>
-                @include('manager.includes.footer')
+   
+                
+@endsection
