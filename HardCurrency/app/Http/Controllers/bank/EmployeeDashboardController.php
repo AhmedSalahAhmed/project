@@ -23,7 +23,7 @@ class EmployeeDashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $bank_id = Auth::user()->bank_id;
         $banks = Bank::where('id', $bank_id)->get();
@@ -38,7 +38,9 @@ class EmployeeDashboardController extends Controller
         // $tc = Transaction::join('bank_currencies', 'transaction.bank_currency_id', '=', 'bank_currencies.id')
         // ->get(['transaction.*', 'bank_currencies.currency_name']);
         // return $transactions;
-
+        if ($request->ajax()) {
+            return view('bank.dashboard', compact('bankcurrencies', 'currencies', 'banks', 'branches'))->renderSections()['content'];
+        }
         return view('bank.dashboard', compact('bankcurrencies', 'currencies', 'banks', 'branches'));
     }
 

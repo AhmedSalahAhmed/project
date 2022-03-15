@@ -16,7 +16,7 @@ class EmployeeProcessController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $bank_id = Auth::user()->bank_id;
         $employee_id = Auth::user()->id;
@@ -24,7 +24,6 @@ class EmployeeProcessController extends Controller
         $branches = Branch::where('id', $bank_id)->get();
 
         // dd($bank_id);
-
 
         // $processes = Process::where('bank_id' ,$bank_id)->join(
         $processes = Process::where('processes.bank_id', $bank_id)->where('processes.employee_id', $employee_id)
@@ -34,8 +33,12 @@ class EmployeeProcessController extends Controller
                 '=',
                 'bank_currencies.id'
             )->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
-            ->orderBy('processes.id' , 'desc')
+            ->orderBy('processes.id', 'desc')
             ->get(['processes.*', 'bank_currencies.buy_price', 'currencies.currency_name', 'currencies.symbol']);
+
+        if ($request->ajax()) {
+            return view('bank.process', compact('processes', 'banks', 'branches'))->renderSections()['content'];
+        }
         return view('bank.process', compact('processes', 'banks', 'branches'));
     }
 

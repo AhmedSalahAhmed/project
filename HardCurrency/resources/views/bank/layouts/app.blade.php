@@ -118,20 +118,11 @@
                         <div class="right"></div>
                     </div>
                     <li class="nav-item">
-                        <a class="nav-link" void(0) href="dashboard"><i class="fas fa-tachometer-alt"></i>شراء عملة اجنبية</a>
-                    </li>
-
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="">
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="transaction"><i class="far fa-calendar-alt"></i>العمليات</a>
+                        <a class="nav-link" onfocus="linkClicked('dashboard')" href="dashboard"><i class="fas fa-tachometer-alt"></i>شراء عملة اجنبية</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0);"><i class="far fa-copy"></i>Documents</a>
+                        <a class="nav-link" onfocus="linkClicked('transaction')" href="transaction"><i class="far fa-calendar-alt"></i>العمليات</a>
                     </li>
 
 
@@ -139,7 +130,7 @@
             </div>
         </nav>
         <!-- partial -->
-        <div class="container-fluid page-body-wrapper">
+        <div id="content" class="container-fluid page-body-wrapper">
         @yield('content')
 
         </div>
@@ -173,6 +164,19 @@
     <script src="{{asset('assets/vendors/js/vendor.bundle.base.js')}}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
+
+    <script>
+
+      $('.nav-link').click(function (event) {
+          // Avoid the link click from loading a new page
+          event.preventDefault();
+
+          // Load the content from the link's href attribute
+          $('.page-body-wrapper').load($(this).attr('href'));
+      });
+
+    </script>
+
     <script src="{{asset('assets/vendors/chart.js/Chart.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery.cookie.js')}}" type="text/javascript"></script>
     <!-- End plugin js for this page -->
