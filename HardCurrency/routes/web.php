@@ -23,12 +23,8 @@ Route::get('/', function () {
 Auth::routes();
 //central Bank Routes
 Route::group(['prefix' => 'centralbank'], function () {
-
     Route::group(['middleware' => 'auth'], function () {
-
-
         Route::resource('statistics', centralbank\StatisticsController::class);
-
         Route::resource('banks', centralbank\BankController::class);
         Route::resource('currency', centralbank\CurrencyController::class);
         Route::resource('price', centralbank\PriceController::class);
@@ -57,7 +53,6 @@ Route::group(['prefix' => 'manager'], function () {
         // Route::post('/currency', [App\Http\Controllers\manager\ManagerDashboardController::class, 'insert'])->name('manager.insert');
         Route::resource('manager', manager\ManagerDashboardController::class);
         Route::resource('data', manager\StatisticsController::class);
-
     });
 });
 //Bank Employees Routes

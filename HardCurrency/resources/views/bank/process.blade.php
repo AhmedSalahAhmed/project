@@ -1,8 +1,6 @@
 @extends('bank/layouts.app')
-
 @section('content')
 <div class="content-wrapper">
-
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -17,7 +15,6 @@
                 </div>
                 @endif
                 <!-- Display message -->
-
                 @if (session('success'))
 
                 <div class="alert alert-success">

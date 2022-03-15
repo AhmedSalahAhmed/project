@@ -9,18 +9,15 @@
     <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  
-  <link rel="stylesheet" href="assets/css/login.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet" />
     <style>
-      * {
-        font-family: "Tajawal", sans-serif !important;
-      }
+        * {
+            font-family: "Tajawal", sans-serif !important;
+        }
     </style>
 </head>
 
@@ -60,14 +57,10 @@
                                     </span>
                                     @enderror
                                 </div>
-                                <div class="row mb-0">
-                                    <div class="col-md-8 offset-md-4">
-                                        <button type="submit" class="btn btn-block login-btn mb-4">
-                                            {{ __('تسجيل دخول') }}
-                                        </button>
-
-
-                                    </div>
+                                <div class="form-group mb-4">
+                                    <button type="submit" class="btn btn-block login-btn mb-4 ">
+                                        {{ __('تسجيل دخول') }}
+                                    </button>
                                 </div>
 
                             </form>

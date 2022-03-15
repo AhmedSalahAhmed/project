@@ -9,6 +9,7 @@ body {
     height: 37px; }
 .myshadow{
   box-shadow: 0 4px 20px 0 rgba(3, 40, 95, 0.43);
+  border-radius: 10px;
 
 }
 .login-card {
