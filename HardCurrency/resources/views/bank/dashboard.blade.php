@@ -20,11 +20,9 @@
 
             <!-- Button trigger modal -->
 
-            <button type="button" class="btn btn-twitter" data-bs-toggle="modal" data-bs-target="#exchangeModal">
+            <button type="button" class="btn btn-block login-btn mb-4" data-bs-toggle="modal" data-bs-target="#exchangeModal">
                 تغير عملة نقداً
             </button>
-
-            <button id="checkout-button" class="btn btn-success" type="button">تحويل عبر بطاقة </button>
 
             <!-- Modal -->
             <div class="modal fade" id="exchangeModal" tabindex="-1" aria-labelledby="exchangeModalLabel" aria-hidden="true">
@@ -76,7 +74,7 @@
                                 <div class="form-group row">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> المبلغ </label>
                                     <div class="col-sm-9">
-                                        <input type="text" id="amount" name="amount" class="form-control" placeholder="  المبلغ بالعملة الاجنبية" onkeyup="mult(this.value);">
+                                        <input type="text" id="amount" name="amount" class="form-control" placeholder="  المبلغ بالعملة الاجنبية" onkeyup="mult(this.value);" >
                                         <!-- <input type="text" id="sdgamount" name="sdgamount" hidden> -->
 
                                     </div>
@@ -85,7 +83,7 @@
                                 <div class="form-group row">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> القيمة بالجنيه : </label>
                                     <div class="col-sm-9">
-                                        <input id="sdgamount" type="text" name="sdgamount" class="form-control" placeholder=" المبلغ بالجنيه السوداني" disabled>
+                                        <input style="color: #4688e3; font-weight:bold;" id="sdgamount" type="text" name="sdgamount" class="form-control" placeholder=" المبلغ بالجنيه السوداني" disabled>
                                     </div>
 
                                 </div>
@@ -95,19 +93,19 @@
 
 
                             </form>
+                            @include('sweetalert::alert')
 
                         </div>
 
                     </div>
                 </div>
             </div>
-            @include('sweetalert::alert')
 
     </div>
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
-            <div class="card shadow">
-                <div class="card-body">
+            <div class="card">
+                <div class="card-body login-card">
                     <h4 class="card-title">أسعار الصرف </h4>
 
 

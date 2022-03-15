@@ -83,3 +83,7 @@ body {
     color: #919aa3; }
 
 /*# sourceMappingURL=login.css.map */
+.profileimage {
+  width: 44px;
+  height: 44px;
+  border-radius: 100%;}

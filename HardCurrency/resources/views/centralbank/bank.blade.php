@@ -34,6 +34,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> الاسم المختصر </label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="url" class="form-control" placeholder="الاسم المختصر لعنوان ال URL ">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label">شعار البنك </label>
                                     <div class="col-sm-9">
                                         <input type="file" name="logo" id="logo" class="form-control" placeholder="شعار النك " />
@@ -42,19 +48,18 @@
                                 <div class="form-group row">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> الولاية</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="state" class="form-control" placeholder="الولاية " />
+                                        <select name="state" id=""  class="form-select">
+                                            <option value="">اختر الولاية</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">المدينة </label>
-                                    <div class="col-sm-9">
-                                        <input type="text" name="city" class="form-control" placeholder=" المدينة">
-                                    </div>
-                                </div>
+
                                 <div class="form-group row">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label">المحلية </label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="district" class="form-control" placeholder=" المحلية">
+                                        <select name="state" id="" class="form-select">
+                                            <option value="">اختر المحلية</option>
+                                        </select>
                                     </div>
                                 </div>
 
