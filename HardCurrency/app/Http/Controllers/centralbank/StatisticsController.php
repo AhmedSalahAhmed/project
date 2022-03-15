@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\centralbank;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CurrencyGrowth;
 use App\Models\Account;
 use App\Models\BankCurrency;
 use App\Models\Currency;
-use App\Models\Process;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -77,13 +77,29 @@ class StatisticsController extends Controller
         return view('centralbank.dashboard', compact('banks', 'balance', 'sdgamount', 'symbol', 'currencies'));
     }
 
-    public function getCurrenciesStatistics()
+    public function currencies_growth()
     {
-        $process = Process::all();
+        $year = request()->year ?? now()->year;
 
-        return ($process);
-        // $banks = DB::table('banks')->count();
-        // $sdgamount = DB::table('processes')->sum('sdgamount');
-        // $sdg = BankCurrency::get()->pluck('buy_price', 'currency_id');
+        $processes = DB::table('processes')
+            ->join('bank_currencies', 'bank_currencies.id', '=', 'processes.bank_currency_id')
+            ->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
+            ->select('currencies.currency_name', 'processes.amount', 'bank_currencies.id', 'currency_id', DB::raw('MONTHNAME(processes.created_at) as month, YEAR(processes.created_at) as year'))
+            ->get()
+            ->where('year', $year)
+            ->groupBy('month');
+        $data = [];
+
+        foreach ($processes as $key => $values) {
+            $growth = CurrencyGrowth::collection($values->groupBy('currency_name'));
+            // return $growth->sortByDesc("processes");
+            $data[] = [
+                'month' => $key,
+                'growth' => $growth->sortByDesc("processes")->take(3),
+            ];
+        };
+
+        return collect($data);
+
     }
 }
