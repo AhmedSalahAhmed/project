@@ -12,7 +12,7 @@
 
 
 
-
+<div class="card-header">تقارير العمليات الخاصة بالبنك</div>
                     <div class="form-group row">
                         <div class="col-sm-3 ">
 
@@ -43,11 +43,19 @@
                                 <option value="{{$currency->id}}">{{$currency->currency_name}}</option>
                                 @endforeach
                             </select>
+                           
+                            
+                            
                         </div>
-                        <div class="cole-sm-3">
+                        <div class="col-sm-3 ">
+
                             <button class="btn btn-twitter">بحث</button>
 
+                           
+                            
+                            
                         </div>
+                        
                     </div>
                     <!-- <div class="col-lg-4 mg-t-20 mg-lg-t-0" id="id">
                         <p class="mg-b-10"> البحث باسم العملة\او الاسم المختصر</p>
