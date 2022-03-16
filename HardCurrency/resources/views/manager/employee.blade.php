@@ -128,9 +128,11 @@
                                     <form action="{{ route('employees.update', $employee->id) }}" method="POST">
                                         @csrf
                                         @method('put')
-                                        <input type="text" name="employee_name" class="form-control mb-3" placeholder=" اسم الموظف " value="{{$employee->employee_name}}">
-                                        <input type="email" name="email" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$employee->email}}">
-                                        <button class="btn btn-twitter float-end px-5" type="submit">تم</button>
+                                        <input type="text" name="employee_name" id="employee_name" class="form-control mb-3" placeholder=" اسم الموظف " value="{{$employee->employee_name}}">
+                                        <input type="email" name="email" id="email" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$employee->email}}">
+                                        <input id="_token" type="hidden" value="{{ csrf_token() }}"/>
+
+                                        <button onclick="submitEMPFormManager('{{$employee->id}}', event)" class="btn btn-twitter float-end px-5" type="submit">تم</button>
                                     </form>
                                 </div>
                             </div>
@@ -145,5 +147,48 @@
     </div>
 </div>
 
+<script>
+        const submitEMPFormManager = (id, e) => {
+
+            console.log(id)
+
+            e.preventDefault()
+
+            const data = {
+                employee_name: document.getElementById("employee_name").value,
+                email: document.getElementById("email").value,
+                _token: document.getElementById("_token").value
+            }
+
+            const formData = new FormData()
+
+            formData.append("employee_name", data.employee_name)
+            formData.append("email", data.email)
+            formData.append("_token", data._token)
+
+            console.log(id)
+            console.log(data)
+
+            // return
+            $.ajax({
+                type:"post",
+                url:"employees/"+ id + "?_method=put",
+                data: formData,
+                contentType: false,
+                processData: false,
+                cache: false,
+                dataType: 'json',
+                success:(data) => {
+                    console.log("data*************")
+                    console.log(data)
+                    location.replace("{{route('employees.index')}}")
+                },
+                error:(error)=>{
+                    location.replace("{{route('employees.index')}}")
+                    console.log(error.responseJSON)
+                }
+            })
+            }
+</script>
 
 @endsection

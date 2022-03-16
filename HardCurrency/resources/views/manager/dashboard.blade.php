@@ -82,11 +82,12 @@
 
                                                 @method('put')
 
-                                                <input type="text" name="currency_name" class="form-control mb-3" placeholder=" العملة " value="{{$bankcurrency->currency_name}}" disabled="disabled">
-                                                <input type="text" name="buy_price" class="form-control mb-3" placeholder="سعر الشراء " value="{{$bankcurrency->buy_price}}">
-                                                <input type="text" name="sale_price" class="form-control mb-3" placeholder="سعر البيع " value="{{$bankcurrency->sale_price}}">
+                                                <input type="text" id="currency_name" name="currency_name" class="form-control mb-3" placeholder=" العملة " value="{{$bankcurrency->currency_name}}" disabled="disabled">
+                                                <input type="text" id="buy_price" name="buy_price" class="form-control mb-3" placeholder="سعر الشراء " value="{{$bankcurrency->buy_price}}">
+                                                <input type="text" id="sale_price" name="sale_price" class="form-control mb-3" placeholder="سعر البيع " value="{{$bankcurrency->sale_price}}">
+                                                <input  id="_token" type="hidden" value="{{ csrf_token() }}"/>
 
-                                                <button class="btn btn-twitter float-end px-5" type="submit">تم</button>
+                                                <button onclick="submitPriceFormManager('{{$bankcurrency->id}}', event)" class="btn btn-twitter float-end px-5" type="submit">تم</button>
 
                                             </form>
                                             @include('sweetalert::alert')
@@ -104,4 +105,50 @@
                 </div>
             </div>
         </div>
+<script>
+        const submitPriceFormManager = (id, e) => {
+
+            console.log(id)
+
+            e.preventDefault()
+
+            const data = {
+                currency_name: document.getElementById("currency_name").value,
+                buy_price: document.getElementById("buy_price").value,
+                sale_price: document.getElementById("sale_price").value,
+                _token: document.getElementById("_token").value
+            }
+
+            const formData = new FormData()
+
+            formData.append("currency_name", data.currency_id)
+            formData.append("buy_price", data.buy_price)
+            formData.append("sale_price", data.sale_price)
+            formData.append("_token", data._token)
+
+            console.log(id)
+            console.log(data)
+
+            // return
+            $.ajax({
+                type:"post",
+                url:"manager/"+ id + "?_method=put",
+                data: formData,
+                contentType: false,
+                processData: false,
+                cache: false,
+                dataType: 'json',
+                success:(data) => {
+                    console.log("data*************")
+                    console.log(data)
+                    location.replace("{{route('manager.index')}}")
+                },
+                error:(error)=>{
+                    location.replace("{{route('manager.index')}}")
+                    console.log(error.responseJSON)
+                }
+            })
+            }
+</script>
+
         @endsection

@@ -138,14 +138,15 @@
 
                                 @method('put')
                                 
-                                <input type="text" name="branch_name" class="form-control mb-3" placeholder=" اسم الفرع " value="{{$branch->branch_name}}">
-                                <input type="text" name="city" class="form-control mb-3" placeholder=" المكان  " value="{{$branch->city}}">
-                                <input type="text" name="phone_number" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$branch->phone_number}}">
+                                <input type="text" name="branch_name" id="branch_name" class="form-control mb-3" placeholder=" اسم الفرع " value="{{$branch->branch_name}}">
+                                <input type="text" name="city" id="city" class="form-control mb-3" placeholder=" المكان  " value="{{$branch->city}}">
+                                <input type="text" name="phone_number" id="phone_number" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$branch->phone_number}}">
+                                <input  id="_token" type="hidden" value="{{ csrf_token() }}"/>
                                 
 
                                 
 
-                                <button onclick="editForm('branch,$branch->id')" class="btn btn-twitter float-end px-5" type="submit">تم</button>
+                                <button onclick="submitBranchFormManager('{{$branch->id}}', event)" class="btn btn-twitter float-end px-5" type="submit">تم</button>
 
                             </form>
 
@@ -163,6 +164,51 @@
                 </div>
             </div>       
                                    
+            <script>
+        const submitBranchFormManager = (id, e) => {
+
+            console.log(id)
+
+            e.preventDefault()
+
+            const data = {
+                branch_name: document.getElementById("branch_name").value,
+                city: document.getElementById("city").value,
+                phone_number: document.getElementById("phone_number").value,
+                _token: document.getElementById("_token").value
+            }
+
+            const formData = new FormData()
+
+            formData.append("branch_name", data.branch_name)
+            formData.append("city", data.city)
+            formData.append("phone_number", data.phone_number)
+            formData.append("_token", data._token)
+
+            console.log(id)
+            console.log(data)
+
+            // return
+            $.ajax({
+                type:"post",
+                url:"branch/"+ id + "?_method=put",
+                data: formData,
+                contentType: false,
+                processData: false,
+                cache: false,
+                dataType: 'json',
+                success:(data) => {
+                    console.log("data*************")
+                    console.log(data)
+                    location.replace("{{route('branch.index')}}")
+                },
+                error:(error)=>{
+                    location.replace("{{route('branch.index')}}")
+                    console.log(error.responseJSON)
+                }
+            })
+            }
+</script>
 
              
 @endsection

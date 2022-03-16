@@ -89,15 +89,16 @@
 
                                                 @csrf
 
-                                                <input type="hidden" name="currency_id" class="form-control mb-3" placeholder=" العملة  " value="{{$price->currency_id}}">
-                                                <input type="text" name="currency_id" class="form-control mb-3" placeholder=" العملة  " value="{{$price->currency->currency_name}}" disabled>
-                                                <input type="text" name="buy_price" class="form-control mb-3" placeholder="سعر الشراء " value="{{$price->buy_price}}">
-                                                <input type="text" name="sale_price" class="form-control mb-3" placeholder="سعر البيع " value="{{$price->sale_price}}">
+                                                <input  id="currency_id" type="hidden" name="currency_id" class="form-control mb-3" placeholder=" العملة  " value="{{$price->currency_id}}">
+                                                <input  name="currency_id" type="text" class="form-control mb-3" placeholder=" العملة  " value="{{$price->currency->currency_name}}" disabled>
+                                                <input  id="buy_price" type="text" name="buy_price" class="form-control mb-3" placeholder="سعر الشراء " value="{{$price->buy_price}}">
+                                                <input  id="sale_price" type="text" name="sale_price" class="form-control mb-3" placeholder="سعر البيع " value="{{$price->sale_price}}">
+                                                <input  id="_token" type="hidden" value="{{ csrf_token() }}"/>
 
 
 
 
-                                                <button class="btn btn-twitter float-end px-5" type="submit">تم</button>
+                                                <button onclick="submitPriceForm('{{$price->id}}', event)" class="btn btn-twitter float-end px-5" type="submit">تم</button>
 
                                             </form>
                                             @include('sweetalert::alert')
@@ -112,6 +113,51 @@
                     </table>
                 </div>
 
+                <script>
+    const submitPriceForm = (id, e) => {
+
+        console.log(id)
+
+        e.preventDefault()
+
+        const data = {
+            currency_id: document.getElementById("currency_id").value,
+            buy_price: document.getElementById("buy_price").value,
+            sale_price: document.getElementById("sale_price").value,
+            _token: document.getElementById("_token").value
+        }
+
+        const formData = new FormData()
+
+        formData.append("currency_id", data.currency_id)
+        formData.append("buy_price", data.buy_price)
+        formData.append("sale_price", data.sale_price)
+        formData.append("_token", data._token)
+
+        console.log(id)
+        console.log(data)
+
+        // return
+        $.ajax({
+            type:"post",
+            url:"price/"+ id,
+            data: formData,
+            contentType: false,
+            processData: false,
+            cache: false,
+            dataType: 'json',
+            success:(data) => {
+                console.log("data*************")
+                console.log(data)
+                location.replace("{{route('price.index')}}")
+            },
+            error:(error)=>{
+                location.replace("{{route('price.index')}}")
+                console.log(error.responseJSON)
+            }
+        })
+    }
+</script>
 
 
 @endsection

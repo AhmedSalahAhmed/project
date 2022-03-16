@@ -133,9 +133,10 @@
                                         <form action="{{ route('users.update', $user->id) }}" method="POST">
                                             @csrf
                                             @method('put')
-                                            <input type="text" name="name" class="form-control mb-3" placeholder=" اسم المستخدم " value="{{$user->name}}">
-                                            <input type="email" name="email" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$user->email}}">
-                                            <button class="btn btn-twitter float-end px-5" type="submit">تم</button>
+                                            <input type="text" id="name" name="name" class="form-control mb-3" placeholder=" اسم المستخدم " value="{{$user->name}}"/>
+                                            <input type="email" id="email" name="email" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$user->email}}"/>
+                                            <input type="hidden" id="_token" value="{{ csrf_token() }}"/>
+                                            <button onclick="submitForm('{{$user->id}}', event)" class="btn btn-twitter float-end px-5" type="submit">تم</button>
                                         </form>
 
                                     </div>
@@ -148,12 +149,55 @@
 
                     </tbody>
                 </table>
-                
+
 
             </div>
         </div>
     </div>
 
 
+    <script>
+    const submitForm = (id, e) => {
+
+        console.log(id)
+
+        e.preventDefault()
+
+        const data = {
+            name: document.getElementById("name").value? document.getElementById("name").value: 0,
+            email: document.getElementById("email").value? document.getElementById("email").value: 0,
+            _token: document.getElementById("_token").value? document.getElementById('_token'):0
+        }
+
+        const formData = new FormData()
+
+        formData.append("name", data.name)
+        formData.append("email", data.email)
+        formData.append("_token", data._token)
+
+        console.log(id)
+        console.log(data)
+
+        // return
+        $.ajax({
+            type:"post",
+            url:"users/"+ id + "?_method=put",
+            data: formData,
+            contentType: false,
+            processData: false,
+            cache: false,
+            dataType: 'json',
+            success:(data) => {
+                console.log("data*************")
+                console.log(data)
+                location.replace("{{route('users.index')}}")
+            },
+            error:(error)=>{
+                location.replace("{{route('users.index')}}")
+                console.log(error.responseJSON)
+            }
+        })
+    }
+</script>
 
 @endsection
