@@ -48,6 +48,7 @@
     <link href="{{URL::asset('assets/css-rtl/style-dark.css')}}" rel="stylesheet">
     <!---Skinmodes css-->
     <link href="{{URL::asset('assets/css-rtl/skin-modes.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
 
 </head>
 
@@ -107,31 +108,54 @@
  <div class="container-fluid page-body-wrapper"> -->
 
         <nav class="navbar navbar-expand-custom navbar-mainbg fixed-top">
+            <p class="right">
+
+
+            <div class="nav-profile-image">
+                @foreach($banks as $bank)
+
+                <img src="{{asset('storage/'.$bank->logo)}}" style="width: 44px;
+    height: 44px;
+    border-radius: 100%;" class="profileimage" alt="profile" />
+
+                <!--change to offline or busy as needed-->
+            </div>
+            <div class="nav-profile-text d-flex flex-column " style="color: white;font-weight:bold;">
+                <span class="font-weight-bold mb-2">{{ $bank->bank_name}}</span>
+                @endforeach
+
+            </div>
+
+
+            </p>
             <a class="navbar-brand navbar-logo" href="#"></a>
             <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars text-white"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
                 <ul class="navbar-nav ml-auto">
                     <div class="hori-selector">
                         <div class="left"></div>
                         <div class="right"></div>
                     </div>
+
                     <li class="nav-item">
-                        <a class="nav-link" onfocus="linkClicked('dashboard')" href="dashboard"><i class="fas fa-tachometer-alt"></i>شراء عملة اجنبية</a>
+                        <a class="nav-link" href="dashboard"><i class="fas fa-tachometer-alt"></i>شراء عملة اجنبية</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" onfocus="linkClicked('transaction')" href="transaction"><i class="far fa-calendar-alt"></i>العمليات</a>
+                        <a class="nav-link" href="transaction"><i class="far fa-calendar-alt"></i>العمليات</a>
                     </li>
 
 
                 </ul>
+
             </div>
         </nav>
         <!-- partial -->
         <div id="content" class="container-fluid page-body-wrapper">
-        @yield('content')
+            @yield('content')
 
         </div>
     </div>
@@ -166,15 +190,12 @@
     <!-- Plugin js for this page -->
 
     <script>
-
-      $('.nav-link').click(function (event) {
-          // Avoid the link click from loading a new page
-          event.preventDefault();
-
-          // Load the content from the link's href attribute
-          $('.page-body-wrapper').load($(this).attr('href'));
-      });
-
+        $('.nav-link').click(function(event) {
+            // Avoid the link click from loading a new page
+            event.preventDefault();
+            // Load the content from the link's href attribute
+            $('.page-body-wrapper').load($(this).attr('href'));
+        });
     </script>
 
     <script src="{{asset('assets/vendors/chart.js/Chart.min.js')}}"></script>

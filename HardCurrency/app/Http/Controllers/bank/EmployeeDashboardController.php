@@ -61,18 +61,8 @@ class EmployeeDashboardController extends Controller
      */
     public function store(Request $request)
     {
+       
         $bank_id = Auth::user()->bank_id;
-
-        $currency = BankCurrency::where('bank_id', $bank_id)
-            ->where('bank_currencies.id', $request->bank_currency_id)
-            ->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
-            ->get(['bank_currencies.currency_id'])
-            ->pluck('currency_id');
-        $bank_account = Account::where('bank_id', $bank_id)
-            ->where('currency_id', $currency)->get();
-        // dd($bank_account);
-
-
 
 
 
@@ -95,16 +85,27 @@ class EmployeeDashboardController extends Controller
             'bank_id' => $bank_id,
         ]);
 
+        $currency = BankCurrency::where('bank_id', $bank_id)
+            ->where('bank_currencies.id', $request->bank_currency_id)
+            ->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
+            ->get(['bank_currencies.currency_id'])
+            ->pluck('currency_id');
+        $bank_account = Account::where('bank_id', $bank_id)
+            ->where('currency_id', $currency)->get();
+        // dd($bank_account);
+
+
         if ($bank_account) {
             foreach ($bank_account as $b_account) {
                 $b_account->balance = $b_account->balance + $amount;
                 $b_account->save();
             }
         }
-
         Alert::success('تهانينا !!', 'تمت العملية بنجاح');
 
-        return redirect()->route('bank.index');
+
+        return back();
+          
     }
 
     /**
