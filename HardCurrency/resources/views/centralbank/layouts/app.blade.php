@@ -181,7 +181,7 @@
             $('.printAccount').printThis({
                 importCSS: true,
                 header: "<h4 style='text-align:center;'> <?php echo date('Y-m-d'); ?> </h4><h3 style='text-align:center;'>تقرير اسعار العملات</h3>",
-                doctypeString: '<div><h2  style="text-align:center;">بسم الله الرحمن الرحيم</h2>)<h1 style="text-align:center;">  </h1> <img style="width:10%; text-align:right;" src={{asset(assets/images/cbos.jpeg)}} alt="profile" />',
+                doctypeString: '<div  style="text-align:center;"><h2 >بسم الله الرحمن الرحيم</h2>)<h1 style="text-align:center;">  </h1> <img style="width:10%; text-align:right; " src={{asset("assets/images/cbos.jpeg")}} alt="profile" />',
                 copyTagClasses: true,
             });
         });
