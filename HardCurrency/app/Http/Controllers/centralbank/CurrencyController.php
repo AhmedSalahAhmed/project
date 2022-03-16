@@ -18,9 +18,14 @@ class CurrencyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $currencies = Currency::oldest()->paginate(7);
+        if ($request->ajax()) {
+
+            return view('centralbank.currency', compact('currencies'))->with('i', (request()->input('page', 1) - 1) * 7)
+            ->renderSections()['content'];
+            }
         return view('centralbank.currency', compact('currencies'))->with('i', (request()->input('page', 1) - 1) * 7);
     }
 

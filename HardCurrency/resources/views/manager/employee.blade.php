@@ -24,10 +24,14 @@
             </div>
 
             @endif
-            <h4 class="card-title"> الموظفين </h4>
+            <h4 class="card-title">   جميع موظفي @foreach($banks as $bank)
+                
+        {{$bank->bank_name}}
+        @endforeach
+        </h4>
             <!-- <p class="card-description">    <code class="rtl">مدراء</code>البنوك
                     </p> -->
-            <button type="button" class="btn btn-twitter" data-bs-toggle="modal" data-bs-target="#addModal">
+            <button type="button" class="btn login-btn" data-bs-toggle="modal" data-bs-target="#addModal">
                 اضافة موظف
             </button>
             <!-- Add Bank Modal -->

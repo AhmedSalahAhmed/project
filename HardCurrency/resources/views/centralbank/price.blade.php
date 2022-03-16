@@ -1,9 +1,6 @@
-@include('centralbank.includes.header')
+@extends('centralbank/layouts.app')
 
-@include('centralbank.includes.navbar')
-
-@include('centralbank.includes.sidebar')
-
+@section('content')
 
 <div class="page-header">
     <h3 class="page-title">
@@ -21,7 +18,6 @@
 
 
 
-<div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -118,6 +114,4 @@
 
 
 
-
-
-                @extends('centralbank.includes.footer')
+@endsection

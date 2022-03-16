@@ -1,10 +1,19 @@
-@include('centralbank.includes.header')
+@extends('centralbank/layouts.app')
 
-@include('centralbank.includes.navbar')
-
-@include('centralbank.includes.sidebar')
-
-
+@section('content')
+<div class="page-header">
+    <h3 class="page-title">
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            عفواً <strong>{{ Auth::user()->name }} !!!</strong> <br> هناك بعض الاخطاء في الإدخال .<br><br>
+            <ul dir="ltr">
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+</div>
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
@@ -166,4 +175,4 @@
 
 
 
-@extends('centralbank.includes.footer')
+@endsection

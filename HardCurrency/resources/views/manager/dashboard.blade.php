@@ -19,7 +19,10 @@
                         @endif
                 </div>
 
-                <h4 class="card-title"> العملات الأجنبية التي يتعامل بها البنك
+                <h4 class="card-title"> العملات الأجنبية التي يتعامل بها@foreach($banks as $bank)
+                
+                {{$bank->bank_name}}
+                @endforeach
 
                 </h4>
 

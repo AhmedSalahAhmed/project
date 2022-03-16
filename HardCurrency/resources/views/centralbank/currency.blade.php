@@ -1,8 +1,6 @@
-@include('centralbank.includes.header')
+@extends('centralbank/layouts.app')
 
-@include('centralbank.includes.navbar')
-
-@include('centralbank.includes.sidebar')
+@section('content')
 
 
 <div class="page-header">
@@ -18,7 +16,6 @@
         </div>
         @endif
 </div>
-<div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -33,7 +30,7 @@
 
                 @endif
 
-                <button type="button" class="btn btn-twitter" data-bs-toggle="modal" data-bs-target="#addModal">
+                <button type="button" class="btn login-btn" data-bs-toggle="modal" data-bs-target="#addModal">
                     اضافة عملة
                 </button>
 
@@ -159,5 +156,4 @@
                 </div>
 
 
-
-                @extends('centralbank.includes.footer')
+@endsection

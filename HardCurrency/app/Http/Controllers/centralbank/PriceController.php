@@ -17,7 +17,7 @@ class PriceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
         // $prices = CurrencyPrice::join('currencies', 'currency_prices.currency_id', '=', 
@@ -42,7 +42,11 @@ class PriceController extends Controller
         
         // return $collected;
 
+        if ($request->ajax()) {
 
+            return view('centralbank.price',compact('prices'))
+            ->renderSections()['content'];
+            }
 
 		return view('centralbank.price',compact('prices'));
         

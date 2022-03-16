@@ -16,12 +16,18 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         
         
         $users = User::all();
             //    return $users;
+           
+        if ($request->ajax()) {
+
+            return view('centralbank.users', compact('users'))
+            ->renderSections()['content'];
+            }
         return view('centralbank.users', compact('users'));
     }
 
@@ -55,6 +61,7 @@ class UsersController extends Controller
             'type' => 'user',
             'password' => Hash::make($request->password),
         ]);
+        
         return redirect()->route('users.index')
         ->with('success','تمت تســجيل مدير بنك بنجاح');
 

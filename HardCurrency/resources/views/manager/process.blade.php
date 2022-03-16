@@ -25,7 +25,10 @@
             </div>
 
             @endif
-            <h4 class="card-title"> العمليات </h4>
+            <h4 class="card-title"> جميع العمليات التي حدثت في @foreach($banks as $bank)
+                
+                {{$bank->bank_name}}
+                @endforeach </h4>
             <!-- <p class="card-description">    <code class="rtl">مدراء</code>البنوك
                     </p> -->
 
