@@ -17,9 +17,13 @@ class BankController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $banks = Bank::latest()->paginate(10);
+        if ($request->ajax()) {
+
+            return view('centralbank.bank', compact('banks'))->renderSections()['content'];
+            }
         return view('centralbank.bank', compact('banks'));
     }
 

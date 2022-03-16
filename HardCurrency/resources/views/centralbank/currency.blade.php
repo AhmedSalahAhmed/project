@@ -1,8 +1,6 @@
-@include('centralbank.includes.header')
+@extends('centralbank/layouts.app')
 
-@include('centralbank.includes.navbar')
-
-@include('centralbank.includes.sidebar')
+@section('content')
 
 
 <div class="page-header">
@@ -18,7 +16,6 @@
         </div>
         @endif
 </div>
-<div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -33,7 +30,7 @@
 
                 @endif
 
-                <button type="button" class="btn btn-twitter" data-bs-toggle="modal" data-bs-target="#addModal">
+                <button type="button" class="btn login-btn" data-bs-toggle="modal" data-bs-target="#addModal">
                     اضافة عملة
                 </button>
 
@@ -126,20 +123,20 @@
 
 
 
-                                            <form action="{{ route('currency.update', $currency->id) }}" method="POST">
-
+                                            <form id="editForm" method="post" action="{{ route('currency.update', $currency->id) }}" >
                                                 @csrf
-
                                                 @method('put')
 
-                                                <input type="text" name="currency_name" class="form-control mb-3" placeholder=" العملة " value="{{$currency->currency_name}}" disabled="disabled">
-                                                <input type="text" name="abbreviation" class="form-control mb-3" placeholder="سعر الشراء " value="{{$currency->abbreviation}}">
-                                                <input type="text" name="symbol" class="form-control mb-3" placeholder="سعر البيع " value="{{$currency->symbol}}">
+
+                                                <input id="currency_name" type="text" name="currency_name" class="form-control mb-3" placeholder=" العملة " value="{{$currency->currency_name}}" disabled="disabled"/>
+                                                <input id="abbreviation" type="text" name="abbreviation" class="form-control mb-3" placeholder="سعر الشراء " value="{{$currency->abbreviation}}"/>
+                                                <input id="symbol" type="text" name="symbol" class="form-control mb-3" placeholder="سعر البيع " value="{{$currency->symbol}}"/>
+                                                <input id="_token" type="hidden" value="{{ csrf_token() }}"/>
 
 
 
 
-                                                <button class="btn btn-twitter float-end px-5" type="submit">تم</button>
+                                                <input onclick="submitForm('{{$currency->id}}', event)" class="btn btn-twitter float-end px-5" value="تم" type="submit"/>
 
                                             </form>
                                             @include('sweetalert::alert')
@@ -158,6 +155,82 @@
                     {{ $currencies->links() }}
                 </div>
 
+                <script>
+                    const submitForm = (id, e) => {
 
+                        console.log(id)
 
-                @extends('centralbank.includes.footer')
+                        e.preventDefault()
+
+                        const data = {
+                            abbreviation: document.getElementById("abbreviation").value,
+                            symbol: document.getElementById("symbol").value,
+                            currency_name: document.getElementById("currency_name").value,
+                            _token: document.getElementById("_token").value
+                        }
+
+                        const formData = new FormData()
+
+                        formData.append("abbreviation", data.abbreviation)
+                        formData.append("symbol", data.symbol)
+                        formData.append("currency_name", data.currency_name)
+                        formData.append("_token", data._token)
+                        console.log(id)
+                        console.log(data)
+                        // $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+                        $.ajax({
+                            type:"post",
+                            url:"currency/"+ id + "?_method=put",
+                            data: formData,
+                            contentType: false,
+                            processData: false, 
+                            cache: false,
+                            dataType: 'json',    
+                            success:(data) => {
+                                console.log("data*************")
+                                console.log(data)
+                                location.replace("{{route('currency.index')}}")
+                            },
+                            error:(error)=>{
+                                location.replace("{{route('currency.index')}}")
+                                console.log(error.responseJSON)
+                            }
+                        })
+                    //     const options = {
+                    //         method: "POST",
+                    //         headers: { "Content-Type": "application/json" },
+                    //         data,
+                    //     }
+
+                    //    try {
+                    //     const response = await fetch("currency/"+id+"?_method=put" , options)
+                    //         // .then((response) => response.json() )
+                    //         console.log(response.json)
+                    //    } catch (error) {
+                    //        console.log(error)
+                    //    }
+                    }
+
+                    // $(function() {
+                    //     //hang on event of form with id=myform
+                    //     $("#myform").submit(function(e) {
+                    //         //prevent Default functionality
+                    //         e.preventDefault();
+                    //         //get the action-url of the form
+                    //         var actionurl = e.currentTarget.action;
+                    //         //do your own request an handle the results
+                    //         $.ajax({
+                    //                 url: actionurl,
+                    //                 type: 'put',
+                    //                 dataType: 'application/json',
+                    //                 data: $("#myform").serialize(),
+                    //                 success: function(data) {
+                    //                     console.log(data)
+                    //                 }
+                    //         });
+                    //     });
+                    // });
+
+                </script>
+
+@endsection

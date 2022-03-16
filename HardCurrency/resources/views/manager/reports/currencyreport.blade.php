@@ -1,9 +1,6 @@
-@include('manager.includes.header')
+@extends('manager/layouts.app')
 
-@include('manager.includes.navbar')
-
-@include('manager.includes.sidebar')
-
+@section('content')
 <!-- row -->
 <div class="row">
     <div class="col-xl-12">
@@ -205,4 +202,4 @@
 
 
 
-@extends('manager.includes.footer')
+@endsection

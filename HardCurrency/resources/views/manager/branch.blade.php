@@ -1,9 +1,7 @@
+@extends('manager/layouts.app')
 
-@include('manager.includes.header')
+@section('content')
 
-@include('manager.includes.navbar')
-
-@include('manager.includes.sidebar')
  
    
 <div class="col-lg-12 grid-margin stretch-card">
@@ -31,7 +29,7 @@
                     <h4 class="card-title"> الفروع </h4>
                     <!-- <p class="card-description">    <code class="rtl">مدراء</code>البنوك
                     </p> -->
-                    <button type="button" class="btn btn-twitter" data-bs-toggle="modal" data-bs-target="#addModal">
+                    <button type="button" class="btn login-btn " data-bs-toggle="modal" data-bs-target="#addModal">
                     اضافة فرع جديد
                     </button>
                     <!-- Add Bank Modal -->
@@ -142,7 +140,7 @@
                                 
                                 <input type="text" name="branch_name" class="form-control mb-3" placeholder=" اسم الفرع " value="{{$branch->branch_name}}">
                                 <input type="text" name="city" class="form-control mb-3" placeholder=" المكان  " value="{{$branch->city}}">
-                                <input type="email" name="phone_number" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$branch->phone_number}}">
+                                <input type="text" name="phone_number" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$branch->phone_number}}">
                                 
 
                                 
@@ -167,5 +165,4 @@
                                    
 
              
-@extends('manager.includes.footer')
-   
+@endsection

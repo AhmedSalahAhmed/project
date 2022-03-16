@@ -4,12 +4,12 @@ namespace App\Http\Controllers\centralbank;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
-use Illuminate\Http\Request;
-use App\Models\Currency;
-use App\Models\BankCurrency;
 use App\Models\Bank;
-use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\BankCurrency;
+use App\Models\Currency;
 use App\Models\CurrencyPrice;
+use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CurrencyController extends Controller
 {
@@ -18,9 +18,14 @@ class CurrencyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $currencies = Currency::oldest()->paginate(7);
+        if ($request->ajax()) {
+
+            return view('centralbank.currency', compact('currencies'))->with('i', (request()->input('page', 1) - 1) * 7)
+                ->renderSections()['content'];
+        }
         return view('centralbank.currency', compact('currencies'))->with('i', (request()->input('page', 1) - 1) * 7);
     }
 
@@ -62,18 +67,12 @@ class CurrencyController extends Controller
                 "bank_id" => $bank->id,
             ]);
             Account::create([
-                
+
                 "currency_id" => $stored->id,
                 "bank_id" => $bank->id,
 
-    
-    
             ]);
         }
-       
-
-
-
 
         Alert::success('تهانينا !!', 'تم اضافة  عملة جديدة بنجاح');
 
@@ -114,9 +113,9 @@ class CurrencyController extends Controller
         $request->validate([
             'abbreviation' => 'required',
             'symbol' => 'required',
-
-
         ]);
+        
+        // return $request->all();
 
         $currency->update($request->all());
         Alert::success('تهانينا !!', 'تم تعديل بيانات العملة بنجاح');

@@ -17,12 +17,17 @@ class ManagersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $banks = Bank::all(); 
         $managers = Manager::join('banks', 'managers.bank_id', '=', 'banks.id')
                ->get(['managers.*', 'banks.bank_name']);
             //    return $managers;
+            if ($request->ajax()) {
+
+                return view('centralbank.manager', compact('managers','banks'))
+                ->renderSections()['content'];
+                }
         return view('centralbank.manager', compact('managers','banks'));
     }
 

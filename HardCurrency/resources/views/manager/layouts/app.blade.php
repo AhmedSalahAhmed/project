@@ -5,11 +5,11 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    @foreach($branches as $branch)
+    @foreach($banks as $bank)
 
     <title>
 
-        {{ $branch->branch_name}}
+        {{ $bank->bank_name}}
     </title>
     @endforeach
     <!-- plugins:css -->
@@ -66,15 +66,13 @@
                 <img src="{{asset('storage/'.$bank->logo)}}" style="width: 44px;
                 height: 44px;
                 border-radius: 100%;" class="profileimage" alt="profile" />
-                @endforeach
 
                 <!--change to offline or busy as needed-->
             </div>
-            @foreach($branches as $branch)
-
             <div class="nav-profile-text d-flex flex-column " style="color: white;font-weight:bold;">
-                <span class="font-weight-bold mb-2">{{ $branch->branch_name}}</span>
-@endforeach
+                <span class="font-weight-bold mb-2">{{ $bank->bank_name}}</span>
+                @endforeach
+
             </div>
 
 
@@ -92,11 +90,27 @@
                     </div>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="dashboard"><i class="fas fa-tachometer-alt"></i>شراء عملة اجنبية</a>
+                        <a class="nav-link" href="dashboard"><i class="fas fa-tachometer-alt"></i>  اسعار العملات</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="transaction"><i class="far fa-calendar-alt"></i>العمليات</a>
+                        <a class="nav-link" href="branch"><i class="far fa-calendar-alt"></i>الفروع</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="employees"><i class="fas fa-tachometer-alt"></i> الموظفين </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="process"><i class="far fa-calendar-alt"></i>العمليات</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="account"><i class="fas fa-tachometer-alt"></i>  حساب البنك</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="searchcurrency"><i class="far fa-calendar-alt"></i>التقارير</a>
                     </li>
 
 
@@ -115,7 +129,7 @@
             </form>
         </nav>
         <!-- partial -->
-        <div id="content" class="container-fluid page-body-wrapper">
+        <div id="content" class="container page-body-wrapper">
             @yield('content')
 
         </div>

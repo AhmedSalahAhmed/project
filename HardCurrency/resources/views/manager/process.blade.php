@@ -1,8 +1,6 @@
-@include('manager.includes.header')
+@extends('manager/layouts.app')
 
-@include('manager.includes.navbar')
-
-@include('manager.includes.sidebar')
+@section('content')
 
 
 <div class="col-lg-12 grid-margin stretch-card">
@@ -27,7 +25,10 @@
             </div>
 
             @endif
-            <h4 class="card-title"> العمليات </h4>
+            <h4 class="card-title"> جميع العمليات التي حدثت في @foreach($banks as $bank)
+                
+                {{$bank->bank_name}}
+                @endforeach </h4>
             <!-- <p class="card-description">    <code class="rtl">مدراء</code>البنوك
                     </p> -->
 
@@ -39,7 +40,7 @@
                         <th>العملة </th>
                         <th> الموظف </th>
                         <th> الفرع</th>
-                        <th> تاريخ المعاملة  </th>
+                        <th> تاريخ المعاملة </th>
 
 
                     </tr>
@@ -48,11 +49,11 @@
                     @foreach($processes as $process)
 
                     <tr>
-                    <td> {{$process->client_name}}</td>
+                        <td> {{$process->client_name}}</td>
 
-                        
+
                         <td> {{$process->amount}} {{$process->symbol}}</td>
-                        
+
 
                         <td class="py-1">
                             {{$process->currency_name}}
@@ -79,5 +80,4 @@
 </div>
 
 
-
-@extends('manager.includes.footer')
+@endsection

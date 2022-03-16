@@ -26,6 +26,7 @@ class StatisticsController extends Controller
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
+     *
      */
     public function index(Request $request)
     {
@@ -55,7 +56,12 @@ class StatisticsController extends Controller
         $sdg = BankCurrency::get()->pluck('buy_price', 'currency_id');
         $currency_id = $request->currency_id;
         $balance = DB::table('accounts')->where('currency_id', $currency_id)->sum('balance');
+        if ($request->ajax()) {
 
+            return view('centralbank.dashboard', compact('banks', 'balance', 'sdgamount', 'currencies'))
+                ->with('success', 'تمت تســجيل مدير بنك بنجاح')
+                ->renderSections()['content'];
+        }
         return view('centralbank.dashboard', compact('banks', 'balance', 'sdgamount', 'currencies'));
     }
     public function store(Request $request)
@@ -88,6 +94,7 @@ class StatisticsController extends Controller
             ->get()
             ->where('year', $year)
             ->groupBy('month');
+
         $data = [];
 
         foreach ($processes as $key => $values) {
@@ -100,6 +107,14 @@ class StatisticsController extends Controller
         };
 
         return collect($data);
+
+    }
+
+    public function currencies()
+    {
+        $currencies = Currency::all();
+
+        return $currencies;
 
     }
 }

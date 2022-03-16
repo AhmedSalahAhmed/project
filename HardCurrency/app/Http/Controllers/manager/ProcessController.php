@@ -16,7 +16,7 @@ class ProcessController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $bank_id = Auth::user()->bank_id;
         $banks = Bank::where('id', $bank_id)->get();
@@ -41,6 +41,10 @@ class ProcessController extends Controller
             
             ->orderBy('id' ,'desc')->get(['processes.*', 'bank_currencies.buy_price', 'currencies.currency_name', 'currencies.symbol', 'employees.employee_name' ,'branches.branch_name'])
             ;   
+        if ($request->ajax()) {
+        return view('manager.process', compact('processes' , 'banks'))->renderSections()['content'];
+
+        }
         return view('manager.process', compact('processes' , 'banks'));
     }
 

@@ -55,10 +55,19 @@
                         <form action="{{ route('bank.store') }}" method="post" class="forms-sample">
                             @csrf
 
+<<<<<<< HEAD
                             <div class="form-group row">
                                 <label for="exampleInputEmail2" class="col-sm-3 col-form-label">إسم العميل </label>
                                 <div class="col-sm-9">
                                     <input type="text" name="client_name" class="form-control" placeholder=" إسم العميل">
+=======
+                                <div class="form-group row">
+                                    
+                                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">إسم العميل </label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="client_name" class="form-control" placeholder=" إسم العميل">
+                                    </div>
+>>>>>>> 21c6af72cc72b38100e0174d8295b502675b8b1e
                                 </div>
                             </div>
                             <div class="form-group row">

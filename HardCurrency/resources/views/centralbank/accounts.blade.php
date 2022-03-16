@@ -1,9 +1,6 @@
-@include('centralbank.includes.header')
+@extends('centralbank/layouts.app')
 
-@include('centralbank.includes.navbar')
-
-@include('centralbank.includes.sidebar')
-
+@section('content')
 
 <div class="page-header">
     <h3 class="page-title">
@@ -18,7 +15,6 @@
         </div>
         @endif
 </div>
-<div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -50,14 +46,14 @@
                         </thead>
                         <tbody>
                             <tr>
-                               
+
 
                             </tr>
 
                             <tr>
-                          
-                            
-                            @foreach ($accounts as $account)
+
+
+                                @foreach ($accounts as $account)
                                 <td>{{$account->currency_name}}</td>
                                 <td>{{$account->abbreviation}}</td>
                                 <td>{{$account->bank_name}}</td>
@@ -66,7 +62,7 @@
 
 
                             </tr>
-                            
+
 
                             @endforeach
                         </tbody>
@@ -76,4 +72,6 @@
                 <div class="d-felx justify-content-center">
 
                 </div>
-                @include('centralbank.includes.footer')
+
+
+                @endsection

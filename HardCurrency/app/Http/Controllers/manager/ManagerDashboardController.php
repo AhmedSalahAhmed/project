@@ -21,7 +21,7 @@ class ManagerDashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
 
     {
         $bank_id = Auth::user()->bank_id;
@@ -33,7 +33,10 @@ class ManagerDashboardController extends Controller
         ->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
             ->get(['bank_currencies.*', 'currencies.currency_name', 'currencies.symbol']);
         // return $bankcurrencies;
-
+        if ($request->ajax()) {
+            return view('manager.dashboard', compact('bankcurrencies', 'currencies' ,'banks'))->renderSections()['content'];
+    
+            }
         return view('manager.dashboard', compact('bankcurrencies', 'currencies' ,'banks'));
     }
 

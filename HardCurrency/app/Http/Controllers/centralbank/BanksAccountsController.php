@@ -15,7 +15,7 @@ class BanksAccountsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // $bank_id = Auth::user()->bank_id;
         $banks = Bank::all();
@@ -24,7 +24,10 @@ class BanksAccountsController extends Controller
        ->join('banks', 'accounts.bank_id', '=' , 'banks.id')
          ->get(['accounts.*', 'currencies.*' ,'banks.bank_name']);
         // dd($accounts);
-        
+        if ($request->ajax()) {
+
+            return view('centralbank.accounts', compact('accounts', 'banks'))->renderSections()['content'];
+            }
         return view('centralbank.accounts', compact('accounts', 'banks'));
     }
 
