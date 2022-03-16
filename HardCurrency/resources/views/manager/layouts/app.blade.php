@@ -77,7 +77,6 @@
 
 
             </p>
-            <a class="navbar-brand navbar-logo" href="#"></a>
             <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars text-white"></i>
             </button>
@@ -90,7 +89,11 @@
                     </div>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="dashboard"><i class="fas fa-tachometer-alt"></i>  اسعار العملات</a>
+                        <a class="nav-link" href="data"><i class="fas fa-tachometer-alt"></i> الإحصائيات</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard"><i class="fas fa-tachometer-alt"></i> اسعار العملات</a>
                     </li>
 
                     <li class="nav-item">
@@ -106,7 +109,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="account"><i class="fas fa-tachometer-alt"></i>  حساب البنك</a>
+                        <a class="nav-link" href="account"><i class="fas fa-tachometer-alt"></i> حساب البنك</a>
                     </li>
 
                     <li class="nav-item">
@@ -121,14 +124,12 @@
                 @csrf
 
 
-                <a class="logout" href="route('logout')" onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                <a class="logout" href="route('logout')">
                     <i class="fa-regular fa-user"></i>
                     تسجيل خروج
                 </a>
             </form>
         </nav>
-        <!-- partial -->
         <div id="content" class="container page-body-wrapper">
             @yield('content')
 
@@ -187,6 +188,22 @@
     <script src="{{asset('js/custom.js')}}"></script>
     <script src="{{asset('assets/js/todolist.js')}}"></script>
     <!-- End custom js for this page -->
+
+<script src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
+<script src="{{asset('printThis.js')}}"></script>
+<script>
+    $(document).on('click', 'button', function() {
+        var table = $('#print-table');
+
+        $('.print').printThis({
+            importCSS: true,
+            header: "<h4 style='text-align:center;'> <?php echo date('Y-m-d'); ?> </h4><h3 style='text-align:center;'>تقرير اسعار العملات</h3>",
+            doctypeString: '<div><h2  style="text-align:center;">بسم الله الرحمن الرحيم</h2>@foreach($banks as $bank)<h1 style="text-align:center;"> {{$bank->bank_name}} </h1> <img style="width:10%; text-align:right;" src={{asset("storage/".$bank->logo)}} alt="profile" /> @endforeach',
+            copyTagClasses: true,
+        });
+    });
+
+</script>
 </body>
 
 </html>

@@ -23,11 +23,11 @@ class UsersController extends Controller
         $users = User::all();
             //    return $users;
            
-        if ($request->ajax()) {
+        // if ($request->ajax()) {
 
-            return view('centralbank.users', compact('users'))
-            ->renderSections()['content'];
-            }
+        //     return view('centralbank.users', compact('users'))
+        //     ->renderSections()['content'];
+        //     }
         return view('centralbank.users', compact('users'));
     }
 

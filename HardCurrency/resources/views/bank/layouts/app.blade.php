@@ -70,11 +70,12 @@
 
                 <!--change to offline or busy as needed-->
             </div>
-            @foreach($branches as $branch)
 
             <div class="nav-profile-text d-flex flex-column " style="color: white;font-weight:bold;">
-                <span class="font-weight-bold mb-2">{{ $branch->branch_name}}</span>
-@endforeach
+            @foreach($branches as $branch)
+            
+            <span class="font-weight-bold mb-2">{{ $branch->branch_name}}</span>
+                @endforeach
             </div>
 
 
@@ -115,7 +116,7 @@
             </form>
         </nav>
         <!-- partial -->
-        <div id="content" class="container-fluid page-body-wrapper">
+        <div id="content" class="container page-body-wrapper">
             @yield('content')
 
         </div>
@@ -157,6 +158,32 @@
             // Load the content from the link's href attribute
             $('.page-body-wrapper').load($(this).attr('href'));
         });
+
+
+        $('.editForm').submit(function(event) {
+            // Avoid the link click from loading a new page
+            event.preventDefault();
+            // Load the content from the link's href attribute
+            $('.page-body-wrapper').load($(this).attr('action'));
+        });
+
+        // function editForm(route, id) {
+        //     $.ajax(
+
+        //         {
+        //             type: 'put',
+        //             url: 'branch/' + id,
+        //             headers: {
+        //                 'Content-Type': 'application/json'
+        //             },
+        //             success: (data) => {
+        //                 // $('.page-body-wrapper').html(data);
+        //                 console.log
+
+        //             }
+        //         }
+        //     )
+        // }
     </script>
 
     <script src="{{asset('assets/all.min.js')}}"></script>

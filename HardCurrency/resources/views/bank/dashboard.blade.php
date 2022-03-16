@@ -86,22 +86,14 @@
                                     <div class="col-sm-9">
                                         <input style="color: #4688e3; font-weight:bold;" id="sdgamount" type="text" name="sdgamount" class="form-control" placeholder=" المبلغ بالجنيه السوداني" disabled>
                                     </div>
-
                                 </div>
-
-
                                 <button class="btn btn-twitter float-end px-5" type="submit">تم</button>
-
-
                             </form>
                             @include('sweetalert::alert')
-
                         </div>
-
                     </div>
                 </div>
             </div>
-
     </div>
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
@@ -133,13 +125,10 @@
                             <tbody>
                                 @foreach ($bankcurrencies as $bankcurrency)
                                 <tr>
-
                                     <td>{{$bankcurrency->currency_name}}</td>
                                     <td>{{$bankcurrency->buy_price}}</td>
                                     <td>{{$bankcurrency->sale_price}}</td>
                                     <td>{{($bankcurrency->buy_price + $bankcurrency->sale_price) / 2}}</td>
-
-
                                 </tr>
                                 @endforeach
 
@@ -150,24 +139,7 @@
 
                                     function mult(value) {
                                         var currency = document.getElementById('currency').value;
-
-                                        // console.log(currency)
-
-                                        // console.log(price)
-
                                         var amount = document.getElementById('amount').value;
-                                        // var buy = document.getElementById('buyprice').value;
-                                        // var x = value * buy;
-
-                                        // document.getElementById('total').value = x + ' جنيه  ';
-                                        //    var select = document.getElementById('currency');
-                                        //    var opt = select.options[select.selectedIndex].value;
-                                        //    if($currency->id == opt)
-                                        //    {
-
-
-                                        //    }
-
                                         $.ajax({
                                             type: "get",
                                             url: "{{route('getTotal')}}",
@@ -193,8 +165,4 @@
                             </tbody>
                         </table>
                     </div>
-
-
-
-
-                    @endsection
+                 @endsection

@@ -5,12 +5,9 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
     <title>
         بنك الســـودان المركزي
     </title>
-
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{asset('assets/vendors/mdi/css/materialdesignicons.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vendors/css/vendor.bundle.base.css')}}">
@@ -22,10 +19,8 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <!-- End layout styles -->
-
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -78,9 +73,8 @@
 
 
             </p>
-            <a class="navbar-brand navbar-logo" href="#"></a>
-            <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fas fa-bars text-white"></i>
+            <button style="color:white;" class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars "></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
@@ -88,7 +82,7 @@
                     <div class="hori-selector">
                         <div class="left"></div>
                         <div class="right"></div>
-                    </div>
+                   </div>
 
                     <li class="nav-item">
                         <a class="nav-link" href="statistics"><i class="fas fa-tachometer-alt"></i> الإحصائيات </a>
@@ -106,8 +100,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="managers"><i class="far fa-calendar-alt"></i>الموظفين </a>
                     </li>
-
-
                     <li class="nav-item">
                         <a class="nav-link" href="currency"><i class="fas fa-tachometer-alt"></i> العملات</a>
                     </li>

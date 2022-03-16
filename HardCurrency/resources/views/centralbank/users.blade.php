@@ -131,19 +131,11 @@
 
 
                                         <form action="{{ route('users.update', $user->id) }}" method="POST">
-
                                             @csrf
-
                                             @method('put')
-
                                             <input type="text" name="name" class="form-control mb-3" placeholder=" اسم المستخدم " value="{{$user->name}}">
                                             <input type="email" name="email" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$user->email}}">
-
-
-
-
                                             <button class="btn btn-twitter float-end px-5" type="submit">تم</button>
-
                                         </form>
 
                                     </div>

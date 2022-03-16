@@ -13,8 +13,7 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
-
-
+use Illuminate\Support\Facades\DB;
 
 class EmployeeDashboardController extends Controller
 {
@@ -26,10 +25,11 @@ class EmployeeDashboardController extends Controller
     public function index(Request $request)
     {
         $bank_id = Auth::user()->bank_id;
+        $branch_id = Auth::user()->branch_id;
         $banks = Bank::where('id', $bank_id)->get();
-        $branches = Branch::where('id', $bank_id)->get();
+        $branches = Branch::where('id', $branch_id)->get();
 
-
+      
         // dd($bank_id);
 
         $currencies = Currency::all();

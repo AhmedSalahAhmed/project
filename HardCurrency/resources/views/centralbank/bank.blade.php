@@ -133,11 +133,12 @@
 
 
 
-                                        <form action="{{ route('banks.update', $bank->id) }}" method="POST">
-
-                                            @csrf
+                                        <form action="{{ route('banks.update', $bank->id) }}" method="post">
 
                                             @method('put')
+                                            
+                                            @csrf
+
 
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label">اسم البنك </label>
                                             <input type="text" name="bank_name" class="form-control mb-3" placeholder=" اسم البنك " value="{{$bank->bank_name}}">

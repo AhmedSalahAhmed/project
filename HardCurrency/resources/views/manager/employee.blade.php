@@ -24,11 +24,11 @@
             </div>
 
             @endif
-            <h4 class="card-title">   جميع موظفي @foreach($banks as $bank)
-                
-        {{$bank->bank_name}}
-        @endforeach
-        </h4>
+            <h4 class="card-title"> جميع موظفي @foreach($banks as $bank)
+
+                {{$bank->bank_name}}
+                @endforeach
+            </h4>
             <!-- <p class="card-description">    <code class="rtl">مدراء</code>البنوك
                     </p> -->
             <button type="button" class="btn login-btn" data-bs-toggle="modal" data-bs-target="#addModal">
@@ -43,12 +43,8 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-
                             <form action="{{ route('employees.store') }}" method="post" class="forms-sample" autocomplete="off">
                                 @csrf
-
-
-
                                 <div class="form-group row">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> الإسم </label>
                                     <div class="col-sm-9">
@@ -75,24 +71,15 @@
                                         <input type="email" name="email" class="form-control" id="floatingInput" placeholder="البريد الالكتروني ">
                                     </div>
                                 </div>
-
                                 <div class="form-group row">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> كلمة المرور</label>
                                     <div class="col-sm-9">
                                         <input type="password" name="password" class="form-control" placeholder=" كلمة المرور ">
                                     </div>
                                 </div>
-
-
-
-
                                 <button class="btn btn-twitter float-end px-5" type="submit">تم</button>
-
-
                             </form>
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -132,35 +119,20 @@
                     </tr>
                     <!-- Edit Modal -->
                     <div class="modal fade" id="editModal{{$employee->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
                         <div class="modal-dialog modal-sm">
                             <div class="modal-content">
-
                                 <div class="modal-header">
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-
-
-
                                     <form action="{{ route('employees.update', $employee->id) }}" method="POST">
-
                                         @csrf
-
                                         @method('put')
-
                                         <input type="text" name="employee_name" class="form-control mb-3" placeholder=" اسم الموظف " value="{{$employee->employee_name}}">
                                         <input type="email" name="email" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$employee->email}}">
-
-
-
-
                                         <button class="btn btn-twitter float-end px-5" type="submit">تم</button>
-
                                     </form>
-
                                 </div>
-
                             </div>
                         </div>
                     </div>

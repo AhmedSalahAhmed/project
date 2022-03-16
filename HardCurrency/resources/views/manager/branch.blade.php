@@ -132,7 +132,7 @@
                                 
                                 
 
-                            <form action="{{ route('branch.update', $branch->id) }}" method="POST">
+                            <form action="{{ route('branch.update', $branch->id) }}" class="editForm" method="POST" onsubmit="editForm('branch, $branch->id')">
 
                             @csrf
 
@@ -145,7 +145,7 @@
 
                                 
 
-                                <button class="btn btn-twitter float-end px-5" type="submit">تم</button>
+                                <button onclick="editForm('branch,$branch->id')" class="btn btn-twitter float-end px-5" type="submit">تم</button>
 
                             </form>
 

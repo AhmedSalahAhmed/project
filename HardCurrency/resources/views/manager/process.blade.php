@@ -26,54 +26,57 @@
 
             @endif
             <h4 class="card-title"> جميع العمليات التي حدثت في @foreach($banks as $bank)
-                
+
                 {{$bank->bank_name}}
-                @endforeach </h4>
+                @endforeach
+            </h4>
             <!-- <p class="card-description">    <code class="rtl">مدراء</code>البنوك
                     </p> -->
-
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th> العميل </th>
-                        <th> المبلغ </th>
-                        <th>العملة </th>
-                        <th> الموظف </th>
-                        <th> الفرع</th>
-                        <th> تاريخ المعاملة </th>
-
-
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($processes as $process)
-
-                    <tr>
-                        <td> {{$process->client_name}}</td>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th> العميل </th>
+                            <th> المبلغ </th>
+                            <th>العملة </th>
+                            <th> الموظف </th>
+                            <th> الفرع</th>
+                            <th> تاريخ المعاملة </th>
 
 
-                        <td> {{$process->amount}} {{$process->symbol}}</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($processes as $process)
+
+                        <tr>
+                            <td> {{$process->client_name}}</td>
 
 
-                        <td class="py-1">
-                            {{$process->currency_name}}
-                        </td>
-                        <td>
-                            {{$process->employee_name}}
-                        </td>
-                        <td>
-                            {{$process->branch_name}}
-                        </td>
-                        <td>
-                            {{$process->created_at}}
-                        </td>
+                            <td> {{$process->amount}} {{$process->symbol}}</td>
 
-                    </tr>
 
-                    @endforeach
+                            <td class="py-1">
+                                {{$process->currency_name}}
+                            </td>
+                            <td>
+                                {{$process->employee_name}}
+                            </td>
+                            <td>
+                                {{$process->branch_name}}
+                            </td>
+                            <td>
+                                {{$process->created_at}}
+                            </td>
 
-                </tbody>
-            </table>
+                        </tr>
+
+                        @endforeach
+
+                    </tbody>
+                </table>
+            </div>
+
 
         </div>
     </div>

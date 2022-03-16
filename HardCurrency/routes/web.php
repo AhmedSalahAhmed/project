@@ -47,12 +47,14 @@ Route::group(['prefix' => 'manager'], function () {
         Route::resource('account', manager\BankAccountController::class);
         Route::resource('branch', manager\BranchController::class);
         Route::resource('process', manager\ProcessController::class);
-        Route::get('/searchcurrency', [App\Http\Controllers\manager\CurrencyReportController::class, 'searchcurrency']);
-
         Route::get('/logout', [App\Http\Controllers\manager\ManagerController::class, 'logout'])->name('manager.logout');
-        // Route::post('/currency', [App\Http\Controllers\manager\ManagerDashboardController::class, 'insert'])->name('manager.insert');
         Route::resource('manager', manager\ManagerDashboardController::class);
         Route::resource('data', manager\StatisticsController::class);
+        // Rrports
+        Route::get('/searchcurrency', [App\Http\Controllers\manager\CurrencyReportController::class, 'searchcurrency']);
+        Route::get('/processreport', [App\Http\Controllers\manager\CurrencyReportController::class, 'searchprocess']);
+        Route::get('/bankaccountreport', [App\Http\Controllers\manager\CurrencyReportController::class, 'bankaccountreport']);
+
     });
 });
 //Bank Employees Routes
