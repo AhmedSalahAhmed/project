@@ -144,13 +144,14 @@
 
                                         @method('put')
 
-                                        <input type="text" name="manager_name" class="form-control mb-3" placeholder=" اسم الموظف " value="{{$manager->manager_name}}">
-                                        <input type="email" name="email" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$manager->email}}">
+                                        <input type="text" id="manager_name" name="manager_name" class="form-control mb-3" placeholder=" اسم الموظف " value="{{$manager->manager_name}}">
+                                        <input type="email" id="email" name="email" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$manager->email}}">
+
+                                        <input type="hidden" id="_token" value="{{ csrf_token() }}"/>
 
 
 
-
-                                        <button class="btn btn-twitter float-end px-5" type="submit">تم</button>
+                                        <button onclick="submitForm('{{$manager->id}}', event)" class="btn btn-twitter float-end px-5" type="submit">تم</button>
 
                                     </form>
 
@@ -167,6 +168,48 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    const submitForm = (id, e) => {
+
+        console.log(id)
+
+        e.preventDefault()
+
+        const data = {
+            manager_name: document.getElementById("manager_name").value,
+            email: document.getElementById("email").value,
+            _token: document.getElementById("_token").value
+        }
+
+        const formData = new FormData()
+
+        formData.append("manager_name", data.manager_name)
+        formData.append("email", data.email)
+        formData.append("_token", data._token)
+        console.log(id)
+        console.log(data)
+        $.ajax({
+            type:"post",
+            url:"managers/"+ id + "?_method=put",
+            data: formData,
+            contentType: false,
+            processData: false,
+            cache: false,
+            dataType: 'json',
+            success:(data) => {
+                console.log("data*************")
+                console.log(data)
+                location.replace("{{route('managers.index')}}")
+            },
+            error:(error)=>{
+                location.replace("{{route('managers.index')}}")
+                console.log(error.responseJSON)
+            }
+        })
+    }
+</script>
 
 
 
