@@ -1,21 +1,18 @@
-@extends('manager/layouts.app')
+@extends('centralbank/layouts.app')
 
 @section('content')
 <div class="col-lg-12 grid-margin stretch-card">
 
     <div class="card mg-b-20">
-        <form action="processreport" method="get" role="search" autocomplete="off">
+        <form action="accountsreport" method="get" role="search" autocomplete="off">
             @csrf
             <div class="col-lg-12 grid stretch-card">
                 <div class="card-body">
 
 
-                    <div class="card-title">تقارير عمليات
-                        @foreach($banks as $bank)
-                        {{$bank->bank_name}}
-                        @endforeach
-                    </div>
+                    <div class="card-title">تقارير حسابات البنوك
 
+                    </div>
                     <div class="form-group row">
                         <div class="col-lg-3" id="start_at">
                             <div class="input-group">
@@ -37,21 +34,11 @@
                     <div class="form-group row">
                         <div class="col-sm-3 ">
 
-                            <select name="branch_id" id="" class="form-select" onchange="select()">
-                                <option value=""> الفرع </option>
+                            <select name="bank_id" id="" class="form-select" onchange="select()">
+                                <option value=""> البنك </option>
 
-                                @foreach($branches as $branch)
-                                <option value="{{$branch->id}}">{{$branch->branch_name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-sm-3 ">
-
-                            <select name="employee_id" id="" class="form-select" onchange="select()">
-                                <option value=""> الموظف </option>
-
-                                @foreach($employees as $employee)
-                                <option value="{{$employee->id}}">{{$employee->employee_name}}</option>
+                                @foreach($banks as $bank)
+                                <option value="{{$bank->id}}">{{$bank->bank_name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -75,61 +62,50 @@
                 </div>
             </div>
         </form>
+
         <div class="table-responsive">
-            @if (isset($details))
-
-            <div id="print">
+            <div class="printAccount">
                 <table class="table">
+
                     <thead>
+                        <tr></tr>
                         <tr>
-                            <th> العميل </th>
-                            <th> المبلغ </th>
-                            <th>العملة </th>
-                            <th> الموظف </th>
-                            <th> الفرع</th>
-                            <th> تاريخ المعاملة </th>
 
+                            <th scope="col">العملة </th>
+                            <th scope="col">الرمز </th>
+                            <th scope="col">البنك </th>
 
+                            <th scope="col"> الرصيد </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($processes as $process)
-
                         <tr>
-                            <td> {{$process->client_name}}</td>
 
-
-                            <td> {{$process->amount}} {{$process->symbol}}</td>
-
-
-                            <td class="py-1">
-                                {{$process->currency_name}}
-                            </td>
-                            <td>
-                                {{$process->employee_name}}
-                            </td>
-                            <td>
-                                {{$process->branch_name}}
-                            </td>
-                            <td>
-                                {{$process->created_at}}
-                            </td>
 
                         </tr>
 
-                        @endforeach
+                        <tr>
 
+
+                            @foreach ($accounts as $account)
+                            <td>{{$account->currency_name}}</td>
+                            <td>{{$account->abbreviation}}</td>
+                            <td>{{$account->bank_name}}</td>
+
+                            <td>{{$account->balance}} {{$account->symbol}}</td>
+
+
+                        </tr>
+
+
+                        @endforeach
                     </tbody>
                 </table>
             </div>
-
-
-            @endif
         </div>
 
         <div class="col-sm-1 col-md-1 mt-4 mb-4">
-            <button id="printBtn" class="btn btn-success">طباعة</button>
-
+            <button  class="btn btn-success accountPrint">طباعة</button>
         </div>
 
     </div>

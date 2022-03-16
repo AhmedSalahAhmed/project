@@ -31,6 +31,8 @@ Route::group(['prefix' => 'centralbank'], function () {
         Route::resource('bankaccounts', centralbank\BanksAccountsController::class);
         Route::resource('managers', centralbank\ManagersController::class);
         Route::resource('users', centralbank\UsersController::class);
+        Route::get('/accountsreport', [App\Http\Controllers\centralbank\CentralReportController::class, 'accountsreport']);
+
     });
 });
 

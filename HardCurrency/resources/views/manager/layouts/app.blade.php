@@ -42,7 +42,7 @@
     <link href="{{URL::asset('assets/css/icons.css')}}" rel="stylesheet">
     <!--  Custom Scroll bar-->
     <link href="{{URL::asset('assets/plugins/mscrollbar/jquery.mCustomScrollbar.css')}}" rel="stylesheet" />
-    -->
+  
     <link href="{{URL::asset('assets/css-rtl/style.css')}}" rel="stylesheet">
     <!--- Dark-mode css -->
     <link href="{{URL::asset('assets/css-rtl/style-dark.css')}}" rel="stylesheet">
@@ -54,10 +54,10 @@
 </head>
 
 <body>
+  
     <div class="container-scroller rtl">
-
         <nav class="navbar navbar-expand-custom navbar-mainbg fixed-top">
-            <p class="right">
+       
 
 
             <div class="nav-profile-image">
@@ -76,7 +76,7 @@
             </div>
 
 
-            </p>
+
             <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars text-white"></i>
             </button>
@@ -97,7 +97,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="branch"><i class="far fa-calendar-alt"></i>الفروع</a>
+                        <a class="nav-link" href="branch">الفروع</a>
                     </li>
 
                     <li class="nav-item">
@@ -105,15 +105,17 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="process"><i class="far fa-calendar-alt"></i>العمليات</a>
+                        <a class="nav-link" href="process">العمليات</a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="account"><i class="fas fa-tachometer-alt"></i> حساب البنك</a>
                     </li>
 
+                    
                     <li class="nav-item">
-                        <a class="nav-link" href="searchcurrency"><i class="far fa-calendar-alt"></i>التقارير</a>
+                        <a class="nav-link" href="processreport">التقارير</a>
+                        
                     </li>
 
 
@@ -130,34 +132,20 @@
                 </a>
             </form>
         </nav>
-        <div id="content" class="container page-body-wrapper">
+       
+        <div id="content" class="container page-body-wrapper mt-4">
             @yield('content')
 
         </div>
     </div>
-    </div>
 
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    <!-- content-wrapper ends -->
-    <!-- partial:partials/_footer.html -->
+
+
     <footer class="footer">
         <div class="container-fluid d-flex justify-content-between">
             <span class="text-muted d-block text-end text-sm-start d-sm-inline-block">Copyright © oot.com 2022</span>
         </div>
     </footer>
-
-
-    <!-- partial -->
-    </div>
-    <!-- main-panel ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
-    </div>
-    <!-- container-scroller -->
 
 
     <!-- plugins:js -->
@@ -189,21 +177,20 @@
     <script src="{{asset('assets/js/todolist.js')}}"></script>
     <!-- End custom js for this page -->
 
-<script src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
-<script src="{{asset('printThis.js')}}"></script>
-<script>
-    $(document).on('click', 'button', function() {
-        var table = $('#print-table');
+    <script src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
+    <script src="{{asset('printThis.js')}}"></script>
+    <script>
+        $(document).on('click', '#printBtn', function() {
+            var table = $('#print-table');
 
-        $('.print').printThis({
-            importCSS: true,
-            header: "<h4 style='text-align:center;'> <?php echo date('Y-m-d'); ?> </h4><h3 style='text-align:center;'>تقرير اسعار العملات</h3>",
-            doctypeString: '<div><h2  style="text-align:center;">بسم الله الرحمن الرحيم</h2>@foreach($banks as $bank)<h1 style="text-align:center;"> {{$bank->bank_name}} </h1> <img style="width:10%; text-align:right;" src={{asset("storage/".$bank->logo)}} alt="profile" /> @endforeach',
-            copyTagClasses: true,
+            $('.print').printThis({
+                importCSS: true,
+                header: "<h4 style='text-align:center;'> <?php echo date('Y-m-d'); ?> </h4><h3 style='text-align:center;'>تقرير اسعار العملات</h3>",
+                doctypeString: '<div><h2  style="text-align:center;">بسم الله الرحمن الرحيم</h2>@foreach($banks as $bank)<h1 style="text-align:center;"> {{$bank->bank_name}} </h1> <img style="width:10%; text-align:right;" src={{asset("storage/".$bank->logo)}} alt="profile" /> @endforeach',
+                copyTagClasses: true,
+            });
         });
-    });
-
-</script>
+    </script>
 </body>
 
 </html>
