@@ -141,20 +141,21 @@
 
 
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label">اسم البنك </label>
-                                            <input type="text" name="bank_name" class="form-control mb-3" placeholder=" اسم البنك " value="{{$bank->bank_name}}">
+                                            <input type="text" id="bank_name{{$bank->id}}" name="bank_name" class="form-control mb-3" placeholder=" اسم البنك " value="{{$bank->bank_name}}"/>
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label">الولاية </label>
-                                            <input type="text" name="state" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->state}}">
+                                            <input type="text" id="state{{$bank->id}}" name="state" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->state}}"/>
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label">المدينة </label>
 
-                                            <input type="text" name="city" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->city}}">
+                                            <input type="text" id="city{{$bank->id}}" name="city" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->city}}"/>
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label">المحلية </label>
 
-                                            <input type="text" name="district" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->district}}">
+                                            <input type="text" id="district{{$bank->id}}" name="district" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->district}}"/>
+
+                                            <input type="hidden" id="_token" value="{{ csrf_token() }}"/>
 
 
 
-
-                                            <button class="btn btn-twitter float-end px-5" type="submit">تم</button>
+                                            <button onclick="submitBanksForm('{{$bank->id}}', event)" class="btn btn-twitter float-end px-5" type="submit">تم</button>
 
                                         </form>
 
@@ -173,7 +174,58 @@
         </div>
     </div>
 </div>
+<!-- <script src="{{asset('constrains.js')}}"></script> -->
+<script>
+    function submitBanksForm (id, e) {
 
+        console.log(id)
 
+        e.preventDefault()
+
+        const data = {
+            bank_name: document.getElementById("bank_name"+id).value,
+            state: document.getElementById("state"+id).value,
+            city: document.getElementById("city"+id).value,
+            district: document.getElementById("district"+id).value,
+            _token: document.getElementById("_token").value
+        }
+
+        const formData = new FormData()
+
+        formData.append("bank_name", data.bank_name)
+        formData.append("state", data.state)
+        formData.append("city", data.city)
+        formData.append("district", data.district)
+        formData.append("_token", data._token)
+
+        console.log(id)
+        console.log(data)
+
+        // return
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type:"post",
+            url:"banks/"+ id + "?_method=put",
+            data: formData,
+            contentType: false,
+            processData: false,
+            cache: false,
+            dataType: 'json',
+            success:(data) => {
+                console.log("data*************")
+                console.log(data)
+                location.replace("{{route('banks.index')}}")
+            },
+            error:(error)=>{
+                location.replace("{{route('banks.index')}}")
+                console.log(error.responseJSON)
+            }
+        })
+    }
+</script>
 
 @endsection

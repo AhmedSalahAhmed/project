@@ -128,9 +128,9 @@
                                                 @method('put')
 
 
-                                                <input id="currency_name" type="text" name="currency_name" class="form-control mb-3" placeholder=" العملة " value="{{$currency->currency_name}}" disabled="disabled"/>
-                                                <input id="abbreviation" type="text" name="abbreviation" class="form-control mb-3" placeholder="سعر الشراء " value="{{$currency->abbreviation}}"/>
-                                                <input id="symbol" type="text" name="symbol" class="form-control mb-3" placeholder="سعر البيع " value="{{$currency->symbol}}"/>
+                                                <input id="currency_name{{$currency->id}}" type="text" name="currency_name" class="form-control mb-3" placeholder=" العملة " value="{{$currency->currency_name}}" disabled="disabled"/>
+                                                <input id="abbreviation{{$currency->id}}" type="text" name="abbreviation" class="form-control mb-3" placeholder="سعر الشراء " value="{{$currency->abbreviation}}"/>
+                                                <input id="symbol{{$currency->id}}" type="text" name="symbol" class="form-control mb-3" placeholder="سعر البيع " value="{{$currency->symbol}}"/>
                                                 <input id="_token" type="hidden" value="{{ csrf_token() }}"/>
 
                                                 <input onclick="submitForm('{{$currency->id}}', event)" class="btn btn-twitter float-end px-5" value="تم" type="submit"/>
@@ -160,9 +160,9 @@
                         e.preventDefault()
 
                         const data = {
-                            abbreviation: document.getElementById("abbreviation").value,
-                            symbol: document.getElementById("symbol").value,
-                            currency_name: document.getElementById("currency_name").value,
+                            abbreviation: document.getElementById("abbreviation"+id).value,
+                            symbol: document.getElementById("symbol"+id).value,
+                            currency_name: document.getElementById("currency_name"+id).value,
                             _token: document.getElementById("_token").value
                         }
 

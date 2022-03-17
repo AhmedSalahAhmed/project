@@ -89,10 +89,10 @@
 
                                                 @csrf
 
-                                                <input  id="currency_id" type="hidden" name="currency_id" class="form-control mb-3" placeholder=" العملة  " value="{{$price->currency_id}}">
+                                                <input  id="currency_id{{$price->id}}" type="hidden" name="currency_id" class="form-control mb-3" placeholder=" العملة  " value="{{$price->currency_id}}">
                                                 <input  name="currency_id" type="text" class="form-control mb-3" placeholder=" العملة  " value="{{$price->currency->currency_name}}" disabled>
-                                                <input  id="buy_price" type="text" name="buy_price" class="form-control mb-3" placeholder="سعر الشراء " value="{{$price->buy_price}}">
-                                                <input  id="sale_price" type="text" name="sale_price" class="form-control mb-3" placeholder="سعر البيع " value="{{$price->sale_price}}">
+                                                <input  id="buy_price{{$price->id}}" type="text" name="buy_price" class="form-control mb-3" placeholder="سعر الشراء " value="{{$price->buy_price}}">
+                                                <input  id="sale_price{{$price->id}}" type="text" name="sale_price" class="form-control mb-3" placeholder="سعر البيع " value="{{$price->sale_price}}">
                                                 <input  id="_token" type="hidden" value="{{ csrf_token() }}"/>
 
 
@@ -121,9 +121,9 @@
         e.preventDefault()
 
         const data = {
-            currency_id: document.getElementById("currency_id").value,
-            buy_price: document.getElementById("buy_price").value,
-            sale_price: document.getElementById("sale_price").value,
+            currency_id: document.getElementById("currency_id" +id).value,
+            buy_price: document.getElementById("buy_price"+id).value,
+            sale_price: document.getElementById("sale_price"+id).value,
             _token: document.getElementById("_token").value
         }
 
@@ -140,7 +140,7 @@
         // return
         $.ajax({
             type:"post",
-            url:"price/"+ id,
+            url:"price",
             data: formData,
             contentType: false,
             processData: false,

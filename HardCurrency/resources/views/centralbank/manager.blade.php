@@ -144,14 +144,14 @@
 
                                         @method('put')
 
-                                        <input type="text" id="manager_name" name="manager_name" class="form-control mb-3" placeholder=" اسم الموظف " value="{{$manager->manager_name}}">
-                                        <input type="email" id="email" name="email" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$manager->email}}">
+                                        <input type="text" id="manager_name{{$manager->id}}" name="manager_name" class="form-control mb-3" placeholder=" اسم الموظف " value="{{$manager->manager_name}}"/>
+                                        <input type="email" id="email{{$manager->id}}" name="email" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$manager->email}}"/>
 
                                         <input type="hidden" id="_token" value="{{ csrf_token() }}"/>
 
 
 
-                                        <button onclick="submitForm('{{$manager->id}}', event)" class="btn btn-twitter float-end px-5" type="submit">تم</button>
+                                        <button onclick="submitCurrencyForm('{{$manager->id}}', event)" class="btn btn-twitter float-end px-5" type="submit">تم</button>
 
                                     </form>
 
@@ -171,15 +171,15 @@
 
 
 <script>
-    const submitForm = (id, e) => {
+    function submitCurrencyForm (id, e) {
 
         console.log(id)
 
         e.preventDefault()
 
         const data = {
-            manager_name: document.getElementById("manager_name").value,
-            email: document.getElementById("email").value,
+            manager_name: document.getElementById("manager_name"+id).value,
+            email: document.getElementById("email"+id).value,
             _token: document.getElementById("_token").value
         }
 

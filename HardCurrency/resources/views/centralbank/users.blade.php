@@ -133,8 +133,8 @@
                                         <form action="{{ route('users.update', $user->id) }}" method="POST">
                                             @csrf
                                             @method('put')
-                                            <input type="text" id="name" name="name" class="form-control mb-3" placeholder=" اسم المستخدم " value="{{$user->name}}"/>
-                                            <input type="email" id="email" name="email" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$user->email}}"/>
+                                            <input type="text" id="name{{$user->id}}" name="name" class="form-control mb-3" placeholder=" اسم المستخدم " value="{{$user->name}}"/>
+                                            <input type="email" id="email{{$user->id}}" name="email" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$user->email}}"/>
                                             <input type="hidden" id="_token" value="{{ csrf_token() }}"/>
                                             <button onclick="submitForm('{{$user->id}}', event)" class="btn btn-twitter float-end px-5" type="submit">تم</button>
                                         </form>
@@ -164,9 +164,9 @@
         e.preventDefault()
 
         const data = {
-            name: document.getElementById("name").value? document.getElementById("name").value: 0,
-            email: document.getElementById("email").value? document.getElementById("email").value: 0,
-            _token: document.getElementById("_token").value? document.getElementById('_token'):0
+            name: document.getElementById("name"+id).value,
+            email: document.getElementById("email"+id).value,
+            _token: document.getElementById("_token").value
         }
 
         const formData = new FormData()
