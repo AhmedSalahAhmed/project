@@ -128,8 +128,8 @@
                                     <form action="{{ route('employees.update', $employee->id) }}" method="POST">
                                         @csrf
                                         @method('put')
-                                        <input type="text" name="employee_name" id="employee_name" class="form-control mb-3" placeholder=" اسم الموظف " value="{{$employee->employee_name}}">
-                                        <input type="email" name="email" id="email" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$employee->email}}">
+                                        <input type="text" name="employee_name" id="employee_name{{$employee->id}}" class="form-control mb-3" placeholder=" اسم الموظف " value="{{$employee->employee_name}}">
+                                        <input type="email" name="email" id="email{{$employee->id}}" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$employee->email}}">
                                         <input id="_token" type="hidden" value="{{ csrf_token() }}"/>
 
                                         <button onclick="submitEMPFormManager('{{$employee->id}}', event)" class="btn btn-twitter float-end px-5" type="submit">تم</button>
@@ -155,8 +155,8 @@
             e.preventDefault()
 
             const data = {
-                employee_name: document.getElementById("employee_name").value,
-                email: document.getElementById("email").value,
+                employee_name: document.getElementById("employee_name"+id).value,
+                email: document.getElementById("email"+id).value,
                 _token: document.getElementById("_token").value
             }
 

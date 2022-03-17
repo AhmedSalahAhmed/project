@@ -82,9 +82,9 @@
 
                                                 @method('put')
 
-                                                <input type="text" id="currency_name" name="currency_name" class="form-control mb-3" placeholder=" العملة " value="{{$bankcurrency->currency_name}}" disabled="disabled">
-                                                <input type="text" id="buy_price" name="buy_price" class="form-control mb-3" placeholder="سعر الشراء " value="{{$bankcurrency->buy_price}}">
-                                                <input type="text" id="sale_price" name="sale_price" class="form-control mb-3" placeholder="سعر البيع " value="{{$bankcurrency->sale_price}}">
+                                                <input type="text" id="currency_name{{$bankcurrency->id}}" name="currency_name" class="form-control mb-3" placeholder=" العملة " value="{{$bankcurrency->currency_name}}" disabled="disabled">
+                                                <input type="text" id="buy_price{{$bankcurrency->id}}" name="buy_price" class="form-control mb-3" placeholder="سعر الشراء " value="{{$bankcurrency->buy_price}}">
+                                                <input type="text" id="sale_price{{$bankcurrency->id}}" name="sale_price" class="form-control mb-3" placeholder="سعر البيع " value="{{$bankcurrency->sale_price}}">
                                                 <input  id="_token" type="hidden" value="{{ csrf_token() }}"/>
 
                                                 <button onclick="submitPriceFormManager('{{$bankcurrency->id}}', event)" class="btn btn-twitter float-end px-5" type="submit">تم</button>
@@ -113,9 +113,9 @@
             e.preventDefault()
 
             const data = {
-                currency_name: document.getElementById("currency_name").value,
-                buy_price: document.getElementById("buy_price").value,
-                sale_price: document.getElementById("sale_price").value,
+                currency_name: document.getElementById("currency_name"+id).value,
+                buy_price: document.getElementById("buy_price"+id).value,
+                sale_price: document.getElementById("sale_price"+id).value,
                 _token: document.getElementById("_token").value
             }
 

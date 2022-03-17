@@ -138,9 +138,9 @@
 
                                 @method('put')
                                 
-                                <input type="text" name="branch_name" id="branch_name" class="form-control mb-3" placeholder=" اسم الفرع " value="{{$branch->branch_name}}">
-                                <input type="text" name="city" id="city" class="form-control mb-3" placeholder=" المكان  " value="{{$branch->city}}">
-                                <input type="text" name="phone_number" id="phone_number" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$branch->phone_number}}">
+                                <input type="text" name="branch_name" id="branch_name{{$branch->id}}" class="form-control mb-3" placeholder=" اسم الفرع " value="{{$branch->branch_name}}">
+                                <input type="text" name="city" id="city{{$branch->id}}" class="form-control mb-3" placeholder=" المكان  " value="{{$branch->city}}">
+                                <input type="text" name="phone_number" id="phone_number{{$branch->id}}" class="form-control mb-3" placeholder=" البريد الإلكتروني " value="{{$branch->phone_number}}">
                                 <input  id="_token" type="hidden" value="{{ csrf_token() }}"/>
                                 
 
@@ -172,9 +172,9 @@
             e.preventDefault()
 
             const data = {
-                branch_name: document.getElementById("branch_name").value,
-                city: document.getElementById("city").value,
-                phone_number: document.getElementById("phone_number").value,
+                branch_name: document.getElementById("branch_name"+id).value,
+                city: document.getElementById("city"+id).value,
+                phone_number: document.getElementById("phone_number"+id).value,
                 _token: document.getElementById("_token").value
             }
 
