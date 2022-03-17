@@ -17,12 +17,13 @@ class CurrencyReportController extends Controller
 
 {
 
-    public function index(){
+    public function index()
+    {
         $bank_id = Auth::user()->bank_id;
 
         $banks = Bank::where('id', $bank_id)->get();
 
-        return view('manager.reports.bankreports',compact('banks'));
+        return view('manager.reports.bankreports', compact('banks'));
     }
     public function searchcurrency(Request $request)
     {
@@ -33,30 +34,32 @@ class CurrencyReportController extends Controller
         $banks = Bank::where('id', $bank_id)->get();
 
 
-
-
-        if ($request->start_at == '' && $request->end_at == '') {
+        $bankcurrenies = Currency::all();
+        $start_at = date($request->start_at);
+        $end_at = date($request->end_at);
+        if ($request->start_at == '' && $request->end_at == '' && $request->currency_id !='') {
             $currencies = BankCurrency::where('bank_id', $bank_id)
-                ->where('currencies.abbreviation', 'like', '%' . $request->currency_name . '%')
-                ->orwhere('currencies.currency_name', 'like', '%' . $request->currency_name . '%')
-                ->where('bank_id', $bank_id)
+                ->where('currencies.id', '=', $request->currency_id)
                 ->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
                 ->get(['bank_currencies.*', 'currencies.currency_name', 'currencies.abbreviation', 'currencies.symbol']);
-            return view('manager.reports.currencyreport', compact('currencies', 'banks'))->withDetails($currencies);
-        } else {
-
-            $start_at = date($request->start_at);
-            $end_at = date($request->end_at);
+            return view('manager.reports.currencyreport', compact('currencies', 'bankcurrenies', 'banks'))->withDetails($currencies);
+        } elseif ($request->currency_id == '' && $request->start_at != '' && $request->end_at != '') {
             $currencies = BankCurrency::where('bank_id', $bank_id)
-                ->where('currencies.abbreviation', 'like', '%' . $request->currency_name . '%')
-
-                ->orwhere('currencies.currency_name', 'like', '%' . $request->currency_name . '%')
-                ->where('bank_id', $bank_id)
                 ->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
                 ->get(['bank_currencies.*', 'currencies.currency_name', 'currencies.abbreviation', 'currencies.symbol'])
                 ->whereBetween('created_at', [$start_at, $end_at]);
-            return view('manager.reports.currencyreport', compact('currencies', 'banks', 'start_at', 'end_at'))->withDetails($currencies);
+            return view('manager.reports.currencyreport', compact('currencies', 'bankcurrenies', 'banks', 'start_at', 'end_at'))->withDetails($currencies);
         }
+        else{
+            $currencies = BankCurrency::where('bank_id', $bank_id)
+            
+            ->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
+            ->get(['bank_currencies.*', 'currencies.currency_name', 'currencies.abbreviation', 'currencies.symbol'])
+          ;
+        return view('manager.reports.currencyreport', compact('currencies', 'bankcurrenies', 'banks', 'start_at', 'end_at'))->withDetails($currencies);
+   
+        }
+        
     }
     public function searchprocess(Request $request)
     {
@@ -308,7 +311,7 @@ class CurrencyReportController extends Controller
     }
     public function bankaccountreport(Request $request)
     {
-        
+
         $bank_id = Auth::user()->bank_id;
         $banks = Bank::where('id', $bank_id)->get();
         $currencies = Currency::all();

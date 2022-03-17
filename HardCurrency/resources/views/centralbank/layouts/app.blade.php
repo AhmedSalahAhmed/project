@@ -131,7 +131,7 @@
             </form>
         </nav>
         <!-- partial -->
-        <div id="content" class="container page-body-wrapper">
+        <div id="content" class="container page-body-wrapper mt-4">
             @yield('content')
 
         </div>

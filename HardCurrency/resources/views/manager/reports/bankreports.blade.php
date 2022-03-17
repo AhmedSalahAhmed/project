@@ -50,7 +50,7 @@
                             <h4 class="font-weight-normal mb-3"> العملات
                             </h4>
                             
-                            <h2 class="mb-5"> تقارير اسعار العملات  </h2>
+                            <h2 class="mb-5"> تقارير اسعار الصرف  </h2>
                             <a href="searchcurrency" class="btn btn-danger">افتح التقرير</a>
                         </div>
                     </div>

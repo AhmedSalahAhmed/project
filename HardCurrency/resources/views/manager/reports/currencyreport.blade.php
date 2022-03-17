@@ -5,52 +5,46 @@
 <div class="col-xl-12">
     <div class="card mg-b-20">
         <div class="card-header ">
-        <h4>تقارير العملات
-        <a href="bankreports" style="float: left;">رجوع </a>
+            <h4>تقارير العملات
+                <a href="bankreports" style="float: left;">رجوع </a>
 
-            <form action="searchcurrency" method="get" role="search" autocomplete="off">
-                @csrf
-                <div class="row">
+                <form action="searchcurrency" method="get" role="search" autocomplete="off">
+                    @csrf
+                    <div class="for-group row">
 
-                    <div class="col-lg-4 mg-t-20 mg-lg-t-0" id="id">
-                        <p class="mg-b-10"> البحث باسم العملة\او الاسم المختصر</p>
-                        <input type="text" class="form-control" id="currency_name" name="currency_name">
-                        <button class="btn btn-twitter">بحث</button>
+
+                        <div class="col-sm-3 ">
+
+                            <select name="currency_id" id="" class="form-select" onchange="select()">
+                                <option value=""> العملة </option>
+
+                                @foreach($bankcurrenies as $currency)
+                                <option value="{{$currency->id}}">{{$currency->currency_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-lg-3" id="start_at">
+                            
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    
+                                </div>من<input class="form-control" value="{{ $start_at ?? '' }}" name="start_at" placeholder="YYYY-MM-DD" type="date">
+                            </div><!-- input-group -->
+                        </div>
+
+                        <div class="col-lg-3" id="end_at">
+                            
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    
+                                </div><input name="end_at" class="form-control" value="{{ $end_at ?? '' }}" placeholder="YYYY-MM-DD" type="date">
+                            </div><!-- input-group -->
+                        </div>
 
                     </div>
-
-                    <div class="col-lg-3" id="start_at">
-                        <label for="exampleFormControlSelect1">من تاريخ</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="fas fa-calendar-alt"></i>
-                                </div>
-                            </div><input class="form-control" value="{{ $start_at ?? '' }}" name="start_at" placeholder="YYYY-MM-DD" type="date">
-                        </div><!-- input-group -->
-                    </div>
-
-                    <div class="col-lg-3" id="end_at">
-                        <label for="exampleFormControlSelect1">الي تاريخ</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="fas fa-calendar-alt"></i>
-                                </div>
-                            </div><input name="end_at" class="form-control" value="{{ $end_at ?? '' }}" placeholder="YYYY-MM-DD" type="date">
-                        </div><!-- input-group -->
-                    </div>
-
-                </div><br>
-                <div class="row">
-                    &nbsp;
-                    &nbsp;
-                    &nbsp;
-                    &nbsp;
-                    &nbsp;
-                    &nbsp;
-                </div>
-            </form>
+                    <button class="btn login-btn">بحث</button>
+                </form>
         </div>
         <div class="col-sm-1 col-md-1">
             <button id="print" class="btn btn-success">طباعة</button>
