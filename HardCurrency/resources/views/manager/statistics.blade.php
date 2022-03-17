@@ -10,7 +10,7 @@
             <i class="mdi mdi-home"></i>
           </span> الإحصائيات
         </h3>
-     
+
       </div>
 
       <div class="row">
@@ -18,7 +18,7 @@
           <div class="card bg-gradient-danger card-img-holder text-white">
             <div class="card-body">
               <img src="{{asset('assets/images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image" />
-              <h4 class="font-weight-normal mb-3">  العمليات   <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+              <h4 class="font-weight-normal mb-3"> العمليات <i class="mdi mdi-chart-line mdi-24px float-right"></i>
               </h4>
               <h2 class="mb-5">{{$proccesses}} </h2>
             </div>
@@ -29,7 +29,7 @@
           <div class="card bg-gradient-success card-img-holder text-white">
             <div class="card-body">
               <img src="{{asset('assets/images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image" />
-              <h4 class="font-weight-normal mb-3">  الفروع  <i class="mdi mdi-diamond mdi-24px float-right"></i>
+              <h4 class="font-weight-normal mb-3"> الفروع <i class="mdi mdi-diamond mdi-24px float-right"></i>
               </h4>
               <h2 class="mb-5">{{$branches}}</h2>
             </div>

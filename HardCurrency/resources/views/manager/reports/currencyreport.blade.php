@@ -5,21 +5,12 @@
 <div class="col-xl-12">
     <div class="card mg-b-20">
         <div class="card-header ">
+        <h4>تقارير العملات
+        <a href="bankreports" style="float: left;">رجوع </a>
+
             <form action="searchcurrency" method="get" role="search" autocomplete="off">
                 @csrf
                 <div class="row">
-<!-- 
-                    <div class="col-lg-3 mg-t-20 mg-lg-t-0" id="type">
-                        <select class="form-control select2" name="currency_id" required>
-                            @foreach($currencies as $currency)
-                            <option value="{{$currency->id}}" selected>
-                                {{$currency->currency_name}}
-                            </option>
-                            @endforeach
-
-                        </select>
-                    </div>
- -->
 
                     <div class="col-lg-4 mg-t-20 mg-lg-t-0" id="id">
                         <p class="mg-b-10"> البحث باسم العملة\او الاسم المختصر</p>

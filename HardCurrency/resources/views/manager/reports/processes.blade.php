@@ -14,6 +14,9 @@
                         @foreach($banks as $bank)
                         {{$bank->bank_name}}
                         @endforeach
+                        
+                        <a href="bankreports" style="float: left;">رجوع </a>
+
                     </div>
 
                     <div class="form-group row">

@@ -16,6 +16,14 @@ use Illuminate\Support\Facades\Auth;
 class CurrencyReportController extends Controller
 
 {
+
+    public function index(){
+        $bank_id = Auth::user()->bank_id;
+
+        $banks = Bank::where('id', $bank_id)->get();
+
+        return view('manager.reports.bankreports',compact('banks'));
+    }
     public function searchcurrency(Request $request)
     {
 

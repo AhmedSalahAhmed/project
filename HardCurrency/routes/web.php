@@ -54,6 +54,7 @@ Route::group(['prefix' => 'manager'], function () {
         Route::resource('manager', manager\ManagerDashboardController::class);
         Route::resource('data', manager\StatisticsController::class);
         // Rrports
+        Route::get('/bankreports', [App\Http\Controllers\manager\CurrencyReportController::class, 'index']);
         Route::get('/searchcurrency', [App\Http\Controllers\manager\CurrencyReportController::class, 'searchcurrency']);
         Route::get('/processreport', [App\Http\Controllers\manager\CurrencyReportController::class, 'searchprocess']);
         Route::get('/bankaccountreport', [App\Http\Controllers\manager\CurrencyReportController::class, 'bankaccountreport']);

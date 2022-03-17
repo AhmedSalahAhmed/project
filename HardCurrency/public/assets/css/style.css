@@ -12922,7 +12922,7 @@ code {
 /* Cards */
 .card {
   border: 0;
-  background: #999; }
+  background: #fff; }
   .card .card-body {
     padding: 2.5rem 2.5rem; }
     .card .card-body + .card-body {
