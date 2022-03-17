@@ -122,6 +122,7 @@
                 </ul>
 
             </div>
+            
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
 
@@ -131,6 +132,15 @@
                     تسجيل خروج
                 </a>
             </form>
+           @csrf
+
+           <li class="nav-item rtl" style="float: left;">
+
+
+
+             <button class="btn btn-danger"><i class="mdi mdi-logout  menu-icon"></i></button>
+           </li>
+         </form>
         </nav>
        
         <div id="content" class="container page-body-wrapper mt-4">
