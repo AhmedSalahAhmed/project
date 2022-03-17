@@ -52,7 +52,7 @@ Route::group(['prefix' => 'manager'], function () {
         Route::resource('process', manager\ProcessController::class);
         Route::get('/logout', [App\Http\Controllers\manager\ManagerController::class, 'logout'])->name('manager.logout');
         Route::resource('manager', manager\ManagerDashboardController::class);
-        Route::resource('data', manager\StatisticsController::class);
+        Route::get('/stats', [App\Http\Controllers\manager\StatisticsController::class , 'index'])->name('manager.stats');
         // Rrports
         Route::get('/bankreports', [App\Http\Controllers\manager\CurrencyReportController::class, 'index']);
         Route::get('/searchcurrency', [App\Http\Controllers\manager\CurrencyReportController::class, 'searchcurrency']);

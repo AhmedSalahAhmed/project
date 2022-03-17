@@ -21,7 +21,7 @@ class ManagerRedirectIfAuthenticated
     {
 
             if (Auth::guard('manager')->check()) {
-                return redirect()->route('manager.dashboard');
+                return redirect()->route('manager.data');
             }
         
 

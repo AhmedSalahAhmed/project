@@ -42,7 +42,7 @@
     <link href="{{URL::asset('assets/css/icons.css')}}" rel="stylesheet">
     <!--  Custom Scroll bar-->
     <link href="{{URL::asset('assets/plugins/mscrollbar/jquery.mCustomScrollbar.css')}}" rel="stylesheet" />
-  
+
     <link href="{{URL::asset('assets/css-rtl/style.css')}}" rel="stylesheet">
     <!--- Dark-mode css -->
     <link href="{{URL::asset('assets/css-rtl/style-dark.css')}}" rel="stylesheet">
@@ -54,10 +54,10 @@
 </head>
 
 <body>
-  
+
     <div class="container-scroller rtl">
         <nav class="navbar navbar-expand-custom navbar-mainbg fixed-top">
-       
+
 
 
             <div class="nav-profile-image">
@@ -89,7 +89,7 @@
                     </div>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="data"><i class="fas fa-tachometer-alt"></i> الإحصائيات</a>
+                        <a class="nav-link" href="stats"><i class="fas fa-tachometer-alt"></i> الإحصائيات</a>
                     </li>
 
                     <li class="nav-item">
@@ -112,50 +112,41 @@
                         <a class="nav-link" href="account"><i class="fas fa-tachometer-alt"></i> حساب البنك</a>
                     </li>
 
-                    
+
                     <li class="nav-item">
                         <a class="nav-link" href="bankreports">التقارير</a>
-                        
+
                     </li>
 
 
                 </ul>
 
             </div>
-            
+
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-
-
-                <a class="logout" href="route('logout')">
+                <a class="logout" href="route('logout')" onclick="event.preventDefault();
+                                                this.closest('form').submit();">
                     <i class="fa-regular fa-user"></i>
                     تسجيل خروج
                 </a>
             </form>
-           @csrf
-
-           <li class="nav-item rtl" style="float: left;">
-
-
-
-             <button class="btn btn-danger"><i class="mdi mdi-logout  menu-icon"></i></button>
-           </li>
-         </form>
         </nav>
-       
+
         <div id="content" class="container page-body-wrapper mt-4">
             @yield('content')
 
         </div>
+        <footer class="footer">
+            <div class="container-fluid d-flex justify-content-between">
+                <span class="text-muted d-block text-end text-sm-start d-sm-inline-block">Copyright © oot.com 2022</span>
+            </div>
+        </footer>
     </div>
 
 
 
-    <footer class="footer">
-        <div class="container-fluid d-flex justify-content-between">
-            <span class="text-muted d-block text-end text-sm-start d-sm-inline-block">Copyright © oot.com 2022</span>
-        </div>
-    </footer>
+
 
 
     <!-- plugins:js -->
@@ -168,7 +159,7 @@
             // Avoid the link click from loading a new page
             event.preventDefault();
             // Load the content from the link's href attribute
-            window.history.pushState('','',$(this).attr('href'))
+            window.history.pushState('', '', $(this).attr('href'))
             $('.page-body-wrapper').load($(this).attr('href'));
         });
     </script>
