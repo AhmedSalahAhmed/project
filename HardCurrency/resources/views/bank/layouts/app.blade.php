@@ -106,8 +106,6 @@
             </div>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-
-
                 <a class="logout" href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                     <i class="fa-regular fa-user"></i>

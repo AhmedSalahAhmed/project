@@ -1,28 +1,20 @@
 @extends('centralbank/layouts.app')
-
 @section('content')
 <div class="col-lg-12 grid-margin stretch-card">
-
     <div class="card mg-b-20">
-        <form action="accountsreport" method="get" role="search" autocomplete="off">
+        <form action="processesreport" method="get" role="search" autocomplete="off">
             @csrf
             <div class="col-lg-12 grid stretch-card">
                 <div class="card-body">
-
-
                     <div class="card-title">تقارير حسابات البنوك
-
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-3" id="start_at">
                             <div class="input-group">
-
-
                                 <label for="exampleFormControlSelect1">من </label>
                                 <input class="form-control" value="{{ $start_at ?? '' }}" name="start_at" placeholder="YYYY-MM-DD" type="date">
                             </div>
                         </div>
-
                         <div class="col-lg-3" id="end_at">
                             <div class="input-group">
                                 <label for="exampleFormControlSelect1">الي </label>
@@ -76,35 +68,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                      
-
                         <tr>
-
-
                             @foreach ($accounts as $account)
                             <td>{{$account->currency_name}}</td>
                             <td>{{$account->abbreviation}}</td>
                             <td>{{$account->bank_name}}</td>
-
                             <td>{{$account->balance}} {{$account->symbol}}</td>
-
-
                         </tr>
-
-
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
-
         <div class="col-sm-1 col-md-1 mt-4 mb-4">
-            <button  class="btn btn-success accountPrint">طباعة</button>
+            <button class="btn btn-success accountPrint">طباعة</button>
         </div>
-
     </div>
 </div>
-
-
-
 @endsection

@@ -36,7 +36,7 @@
     <link href="{{URL::asset('assets/css/icons.css')}}" rel="stylesheet">
     <!--  Custom Scroll bar-->
     <link href="{{URL::asset('assets/plugins/mscrollbar/jquery.mCustomScrollbar.css')}}" rel="stylesheet" />
-    -->
+
     <link href="{{URL::asset('assets/css-rtl/style.css')}}" rel="stylesheet">
     <!--- Dark-mode css -->
     <link href="{{URL::asset('assets/css-rtl/style-dark.css')}}" rel="stylesheet">
@@ -82,7 +82,7 @@
                     <div class="hori-selector">
                         <div class="left"></div>
                         <div class="right"></div>
-                   </div>
+                    </div>
 
                     <li class="nav-item">
                         <a class="nav-link" href="statistics"><i class="fas fa-tachometer-alt"></i> الإحصائيات </a>
@@ -112,7 +112,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="transaction"><i class="far fa-calendar-alt"></i> التقارير</a>
+                        <a class="nav-link" href="accountsreport"><i class="far fa-calendar-alt"></i> التقارير</a>
                     </li>
 
 
@@ -176,13 +176,19 @@
         });
 
         $(document).on('click', '.accountPrint', function() {
-          
+
 
             $('.printAccount').printThis({
                 importCSS: true,
-                header: "<h4 style='text-align:center;'> <?php echo date('Y-m-d'); ?> </h4><h3 style='text-align:center;'>تقرير اسعار العملات</h3>",
-                doctypeString: '<div  style="text-align:center;"><h2 >بسم الله الرحمن الرحيم</h2>)<h1 style="text-align:center;">  </h1> <img style="width:10%; text-align:right; " src={{asset("assets/images/cbos.jpeg")}} alt="profile" />',
-                copyTagClasses: true,
+                loadCSS: true,
+                canvas: true,
+                debug: false, 
+                importStyle: true,  
+                copyTagClasses: true, 
+                loadCSS: "{{ asset('assets/css/report.css') }}",
+                header: "<h4 style='text-align:center;'> <?php echo date('Y-m-d'); ?> </h4><h3 style='text-align:center;'>تقرير حسابات البنوك من العملة الاجنبية </h3>",
+                doctypeString: '<div  style="text-align:center;"><h2>بسم الله الرحمن الرحيم</h2><h2 >  بنك السودان المركزي </h2><h1 style="text-align:center;"> </h1> <img style="width:10%; mr-1" src={{asset("assets/images/cbos.jpeg")}} alt="profile" />',
+                copyTagClasses: false,
             });
         });
     </script>
