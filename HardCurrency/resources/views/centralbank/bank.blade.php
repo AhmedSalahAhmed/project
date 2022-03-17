@@ -174,7 +174,6 @@
         </div>
     </div>
 </div>
-<!-- <script src="{{asset('assets/js/constrains.js')}}"></script> -->
 <script>
     function submitBanksForm (id, e) {
 

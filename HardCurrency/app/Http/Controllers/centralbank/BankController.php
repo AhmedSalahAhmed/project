@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\centralbank;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\StaticFunctionController;
+use App\Http\Resources\States;
 use App\Models\Account;
-use Illuminate\Http\Request;
 use App\Models\Bank;
 use App\Models\BankCurrency;
 use App\Models\CurrencyPrice;
+use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class BankController extends Controller
@@ -23,8 +25,12 @@ class BankController extends Controller
         if ($request->ajax()) {
 
             return view('centralbank.bank', compact('banks'))->renderSections()['content'];
-            }
-        return view('centralbank.bank', compact('banks'));
+        }
+
+        $states = StaticFunctionController::states();
+        $locales = StaticFunctionController::locales();
+
+        return view('centralbank.bank', compact('banks', '$states', '$locales'));
     }
 
     /**
@@ -63,11 +69,10 @@ class BankController extends Controller
             "state" => $request->state,
             "city" => $request->city,
             "district" => $request->district,
-            "logo" => $request->file("logo")->store("images", "public")
+            "logo" => $request->file("logo")->store("images", "public"),
         ]);
 
         // $bank = Bank::create($request->all());
-
 
         // $bank = DB::getPdo()->lastInsertId();
 
@@ -81,18 +86,14 @@ class BankController extends Controller
                 "currency_id" => $price->currency_id,
                 "buy_price" => $price->buy_price,
                 "sale_price" => $price->sale_price,
-                "balance" => 0
+                "balance" => 0,
             ]);
-            Account::create([   
+            Account::create([
                 "bank_id" => $bank->id,
                 "currency_id" => $price->currency_id,
-                "balance" => 0
+                "balance" => 0,
             ]);
         }
-
-
-
-
 
         Alert::success('تم ', 'تم اضافة  بنك جديد للنظام بنجاح');
 
@@ -127,7 +128,7 @@ class BankController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @param  \App\Models\Bank  $bank
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Bank $bank)
@@ -149,7 +150,7 @@ class BankController extends Controller
      *
      * @param  int  $id
      * @param  \App\Models\Bank  $bank
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Bank $bank)
