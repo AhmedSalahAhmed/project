@@ -171,6 +171,7 @@
             // Avoid the link click from loading a new page
             event.preventDefault();
             // Load the content from the link's href attribute
+            window.history.pushState('','',$(this).attr('href'))
             $('.page-body-wrapper').load($(this).attr('href'));
         });
 

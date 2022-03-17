@@ -154,6 +154,7 @@
             // Avoid the link click from loading a new page
             event.preventDefault();
             // Load the content from the link's href attribute
+            window.history.pushState('','',$(this).attr('href'))
             $('.page-body-wrapper').load($(this).attr('href'));
         });
 
@@ -164,24 +165,6 @@
             // Load the content from the link's href attribute
             $('.page-body-wrapper').load($(this).attr('action'));
         });
-
-        // function editForm(route, id) {
-        //     $.ajax(
-
-        //         {
-        //             type: 'put',
-        //             url: 'branch/' + id,
-        //             headers: {
-        //                 'Content-Type': 'application/json'
-        //             },
-        //             success: (data) => {
-        //                 // $('.page-body-wrapper').html(data);
-        //                 console.log
-
-        //             }
-        //         }
-        //     )
-        // }
     </script>
 
     <script src="{{asset('assets/all.min.js')}}"></script>
