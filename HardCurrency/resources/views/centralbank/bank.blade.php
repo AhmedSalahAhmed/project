@@ -57,7 +57,7 @@
                                 <div class="form-group row">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> الولاية</label>
                                     <div class="col-sm-9">
-                                        <select name="state" id="state" class="form-select">
+                                        <select name="state" id="state" class="form-select mySelectAdd">
 
                                             <option value="">اختر الولاية</option>
                                             @foreach($states as $state)
@@ -70,11 +70,11 @@
                                 <div class="form-group row">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label">المحلية </label>
                                     <div class="col-sm-9">
-                                        <select name="district" id="locale" class="form-select">
+                                        <select name="district" id="locale" class="form-select mySelect2Add">
                                             @foreach (range(1, 18) as $i)
-                                                @foreach($locales[0][$i] as $locale)
-                                                <option value="{{$i}}" label="{{$locale['label']}}" ></option>
-                                                @endforeach
+                                            @foreach($locales[0][$i] as $locale)
+                                            <option value="{{$i}}" label="{{$locale['label']}}"></option>
+                                            @endforeach
                                             @endforeach
 
 
@@ -153,20 +153,22 @@
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label">اسم البنك </label>
                                             <input type="text" id="bank_name{{$bank->id}}" name="bank_name" class="form-control mb-3" placeholder=" اسم البنك " value="{{$bank->bank_name}}" />
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label">الولاية </label>
-                                            <input type="text" id="state{{$bank->id}}" name="state" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->state}}" />
-                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">المدينة </label>
-
-                                            <input type="text" id="city{{$bank->id}}" name="city" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->city}}" />
+                                            <select name="state" id="state{{$bank->id}}" class="form-select mySelect">
+                                                <option value="">اختر الولاية</option>
+                                                @foreach($states as $state)
+                                                <option selected="{{$state['value'] == $bank->state?true: false}}" value="{{$state['value']}}" label="{{$state['label']}}"></option>
+                                                @endforeach
+                                            </select>
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label">المحلية </label>
-
-                                            <input type="text" id="district{{$bank->id}}" name="district" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->district}}" />
-
+                                            <select name="district" id="locale{{$bank->id}}" class="form-select mySelect2">
+                                                @foreach (range(1, 18) as $i)
+                                                @foreach($locales[0][$i] as $locale)
+                                                <option selected="{{$i == $bank->district?true: false}}" value="{{$i}}" label="{{$locale['label']}}"></option>
+                                                @endforeach
+                                                @endforeach
+                                            </select>
                                             <input type="hidden" id="_token" value="{{ csrf_token() }}" />
-
-
-
                                             <button onclick="submitBanksForm('{{$bank->id}}', event)" class="btn btn-twitter float-end px-5" type="submit">تم</button>
-
                                         </form>
 
                                     </div>
@@ -186,7 +188,6 @@
 </div>
 
 <script>
-    
     function submitBanksForm(id, e) {
 
         console.log(id)
@@ -196,8 +197,7 @@
         const data = {
             bank_name: document.getElementById("bank_name" + id).value,
             state: document.getElementById("state" + id).value,
-            city: document.getElementById("city" + id).value,
-            district: document.getElementById("district" + id).value,
+            district: document.getElementById("locale" + id).value,
             _token: document.getElementById("_token").value
         }
 
@@ -205,7 +205,6 @@
 
         formData.append("bank_name", data.bank_name)
         formData.append("state", data.state)
-        formData.append("city", data.city)
         formData.append("district", data.district)
         formData.append("_token", data._token)
 
@@ -237,8 +236,6 @@
             }
         })
     }
-
-
 </script>
 
 @endsection

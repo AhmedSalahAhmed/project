@@ -18,16 +18,16 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        
-        
-        $users = User::all();
-            //    return $users;
-           
-        // if ($request->ajax()) {
 
-        //     return view('centralbank.users', compact('users'))
-        //     ->renderSections()['content'];
-        //     }
+
+        $users = User::all();
+        //    return $users;
+
+        if ($request->ajax()) {
+            return view('centralbank.users', compact('users'))
+                ->renderSections()['content'];
+        }
+        
         return view('centralbank.users', compact('users'));
     }
 
@@ -39,7 +39,7 @@ class UsersController extends Controller
     public function create()
     {
         $users = User::all();
-        return view('centeralbank.users' , compact('users'));
+        return view('centeralbank.users', compact('users'));
     }
 
     /**
@@ -61,10 +61,9 @@ class UsersController extends Controller
             'type' => 'user',
             'password' => Hash::make($request->password),
         ]);
-        
-        return redirect()->route('users.index')
-        ->with('success','تمت تســجيل مدير بنك بنجاح');
 
+        return redirect()->route('users.index')
+            ->with('success', 'تمت تســجيل مدير بنك بنجاح');
     }
 
     /**
@@ -107,7 +106,7 @@ class UsersController extends Controller
         ]);
         $user->update([
             'name' => $request->name,
-            
+
         ]);
 
         if ($request->email != $user->email) {
@@ -122,9 +121,7 @@ class UsersController extends Controller
             ]);
         }
         return redirect()->route('users.index')
-        ->with('success','تمت تعديل بيانات المدير  بنجاح');
-        
-
+            ->with('success', 'تمت تعديل بيانات المدير  بنجاح');
     }
 
     /**
@@ -139,7 +136,6 @@ class UsersController extends Controller
     {
         $user->delete();
         return redirect()->route('users.index')
-        ->with('success','تم حذف الســـجل');
-        
+            ->with('success', 'تم حذف الســـجل');
     }
 }

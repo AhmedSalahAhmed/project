@@ -25,7 +25,6 @@ class BankController extends Controller
         $locales = StaticFunctionController::locales();
         $banks = Bank::latest()->paginate(10);
         if ($request->ajax()) {
-
             return view('centralbank.bank', compact('banks', 'states', 'locales'))->renderSections()['content'];
         }
 
@@ -140,7 +139,6 @@ class BankController extends Controller
         $request->validate([
             'bank_name' => 'required',
             'state' => 'required',
-            'city' => 'required',
             'district' => 'required',
         ]);
 

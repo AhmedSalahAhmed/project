@@ -73,7 +73,10 @@ class CentralReportController extends Controller
                     ->whereBetween('created_at', [$start_at, $end_at]);
             }
         }
-
+        if ($request->ajax()) {
+            return view('centralbank.reports.centralaccountreport', compact('accounts', 'currencies', 'banks'))
+                ->renderSections()['content'];
+        }
         return view('centralbank.reports.centralaccountreport', compact('accounts', 'currencies', 'banks'));
     }
     public function processesreport(Request $request)
@@ -141,6 +144,10 @@ class CentralReportController extends Controller
             }
         }
 
+        if ($request->ajax()) {
+            return view('centralbank.reports.centralaccountreport', compact('accounts', 'currencies', 'banks'))
+                ->renderSections()['content'];
+        }
         return view('centralbank.reports.centralaccountreport', compact('accounts', 'currencies', 'banks'));
     }
 }

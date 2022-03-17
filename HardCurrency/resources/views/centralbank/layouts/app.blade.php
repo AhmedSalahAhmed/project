@@ -87,7 +87,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="statistics"><i class="fas fa-tachometer-alt"></i> الإحصائيات </a>
                     </li>
-                    @if(Auth::user()->type == 'admin'))
+                    @if(Auth::user()->type == 'admin')
                     <li class="nav-item">
                         <a class="nav-link" href="users"><i class="far fa-calendar-alt"></i>المستخدمين </a>
                     </li>
@@ -119,7 +119,7 @@
                 </ul>
 
             </div>
-            
+
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <a class="logout" href="route('logout')" onclick="event.preventDefault();
@@ -132,7 +132,6 @@
         <!-- partial -->
         <div id="content" class="container page-body-wrapper mt-4">
             @yield('content')
-
         </div>
     </div>
     </div>
@@ -171,7 +170,7 @@
             // Avoid the link click from loading a new page
             event.preventDefault();
             // Load the content from the link's href attribute
-            window.history.pushState('','',$(this).attr('href'))
+            window.history.pushState('', '', $(this).attr('href'))
             $('.page-body-wrapper').load($(this).attr('href'));
         });
 
@@ -182,25 +181,35 @@
                 importCSS: true,
                 loadCSS: true,
                 canvas: true,
-                debug: false, 
-                importStyle: true,  
-                copyTagClasses: true, 
+                debug: false,
+                importStyle: true,
+                copyTagClasses: true,
                 loadCSS: "{{ asset('assets/css/report.css') }}",
                 header: "<h4 style='text-align:center;'> <?php echo date('Y-m-d'); ?> </h4><h3 style='text-align:center;'>تقرير حسابات البنوك من العملة الاجنبية </h3>",
                 doctypeString: '<div  style="text-align:center;"><h2>بسم الله الرحمن الرحيم</h2><h2 >  بنك السودان المركزي </h2><h1 style="text-align:center;"> </h1> <img style="width:10%; mr-1" src={{asset("assets/images/cbos.jpeg")}} alt="profile" />',
                 copyTagClasses: false,
             });
         });
-        $("#state").change(function() {
-        console.log("h");
-        if ($(this).data('options') === undefined) {
-            /*Taking an array of all options-2 and kind of embedding it on the select1*/
-            $(this).data('options', $('#locale option').clone());
-        }
-        var id = $(this).val();
-        var options = $(this).data('options').filter('[value=' + id + ']');
-        $('#locale').html(options);
-    });
+        $(".mySelect").change(function() {
+            console.log("h");
+            if ($(this).data('options') === undefined) {
+                /*Taking an array of all options-2 and kind of embedding it on the select1*/
+                $(this).data('options', $('.mySelect2 option').clone());
+            }
+            var id = $(this).val();
+            var options = $(this).data('options').filter('[value=' + id + ']');
+            $('.mySelect2').html(options);
+        });
+        $(".mySelectAdd").change(function() {
+            console.log("h");
+            if ($(this).data('options') === undefined) {
+                /*Taking an array of all options-2 and kind of embedding it on the select1*/
+                $(this).data('options', $('.mySelect2Add option').clone());
+            }
+            var id = $(this).val();
+            var options = $(this).data('options').filter('[value=' + id + ']');
+            $('.mySelect2Add').html(options);
+        });
     </script>
 
     <script src="{{asset('assets/all.min.js')}}"></script>
