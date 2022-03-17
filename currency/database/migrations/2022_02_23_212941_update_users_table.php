@@ -15,10 +15,8 @@ class UpdateUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
              
-            // $table->foreignId('account-id')->default('1');
-            // $table->foreign('account-id')
-            //         ->references('id')
-            //         ->on('accounts');
+            // $table->foreignId('account_id')->constrained()
+            // ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

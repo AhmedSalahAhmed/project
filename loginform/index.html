@@ -1,0 +1,96 @@
+
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/all.min.css">
+<nav class="navbar navbar-expand-custom navbar-mainbg">
+  <a class="navbar-brand navbar-logo" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <i class="fas fa-bars text-white"></i>
+  </button>
+  <i class="fa-regular fa-4"></i>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+          <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
+          <li class="nav-item">
+              <a class="nav-link" href="javascript:void(0);"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+          </li>
+          <li class="nav-item active">
+              <a class="nav-link" href="javascript:void(0);"><i class="far fa-address-book"></i>Address Book</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="javascript:void(0);"><i class="far fa-clone"></i>Components</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="javascript:void(0);"><i class="far fa-calendar-alt"></i>Calendar</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="javascript:void(0);"><i class="far fa-chart-bar"></i>Charts</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="javascript:void(0);"><i class="far fa-copy"></i>Documents</a>
+          </li>
+      </ul>
+  </div>
+</nav>
+<body>
+    <!-- solid style -->
+    <i class="fa-regular fa-user"></i>
+    <i class="fa-solid fa-user"></i>
+  
+    <!-- regular style -->
+    <i class="fa-regular fa-user"></i>
+  
+    <!-- light style -->
+    <i class="fa-light fa-user"></i>
+  
+    <!-- duotone style -->
+    <i class="fa-duotone fa-user"></i>
+  
+    <!-- all new thin style -->
+    <i class="fa-thin fa-user"></i>
+  
+    <!--brand icon-->
+    <i class="fa-brands fa-github-square"></i>
+
+  </body>
+  
+<select name="select1" id="select1">
+  <option value="1">Fruit</option>
+  <option value="2">Animal</option>
+  <option value="3">Bird</option>
+  <option value="4">Car</option>
+</select>
+
+
+<select name="select2" id="select2">
+  <option value="1">Banana</option>
+  <option value="1">Apple</option>
+  <option value="1">Orange</option>
+  <option value="2">Wolf</option>
+  <option value="2">Fox</option>
+  <option value="2">Bear</option>
+  <option value="3">Eagle</option>
+  <option value="3">Hawk</option>
+  <option value="4">BWM<option>
+</select>
+<script src="assets/js/all.min.js"></script>
+<script src="assets/js/custom.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+
+   <script>
+       
+import { states } from './state.js'
+$("#select1").change(function() {
+    console.log(states)
+
+  if ($(this).data('options') === undefined) {
+
+    /*Taking an array of all options-2 and kind of embedding it on the select1*/
+    $(this).data('options', $('#select2 option').clone());
+  }
+  var id = $(this).val();
+  var options = $(this).data('options').filter('[value=' + id + ']');
+  $('#select2').html(options);
+});
+
+</script>

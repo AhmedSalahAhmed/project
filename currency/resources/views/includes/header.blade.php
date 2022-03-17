@@ -14,6 +14,8 @@
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" />

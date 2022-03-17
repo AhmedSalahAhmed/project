@@ -10,7 +10,7 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title"> البنوك</h4>
-                    <p class="card-description"> جميع البنوك تحت <code class="rtl">بنك السودان المركزي</code>
+                    <p class="card-description"> جميع البنوك تحت <code class="rtl">{{Auth::user()->name}}</code>
                     </p>
                
                     <table class="table">

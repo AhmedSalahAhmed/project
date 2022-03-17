@@ -11,7 +11,7 @@
          
           <ul class="navbar-nav navbar-nav-right">
           
-            <li class="nav-item nav-profile dropdown">
+          <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                
                 <div class="nav-profile-text">
@@ -32,7 +32,8 @@
                             </x-dropdown-link>
                         </form></a>
               </div>
-            </li>
+          </li>
+            
             
            
           </ul>

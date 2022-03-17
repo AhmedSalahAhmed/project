@@ -18,8 +18,8 @@ class EmployeeController extends Controller
     {
         $role = Role::all();
         
-        $employees = Employee::latest()->paginate(4);
-		return view('employees',compact('role'))->with('i', (request()->input('page', 1) - 1) * 4);
+        $employees = Employee::all();
+		return view('employees',compact('employees'));
         
     }
 

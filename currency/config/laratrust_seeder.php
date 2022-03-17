@@ -14,7 +14,7 @@ return [
     'roles_structure' => [
         'admin' => [
             'users' => 'c,r,u,d',
-            '' => 'c,r,u,d',
+            'currencies' => 'c,r,u,d',
             'profile' => 'r,u'
         ],
         'bank' => [

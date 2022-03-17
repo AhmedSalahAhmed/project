@@ -44,7 +44,7 @@ class CurrencyController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'currency_name' => 'required',
             'sell_price' => 'required',
             'buy_price' => 'required',
         ]);
@@ -85,16 +85,15 @@ class CurrencyController extends Controller
      * @param  \App\Models\Currency  $currency
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Currency $currency)
+    public function update(Request $request, Currency $exchange)
     {
         $request->validate([
-            'name' => 'required',
             'sell_price' => 'required',
             'buy_price' => 'required',
 
         ]);
 
-        $currency->update($request->all());
+        $exchange->update($request->all());
         Alert::success('تهانينا !!', 'تم تعديل بيانات العملة بنجاح');
         return redirect()->route('exchange.index');
     }
@@ -105,12 +104,11 @@ class CurrencyController extends Controller
      * @param  \App\Models\Currency  $currency
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Currency $currency)
+    public function destroy(Currency $exchange)
     {
-        $currency->delete();
-        Alert::success('تم !!', 'تم حذف بيانات العملة بنجاح');
-        return redirect()->route('exchange.index');
+        $exchange->delete();
 
-
-    }
+        return redirect()->route('exchange.index')
+            ->withSuccess(__('Post delete successfully.'));
+    }   
 }

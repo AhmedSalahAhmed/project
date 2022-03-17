@@ -23,19 +23,7 @@
       <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
-    <!-- stripe scripts -->
-    <script src="https://js.stripe.com/v3/"></script>
-    <script>
-        const stripe = Stripe('pk_test_51ISiPlBG8tWZQZa41rtzdEzETsB8MeueME4mswlWeiImKq3lXmYnbhp0FmlGIbvqR1E81uLROboD77nmyBBhxNKD005jenNqRR');
-        const btn = document.getElementById("checkout-button")
-        btn.addEventListener('click', function(e){
-            e.preventDefault();
-            stripe.redirectToCheckout({
-                sessionId:  "<?php  echo $session->id  ?>"
-            })
-        });
-    </script>
-    <!-- stripe scripts -->
+  
 
     <!-- plugins:js -->
     <script src="{{asset('assets/vendors/js/vendor.bundle.base.js')}}"></script>

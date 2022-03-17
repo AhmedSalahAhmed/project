@@ -12,6 +12,7 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "padraic/phar-updater": "^1.0",
         "realrashid/sweet-alert": "^5.0",
         "santigarcor/laratrust": "^7.0",
         "stripe/stripe-php": "^7.114"

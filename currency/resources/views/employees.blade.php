@@ -28,14 +28,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              @foreach($role as $r)
-                              @if($r->user_id == '')
-                              <td>ahmed</td>
+                              @foreach($employees as $employee)
+                            
+                              
                                     <tr>
-                                        <td>{{ $r->user_type }} </td>
+                                        <td>{{ $employee->id }} </td>
+                                        <td>{{ $employee->name }} </td>
+                                        <td>{{ $employee->email }} </td>
                                        
                                     </tr>
-                                    @endif
+                                    
                                 @endforeach
 
                             </tbody>

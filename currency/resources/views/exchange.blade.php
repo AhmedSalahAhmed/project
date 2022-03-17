@@ -1,4 +1,6 @@
-    <!-- Stripe payment code  -->
+@if(Auth::user()->hasRole('user'))
+  
+  <!-- Stripe payment code  -->
     <?php
 // This example sets up an endpoint using the Slim framework.
 // Watch this video to get started: https://youtu.be/sGcNPFX1Ph4.
@@ -30,7 +32,7 @@ require_once __DIR__.'/../../../vendor/autoload.php';
 
 ?>
      
-     
+ @endif    
      @include('includes.header')
 
      @include('includes.navbar')
@@ -63,81 +65,81 @@ require_once __DIR__.'/../../../vendor/autoload.php';
 
                 <!-- Modal -->
                 <div class="modal fade" id="exchangeModal" tabindex="-1" aria-labelledby="exchangeModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                    
+                        <form action="{{ route('transactions.store') }}" method="post" class="forms-sample">
+                            @csrf
+                                        
+                        <div class="form-group row">
+                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">إسم العميل </label>
+                                            <div class="col-sm-9">
+                                            <input type="text" name="client_name" class="form-control"  placeholder=" إسم العميل">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">رقم الهاتف</label>
+                                            <div class="col-sm-9">
+                                            <input type="text" name="client_phone" class="form-control"  placeholder="رقم الهاتف">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">نوع الهوية</label>
+                                            <div class="col-sm-9">
+                                            <input type="text" name="id_type" class="form-control"  placeholder="نوع الهوية">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">رقم الهوية</label>
+                                            <div class="col-sm-9">
+                                            <input type="text" name="id_number" class="form-control"  placeholder="رقم الهوية">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> المبلغ</label>
+                                            <div class="col-sm-9">
+                                            <input type="text" name="amount" class="form-control"  placeholder=" المبلغ">
+                                            </div>
+                        
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> نوع العملية</label>
+                                            <div class="col-sm-9">
+                                            <select name="transaction_type" id="" class="select-control">
+                                                <option value="ايداع">ايداع</option>
+                                                <option value="سحب"> سحب</option>
+                                            </select>
+                                            </div>
+                        
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> العملة</label>
+                                            <div class="col-sm-9">
+                                                
+                                            <select name="currency" id="" class="form-control">
+                                            <option value="">اختار العملة </option>
+
+                                                @foreach($currencies as $currency)
+                                                <option value="{{$currency->currency_name}}">{{$currency->currency_name}}</option>
+                                                @endforeach
+                                            </select>
+                                            </div>
+                        
+                                        </div>
+                                        <button class="btn btn-twitter float-end px-5" type="submit">تم</button>
+
+
+                                        </form>
+                                @include('sweetalert::alert')
+
+                        </div>
+                        
+                        </div>
                     </div>
-                    <div class="modal-body">
-                   
-                    <form action="{{ route('transactions.store') }}" method="post" class="forms-sample">
-                        @csrf
-                                    
-                    <div class="form-group row">
-                                        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">إسم العميل </label>
-                                        <div class="col-sm-9">
-                                          <input type="text" name="client_name" class="form-control"  placeholder=" إسم العميل">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">رقم الهاتف</label>
-                                        <div class="col-sm-9">
-                                        <input type="text" name="client_phone" class="form-control"  placeholder="رقم الهاتف">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">نوع الهوية</label>
-                                        <div class="col-sm-9">
-                                        <input type="text" name="id_type" class="form-control"  placeholder="نوع الهوية">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">رقم الهوية</label>
-                                        <div class="col-sm-9">
-                                        <input type="text" name="id_number" class="form-control"  placeholder="رقم الهوية">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> المبلغ</label>
-                                        <div class="col-sm-9">
-                                        <input type="text" name="amount" class="form-control"  placeholder=" المبلغ">
-                                        </div>
-                    
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> نوع العملية</label>
-                                        <div class="col-sm-9">
-                                        <select name="transaction_type" id="" class="form-control">
-                                            <option value="ايداع">ايداع</option>
-                                            <option value="سحب"> سحب</option>
-                                        </select>
-                                        </div>
-                    
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> العملة</label>
-                                        <div class="col-sm-9">
-                                            
-                                        <select name="currency" id="" class="form-control">
-                                        <option value="">اختار العملة </option>
-
-                                            @foreach($currencies as $currency)
-                                            <option value="{{$currency->name}}">{{$currency->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        </div>
-                    
-                                    </div>
-                                    <button class="btn btn-twitter float-end px-5" type="submit">تم</button>
-
-
-                                    </form>
-                            @include('sweetalert::alert')
-
-                    </div>
-                    
-                    </div>
-                </div>
                 </div>
                 @endif
               
@@ -167,15 +169,14 @@ require_once __DIR__.'/../../../vendor/autoload.php';
                                 <th scope="col">سعر الشراء </th>
                                 <th scope="col">سعر البيع </th>
                                 <th scope="col"> المتوسط </th>
-                                <th scope="col">تعديل</th>
-                                <th scope="col">حذف</th>
+                                <th scope="col">تعـــديل سعر الصرف</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($currencies as $currency) 
                             <tr>
                                 
-                                <td>{{$currency->name}}</td>
+                                <td>{{$currency->currency_name}}</td>
                                 <td>{{$currency->buy_price}}</td>
                                 <td>{{$currency->sell_price}}</td>
                                 <td>{{($currency->buy_price + $currency->sell_price) / 2}}</td>
@@ -184,19 +185,14 @@ require_once __DIR__.'/../../../vendor/autoload.php';
                                 تعديل
                                 </button> 
                                 </td>
-                                <td>
-                                    <form action="{{route('exchange.destroy' , $currency->id)}}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                        <input type="submit" class="btn btn-sm btn-danger" value="حذف">
-                                    </form> 
-                                </td>    
-                            
+                               
                             </tr>
                             <!-- Edit Modal -->
                             <div class="modal fade" id="editModal{{$currency->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
+                            
+                            <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
+
                                 <div class="modal-header">
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
@@ -210,7 +206,7 @@ require_once __DIR__.'/../../../vendor/autoload.php';
 
                                 @method('put')
                                 
-                                <input type="text" name="name" class="form-control mb-3" placeholder=" العملة " value="{{$currency->name}}">
+                                <input type="text" name="currency_name" class="form-control mb-3" placeholder=" العملة " value="{{$currency->currency_name}}" disabled="disabled">
                                 <input type="text" name="buy_price" class="form-control mb-3" placeholder="سعر الشراء " value="{{$currency->buy_price}}">
                                 <input type="text" name="sell_price" class="form-control mb-3" placeholder="سعر البيع " value="{{$currency->sell_price}}">
                                 
@@ -234,7 +230,7 @@ require_once __DIR__.'/../../../vendor/autoload.php';
                     <div class="d-felx justify-content-center">
                         {{ $currencies->links() }}
                     </div>
-                        
+                  @if(Auth::user()->hasRole('admin'))      
                     <button type="button" class="btn btn-twitter" data-bs-toggle="modal" data-bs-target="#addModal">
                     اضافة عملة
                     </button>
@@ -263,17 +259,31 @@ require_once __DIR__.'/../../../vendor/autoload.php';
 
                        @csrf
                           
-                          <input type="text" name="name" class="form-control mb-3" placeholder=" العملة ">
+                          <input type="text" name="currency_name" class="form-control mb-3" placeholder=" العملة ">
                           <input type="text" name="buy_price" class="form-control mb-3" placeholder="سعر الشراء ">
                           <input type="text" name="sell_price" class="form-control mb-3" placeholder="سعر البيع ">
                           <button class="btn btn-twitter float-end px-5" type="submit">تم</button>
     
                       </form>
 
-                </div>
+                    </div>
+                    @endif
                         
+@if(Auth::user()->hasRole('user'))
                                     
-
-                  
+  <!-- stripe scripts -->
+  <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        const stripe = Stripe('pk_test_51ISiPlBG8tWZQZa41rtzdEzETsB8MeueME4mswlWeiImKq3lXmYnbhp0FmlGIbvqR1E81uLROboD77nmyBBhxNKD005jenNqRR');
+        const btn = document.getElementById("checkout-button")
+        btn.addEventListener('click', function(e){
+            e.preventDefault();
+            stripe.redirectToCheckout({
+                sessionId:  "<?php  echo $session->id  ?>"
+            })
+        });
+    </script>
+    <!-- stripe scripts -->
+                  @endif
          @extends('includes.footer')
         
