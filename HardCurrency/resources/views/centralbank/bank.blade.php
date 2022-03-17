@@ -60,7 +60,7 @@
                                         <select name="state" id="" class="form-select">
 
                                             <option value="">اختر الولاية</option>
-                                            @foreach($locales as $state)
+                                            @foreach($states as $state)
                                             <option value="{{$state['value']}}" label="{{$state['label']}}"/>
                                             @endforeach
                                         </select>
@@ -71,7 +71,7 @@
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label">المحلية </label>
                                     <div class="col-sm-9">
                                         <select name="district" id="" class="form-select">
-                                       @foreach($)
+                                      
                                         </select>
                                     </div>
                                 </div>
