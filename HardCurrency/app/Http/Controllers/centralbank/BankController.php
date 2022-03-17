@@ -29,8 +29,8 @@ class BankController extends Controller
 
         $states = StaticFunctionController::states();
         $locales = StaticFunctionController::locales();
-
-        return view('centralbank.bank', compact('banks', '$states', '$locales'));
+        
+        return view('centralbank.bank', compact('banks', 'states', 'locales'));
     }
 
     /**
@@ -56,8 +56,8 @@ class BankController extends Controller
             'bank_name' => 'required',
             'logo' => 'required',
             'state' => 'required',
-            'city' => 'required',
             'district' => 'required',
+            'url' => 'required',
         ]);
 
         // dd($request->all());
@@ -67,7 +67,7 @@ class BankController extends Controller
         $bank = Bank::create([
             "bank_name" => $request->bank_name,
             "state" => $request->state,
-            "city" => $request->city,
+            "url" => $request->url,
             "district" => $request->district,
             "logo" => $request->file("logo")->store("images", "public"),
         ]);

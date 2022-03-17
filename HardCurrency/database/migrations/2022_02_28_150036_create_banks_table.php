@@ -19,7 +19,6 @@ class CreateBanksTable extends Migration
             $table->string('url')->nullable()->unique();
             $table->string('logo')->nullable();
             $table->string('state')->nullable();
-            $table->string('city')->nullable();
             $table->string('district')->nullable();
             $table->timestamps();
         });

@@ -57,8 +57,12 @@
                                 <div class="form-group row">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> الولاية</label>
                                     <div class="col-sm-9">
-                                        <select name="state" id=""  class="form-select">
+                                        <select name="state" id="" class="form-select">
+
                                             <option value="">اختر الولاية</option>
+                                            @foreach($states as $state)
+                                            <option value="{{$state['value']}}" label="{{$state['label']}}"/>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -136,22 +140,22 @@
                                         <form action="{{ route('banks.update', $bank->id) }}" method="post">
 
                                             @method('put')
-                                            
+
                                             @csrf
 
 
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label">اسم البنك </label>
-                                            <input type="text" id="bank_name{{$bank->id}}" name="bank_name" class="form-control mb-3" placeholder=" اسم البنك " value="{{$bank->bank_name}}"/>
+                                            <input type="text" id="bank_name{{$bank->id}}" name="bank_name" class="form-control mb-3" placeholder=" اسم البنك " value="{{$bank->bank_name}}" />
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label">الولاية </label>
-                                            <input type="text" id="state{{$bank->id}}" name="state" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->state}}"/>
+                                            <input type="text" id="state{{$bank->id}}" name="state" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->state}}" />
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label">المدينة </label>
 
-                                            <input type="text" id="city{{$bank->id}}" name="city" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->city}}"/>
+                                            <input type="text" id="city{{$bank->id}}" name="city" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->city}}" />
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label">المحلية </label>
 
-                                            <input type="text" id="district{{$bank->id}}" name="district" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->district}}"/>
+                                            <input type="text" id="district{{$bank->id}}" name="district" class="form-control mb-3" placeholder=" العنوان " value="{{$bank->district}}" />
 
-                                            <input type="hidden" id="_token" value="{{ csrf_token() }}"/>
+                                            <input type="hidden" id="_token" value="{{ csrf_token() }}" />
 
 
 
@@ -175,17 +179,17 @@
     </div>
 </div>
 <script>
-    function submitBanksForm (id, e) {
+    function submitBanksForm(id, e) {
 
         console.log(id)
 
         e.preventDefault()
 
         const data = {
-            bank_name: document.getElementById("bank_name"+id).value,
-            state: document.getElementById("state"+id).value,
-            city: document.getElementById("city"+id).value,
-            district: document.getElementById("district"+id).value,
+            bank_name: document.getElementById("bank_name" + id).value,
+            state: document.getElementById("state" + id).value,
+            city: document.getElementById("city" + id).value,
+            district: document.getElementById("district" + id).value,
             _token: document.getElementById("_token").value
         }
 
@@ -207,19 +211,19 @@
             }
         });
         $.ajax({
-            type:"post",
-            url:"banks/"+ id + "?_method=put",
+            type: "post",
+            url: "banks/" + id + "?_method=put",
             data: formData,
             contentType: false,
             processData: false,
             cache: false,
             dataType: 'json',
-            success:(data) => {
+            success: (data) => {
                 console.log("data*************")
                 console.log(data)
                 location.replace("{{route('banks.index')}}")
             },
-            error:(error)=>{
+            error: (error) => {
                 location.replace("{{route('banks.index')}}")
                 console.log(error.responseJSON)
             }

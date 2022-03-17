@@ -28,8 +28,8 @@ class Bank extends Model
         'bank_name',
         'logo',
         'state',
-        'city',
         'district',
+        'url',
     ];
 
     protected $with = ['currencies'];
