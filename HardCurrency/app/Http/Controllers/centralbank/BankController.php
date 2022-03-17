@@ -21,14 +21,18 @@ class BankController extends Controller
      */
     public function index(Request $request)
     {
+        $states = StaticFunctionController::states();
+        $locales = StaticFunctionController::locales();
         $banks = Bank::latest()->paginate(10);
         if ($request->ajax()) {
 
-            return view('centralbank.bank', compact('banks'))->renderSections()['content'];
+            return view('centralbank.bank', compact('banks', 'states', 'locales'))->renderSections()['content'];
         }
 
-        $states = StaticFunctionController::states();
-        $locales = StaticFunctionController::locales();
+    
+        // foreach($locales as $locale){
+        //     return $locale["1"];
+        // };
         
         return view('centralbank.bank', compact('banks', 'states', 'locales'));
     }
@@ -56,7 +60,7 @@ class BankController extends Controller
             'bank_name' => 'required',
             'logo' => 'required',
             'state' => 'required',
-            'district' => 'required',
+            'district' => 'required',    
             'url' => 'required',
         ]);
 

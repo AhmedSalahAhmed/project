@@ -57,11 +57,11 @@
                                 <div class="form-group row">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> الولاية</label>
                                     <div class="col-sm-9">
-                                        <select name="state" id="" class="form-select">
+                                        <select name="state" id="state" class="form-select">
 
                                             <option value="">اختر الولاية</option>
                                             @foreach($states as $state)
-                                            <option value="{{$state['value']}}" label="{{$state['label']}}"/>
+                                            <option value="{{$state['value']}}" label="{{$state['label']}}"></option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -70,8 +70,14 @@
                                 <div class="form-group row">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label">المحلية </label>
                                     <div class="col-sm-9">
-                                        <select name="district" id="" class="form-select">
-                                      
+                                        <select name="district" id="locale" class="form-select">
+                                            @foreach (range(1, 18) as $i)
+                                                @foreach($locales[0][$i] as $locale)
+                                                <option value="{{$i}}" label="{{$locale['label']}}" ></option>
+                                                @endforeach
+                                            @endforeach
+
+
                                         </select>
                                     </div>
                                 </div>
@@ -178,7 +184,9 @@
         </div>
     </div>
 </div>
+
 <script>
+    
     function submitBanksForm(id, e) {
 
         console.log(id)
@@ -229,6 +237,8 @@
             }
         })
     }
+
+
 </script>
 
 @endsection
