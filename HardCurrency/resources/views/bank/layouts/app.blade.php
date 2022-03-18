@@ -104,9 +104,9 @@
                 </ul>
 
             </div>
-            <form method="POST" action="{{ route('logout') }}">
+            <form method="get" action="{{ route('employee.logout') }}">
                 @csrf
-                <a class="logout" href="route('logout')" onclick="event.preventDefault();
+                <a class="logout" href="route('employee.logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                     <i class="fa-regular fa-user"></i>
                     تسجيل خروج

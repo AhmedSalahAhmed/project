@@ -123,9 +123,9 @@
 
             </div>
 
-            <form method="POST" action="{{ route('logout') }}">
+            <form method="get" action="{{ route('manager.logout') }}">
                 @csrf
-                <a class="logout" href="route('logout')" onclick="event.preventDefault();
+                <a class="logout" href="route('manager.logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                     <i class="fa-regular fa-user"></i>
                     تسجيل خروج
