@@ -30,7 +30,10 @@ class StatisticsController extends Controller
         $branches = DB::table('branches')->count();
         $balance = Account::where('bank_id', $bank_id)->sum('balance');
         $proccesses = Process::where('bank_id', $bank_id)->count();
+        if ($request->ajax()) {
 
+            return view('manager.statistics', compact('branches' ,'banks' , 'balance' , 'sdgamount' ,'currencies' , 'proccesses'))->renderSections()['content'];
+            }
         // dd($balance);
         return view('manager.statistics', compact('branches', 'banks', 'balance', 'sdgamount', 'currencies' , 'proccesses'));
     }

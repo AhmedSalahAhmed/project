@@ -17,12 +17,15 @@ class CurrencyReportController extends Controller
 
 {
 
-    public function index()
+    public function index(Request $request)
     {
         $bank_id = Auth::user()->bank_id;
 
         $banks = Bank::where('id', $bank_id)->get();
+        if ($request->ajax()) {
 
+            return view('manager.reports.bankreports', compact('banks'))->renderSections()['content'];
+            }
         return view('manager.reports.bankreports', compact('banks'));
     }
     public function searchcurrency(Request $request)
