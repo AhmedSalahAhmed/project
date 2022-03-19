@@ -1,9 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\manager\ManagerDashboardController;
-use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +13,13 @@ use App\Models\User;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+// Route::get('/', function () {
+//     return view('auth.login');
+// });
 
+Route::get('/', [App\Http\Controllers\FirstRouteController::class, 'index']);
 
 Route::get('manager/', function () {
     return view('manager.login');
@@ -61,7 +61,7 @@ Route::group(['prefix' => 'manager'], function () {
         Route::resource('process', manager\ProcessController::class);
         Route::get('/logout', [App\Http\Controllers\manager\ManagerController::class, 'logout'])->name('manager.logout');
         Route::resource('manager', manager\ManagerDashboardController::class);
-        Route::get('/stats', [App\Http\Controllers\manager\StatisticsController::class , 'index'])->name('manager.stats');
+        Route::get('/stats', [App\Http\Controllers\manager\StatisticsController::class, 'index'])->name('manager.stats');
         // Rrports
         Route::get('/bankreports', [App\Http\Controllers\manager\CurrencyReportController::class, 'index']);
         Route::get('/searchcurrency', [App\Http\Controllers\manager\CurrencyReportController::class, 'searchcurrency']);
@@ -78,7 +78,7 @@ Route::group(['prefix' => 'bank'], function () {
     });
 
     Route::group(['middleware' => 'employee.auth'], function () {
-        // Route::resource('processes', bank\EmployeeProcessController::class);       
+        // Route::resource('processes', bank\EmployeeProcessController::class);
 
         Route::get('/dashboard', [App\Http\Controllers\bank\EmployeeDashboardController::class, 'index'])->name('employee.dashboard');
         Route::get('/getTotal', [App\Http\Controllers\bank\EmployeeDashboardController::class, 'getTotal'])->name('getTotal');
