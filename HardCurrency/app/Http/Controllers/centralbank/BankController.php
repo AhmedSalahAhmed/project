@@ -11,6 +11,7 @@ use App\Models\BankCurrency;
 use App\Models\CurrencyPrice;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Symfony\Component\Process\Process;
 
 class BankController extends Controller
 {
@@ -83,6 +84,24 @@ class BankController extends Controller
             "district" => $request->district,
             "logo" => $request->file("logo")->store("images", "public"),
         ]);
+
+
+        $process = new Process(["cd", "/media/siddig/windows/websites/project/HardCurrency"]);
+        $process = new Process(["valet", "link", $bank->url]);
+        $process->run();
+
+        $process = new Process(["cd", "/media/siddig/windows/websites/project/HardCurrency"]);
+        $process = new Process(["valet", "link", "admin".$bank->url]);
+        $process->run();
+
+        $process = new Process(["cd", "/media/siddig/windows/websites/project/HardCurrency"]);
+        $process = new Process(["valet", "link", "teller".$bank->url]);
+        $process->run();
+
+        $process = new Process(["cd", "/media/siddig/windows/websites/project/HardCurrency"]);
+        $process = new Process(["valet", "link", "teller".$bank->url]);
+        $process->run();
+
 
         // $bank = Bank::create($request->all());
 

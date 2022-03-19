@@ -68,7 +68,7 @@
                                             @endforeach
 
                                         </select>
-                                        <input type="hidden" name="buy_price" id="buyprice" value="{{$bankcurrency->buy_price}}" />
+                                        <input type="hidden" name="buy_price" id="buyprice" value="/*{{$bankcurrency->buy_price}}*/" />
                                     </div>
 
                                 </div>

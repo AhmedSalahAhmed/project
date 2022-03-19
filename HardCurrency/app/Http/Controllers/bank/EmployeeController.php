@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Validator;
+use App\Models\Bank;
 use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
@@ -16,19 +17,41 @@ class EmployeeController extends Controller
             'password' => 'required'
         ]);
 
-        if (Auth::guard('employee')->attempt(['email' => $request->email, 'password' => $request->password],$request->get('remember'))) {
 
-            return redirect()->route('employee.dashboard');
+        $host = explode('.', $request->getHost());
 
-        } else {
-            session()->flash('error','Either Email/Password is incorrect');
-            return back()->withInput($request->only('email'));
+        $bank = null;
+
+        if($host[0] != "harcurrency"){
+            if(count($host) == 2){
+                $bank = Bank::where("url", $host[0])->get();
+            }elseif(count($host) == 3){
+                $bank = Bank::where("url", $host[1])->get();
+            }
+            $bank = $bank[0];
         }
 
+
+        if($bank){
+            if(Auth::guard('employee')->attempt(['bank_id'=>$bank->id,'email' => $request->email, 'password' => $request->password],$request->get('remember'))) {
+                return redirect()->route('employee.dashboard');
+            }else {
+                session()->flash('error','Either Email/Password is incorrect');
+                return view("bank.login", compact('bank'));
+            }
+        }else{
+            if(Auth::guard('employee')->attempt(['email' => $request->email, 'password' => $request->password],$request->get('remember'))) {
+                return redirect()->route('employee.dashboard');
+            }else {
+                session()->flash('error','Either Email/Password is incorrect');
+                return view("bank.login", compact('bank'));
+            }
+        }
     }
 
     public function logout() {
+        $bank=Bank::find(Auth::user()->bank_id);
         Auth::guard('employee')->logout();
-        return redirect()->route('employee.login');
+        return  view('bank.login', compact("bank"));
     }
 }
