@@ -20,6 +20,17 @@ class ManagerController extends Controller
 
         $bank = null;
 
+        if ($host[0] == "localhost") {
+            
+            if(Auth::guard('manager')->attempt(['email' => $request->email, 'password' => $request->password],$request->get('remember'))) {
+                return redirect()->route('manager.stats');
+            }else {
+                session()->flash('error','Either Email/Password is incorrect');
+                return view("manager.login", compact('bank'));
+            }
+            
+        }
+
         if($host[0] != "harcurrency"){
             if(count($host) == 2){
                 $bank = Bank::where("url", $host[0])->get();

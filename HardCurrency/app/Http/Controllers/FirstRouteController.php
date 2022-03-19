@@ -16,22 +16,22 @@ class FirstRouteController extends Controller
 
         // return $host;
 
-        if($host[0] == "hardcurrency"){
+        if ($host[0] == "hardcurrency") {
             return view('auth.login');
         }
-        
-        if (count($host)) {
+
+        if (count($host) > 1) {
+            $bank = Bank::where("url", $host[1])->get();
+            $bank = $bank ?? $bank[0];
+            if (count($host) >= 2) {
                 $bank = Bank::where("url", $host[1])->get();
-                $bank = $bank??$bank[0];
-            if(count($host) >=2){
-                    $bank = Bank::where("url", $host[1])->get();
-                if($host[0] == "admin"){
+                if ($host[0] == "admin") {
                     $bank = $bank[0];
                     return view('manager.login', compact("bank"));
-                }elseif($host[0] == "teller"){
+                } elseif ($host[0] == "teller") {
                     $bank = $bank[0];
-                    return view('bank.login', compact("bank")); 
-                }else{
+                    return view('bank.login', compact("bank"));
+                } else {
                     $bank = Bank::where("url", $host[0])->get();
                     $bank = $bank[0];
                     return view('manager.login', compact("bank"));
@@ -40,8 +40,8 @@ class FirstRouteController extends Controller
             } else {
                 return view('auth.login');
             };
+        } else {
+            return view('auth.login');
         }
-
     }
-
 }

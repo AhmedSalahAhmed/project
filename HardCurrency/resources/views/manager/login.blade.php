@@ -1,3 +1,19 @@
+<?php
+
+
+if (!isset($bank)) {
+  $bank = [
+    'bank_name' => ' شاشة دخول مدير البنك',
+    'logo' => 'images/fisal.jpeg',
+  ];
+
+  $bank = (object) $bank;
+  // dd($bank->logo);
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 

@@ -21,6 +21,14 @@ class EmployeeController extends Controller
         $host = explode('.', $request->getHost());
 
         $bank = null;
+        if ($host[0] == "localhost") {
+            if(Auth::guard('employee')->attempt(['email' => $request->email, 'password' => $request->password],$request->get('remember'))) {
+                return redirect()->route('employee.dashboard');
+            }else {
+                session()->flash('error','Either Email/Password is incorrect');
+                return view("bank.login", compact('bank'));
+            }
+        }
 
         if($host[0] != "harcurrency"){
             if(count($host) == 2){
