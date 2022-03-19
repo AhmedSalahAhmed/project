@@ -29,7 +29,7 @@
       <div class="card login-card">
         <div class="row no-gutters">
           <div class="col-md-5">
-            <img src="{{asset('assets/images/Faisal-Islamic-Bank-sudan.jpg')}}" alt="login" class="login-card-img">
+            <img src="{{asset('storage/'.$bank->logo)}}" alt="login" class="login-card-img">
           </div>
           <div class="col-md-7" dir="rtl">
             <div class="card-body shadow">
@@ -37,7 +37,7 @@
               <form method="POST" action="{{ route('manager.auth') }}">
                 @csrf
                 <div class="brand-wrapper">
-                  <p class="login-card-description" style="text-align: center;"> بنك فيصل الإسلامي </p>
+                  <p class="login-card-description" style="text-align: center;"> {{$bank->bank_name}} </p>
 
                 </div>
 
