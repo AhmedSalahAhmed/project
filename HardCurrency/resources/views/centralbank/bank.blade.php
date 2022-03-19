@@ -1,7 +1,11 @@
 @extends('centralbank/layouts.app')
 
 @section('content')
-<div class="page-header">
+
+<div class="col-lg-12 grid-margin stretch-card">
+    
+    <div class="card">
+    <div class="page-header">
     <h3 class="page-title">
         @if ($errors->any())
         <div class="alert alert-danger">
@@ -14,8 +18,6 @@
         </div>
         @endif
 </div>
-<div class="col-lg-12 grid-margin stretch-card">
-    <div class="card">
         <div class="card-body">
             <h4 class="card-title"> البنوك</h4>
             <p class="card-description"> جميع البنوك تحت <code class="rtl">بنك السودان المركزي</code>

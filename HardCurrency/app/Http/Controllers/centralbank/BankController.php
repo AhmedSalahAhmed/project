@@ -28,11 +28,11 @@ class BankController extends Controller
             return view('centralbank.bank', compact('banks', 'states', 'locales'))->renderSections()['content'];
         }
 
-    
+
         // foreach($locales as $locale){
         //     return $locale["1"];
         // };
-        
+
         return view('centralbank.bank', compact('banks', 'states', 'locales'));
     }
 
@@ -55,21 +55,30 @@ class BankController extends Controller
      */
     public function store(Request $request)
     {
+
+        $states = StaticFunctionController::states();
+        $locales = StaticFunctionController::locales();
+        foreach ($states as $state) {
+            // dd($state['value']);
+            if($request->state == $state['value'])
+            $storedState = $state['label'];
+        }
+        
+
         $request->validate([
             'bank_name' => 'required',
             'logo' => 'required',
             'state' => 'required',
-            'district' => 'required',    
+            'district' => 'required',
             'url' => 'required',
         ]);
 
         // dd($request->all());
 
         // $request->logo = $request->file("logo")->store("images");
-
         $bank = Bank::create([
             "bank_name" => $request->bank_name,
-            "state" => $request->state,
+            "state" => $storedState,
             "url" => $request->url,
             "district" => $request->district,
             "logo" => $request->file("logo")->store("images", "public"),
