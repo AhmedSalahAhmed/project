@@ -80,7 +80,7 @@ class EmployeeDashboardController extends Controller
             'client_phone' => $request->client_phone,
             'id_number' => $request->id_number,
             'amount' => $request->amount,
-            'sdgamount' => $request->buy_price * $request->amount,
+            'sdgamount' => $request->buy_price,
             'employee_id' => $request->user()->id,
             'bank_id' => $bank_id,
         ]);

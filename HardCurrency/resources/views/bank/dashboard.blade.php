@@ -68,7 +68,7 @@
                                             @endforeach
 
                                         </select>
-                                        <input type="hidden" name="buy_price" id="buyprice" value="/*{{$bankcurrency->buy_price}}*/" />
+                                        <input type="hidden" name="buy_price" id="buyprice"  />
                                     </div>
 
                                 </div>
@@ -76,7 +76,6 @@
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> المبلغ </label>
                                     <div class="col-sm-9">
                                         <input type="text" id="amount" name="amount" class="form-control" placeholder="  المبلغ بالعملة الاجنبية" onkeyup="mult(this.value);" >
-                                        <!-- <input type="text" id="sdgamount" name="sdgamount" hidden> -->
 
                                     </div>
 
@@ -154,6 +153,7 @@
                                             success: (data) => {
                                                 console.log(data)
                                                 document.getElementById('sdgamount').value = data;
+                                                document.getElementById('buyprice').value = data;
                                             },
                                             fail: (error) => {
                                                 console.log(error)
