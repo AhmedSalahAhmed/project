@@ -17,9 +17,11 @@ class CurrencyGrowth extends JsonResource
         $record = [
             'currency_id' => $this->first()->currency_id,
             'name' => $this->first()->currency_name,
-            'processes' => $this->count()
+            'total' => $this->first()->amount,
+            'month' => $this->first()->month,
+            'processes' => $this->count(),
         ];
 
-        return (Object) $record;
+        return collect($record);
     }
 }

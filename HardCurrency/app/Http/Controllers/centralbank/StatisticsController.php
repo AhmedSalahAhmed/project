@@ -73,31 +73,42 @@ class StatisticsController extends Controller
         $processes = DB::table('processes')
             ->join('bank_currencies', 'bank_currencies.id', '=', 'processes.bank_currency_id')
             ->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
-            ->select('currencies.currency_name', 'bank_currencies.id', 'currency_id', DB::raw('MONTHNAME(processes.created_at) as month, YEAR(processes.created_at) as year'))
+            ->select('currencies.currency_name', 'bank_currencies.id', 'currency_id', 'processes.*', DB::raw('MONTHNAME(processes.created_at) as month, YEAR(processes.created_at) as year, MONTH(processes.created_at) as numMonth'))
             ->get()
             ->where('year', $year)
             ->groupBy('month');
+
         $data = [];
 
+        // return $processes;
+        $currencies = [];
+
         foreach ($processes as $key => $values) {
+            foreach ($values as $value) {
+                if (!in_array($value->currency_id, $currencies)) {
+                    array_push($currencies, $value->currency_id);
+                }
+            }
             $data[] = [
                 'month' => $key,
-                'growth' => CurrencyGrowth::collection($values->groupBy('currency_name')),
+                'growth' => CurrencyGrowth::collection($values->groupBy('currency_name'))->take(3),
             ];
         };
+        $months = [];
+        $currency = [];
 
-        return $data;
+        return collect([
+            "data" => $data,
+            "currencies" => $currencies
+        ]);
     }
 
-    public function top_banks(){
-        $data = Process::select('id','bank_id','bank_currency_id')->orderBy('bank_id')->get()->groupBy('bank_id');
+    public function top_banks()
+    {
+        $data = Process::select('id', 'bank_id', 'bank_currency_id')->orderBy('bank_id')->get()->groupBy('bank_id');
         $records = TobBankUsed::collection($data);
 
         return $records;
-        
-        // foreach($records as $record){
-        //     return $reco
-        // }
     }
 
 }

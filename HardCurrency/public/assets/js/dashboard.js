@@ -2,6 +2,43 @@
   'use strict';
   $(async function () {
 
+    const options = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" }
+    }
+
+    const top_banks = await fetch("top_banks", options)
+      .then((response) => response.json())
+
+    const data = top_banks.data
+    const process = []
+    const banks = []
+    Object.entries(data).map(bank => {
+      process.push(bank[1].processes)
+      banks.push(bank[1].bank.bank_name)
+    });
+
+
+    const currencies_growth = await fetch("currencygrowth", options)
+      .then((response) => response.json())
+
+    let topCurrencies = currencies_growth.currencies.slice(0, 3)
+
+    console.log(topCurrencies);
+    
+    const months = []
+    const datasets = []
+    const total = []
+    Object.entries(currencies_growth.data).map(currency => {
+      months.push(currency[1].month)
+      Object.entries(currency[1].growth).map(growth => {
+        let length = Object.entries(currencies_growth).length
+        currencies.push(growth[1].name)
+        total.push(growth[1].total)
+      });
+    });
+
+
     Chart.defaults.global.legend.labels.usePointStyle = true;
 
     if ($("#serviceSaleProgress").length) {
@@ -218,7 +255,8 @@
       var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['يناير', 'فبراير', 'مارس', 'ابريل', 'مايو', 'يونيو', 'يوليو', 'اغسطس'],
+          // labels: ['يناير', 'فبراير', 'مارس', 'ابريل', 'مايو', 'يونيو', 'يوليو', 'اغسطس'],
+          labels: months,
           datasets: [
             {
               label: "دولار امريكي",
@@ -451,23 +489,7 @@
       var gradientLegendGreen = 'linear-gradient(to right, rgba(6, 185, 157, 1), rgba(132, 217, 210, 1))';
 
 
-      const options = {
-        method: "GET",
-        headers: { "Content-Type": "application/json" }
-      }
 
-      const top_banks = await fetch("top_banks", options)
-        .then((response) => response.json())
-
-      const data = top_banks.data
-      const process = []
-      const banks = []
-      Object.entries(data).map(bank => {
-          process.push(bank[1].processes)
-          banks.push(bank[1].bank.bank_name)
-          // console.log("bank from loop")
-          // console.log(bank[1])
-      });
 
       // console.log(process)
       // console.log(banks)
