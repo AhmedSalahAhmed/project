@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\centralbank;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CurrencyGrowth;
+use App\Http\Resources\TobBankUsed;
 use App\Models\Account;
 use App\Models\BankCurrency;
 use App\Models\Currency;
@@ -26,29 +28,10 @@ class StatisticsController extends Controller
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
-     * 
+     *
      */
     public function index(Request $request)
     {
-
-        // $currencys = Currency::all();
-
-        // $processes = Process::all();
-        // // $processes = DB::table('processes')->get();
-
-        // foreach ($processes as $process) {
-        //     $process->bank_currency_id = BankCurrency::find($process->bank_currency_id);
-        // }
-        // // $processes = (array) $processes;
-        // $counted = [];
-        // foreach ($currencys as $currency) {
-        //     $counted = $processes->filter->bank_currency_id===1;
-        // }
-        // return ($counted);
-
-        // return ($processes);
-        // //////////////////
-
         $currencies = Currency::all();
 
         $banks = DB::table('banks')->count();
@@ -59,9 +42,9 @@ class StatisticsController extends Controller
         if ($request->ajax()) {
 
             return view('centralbank.dashboard', compact('banks', 'balance', 'sdgamount', 'currencies'))
-            ->with('success','تمت تســجيل مدير بنك بنجاح')
-            ->renderSections()['content'];
-            }
+                ->with('success', 'تمت تســجيل مدير بنك بنجاح')
+                ->renderSections()['content'];
+        }
         return view('centralbank.dashboard', compact('banks', 'balance', 'sdgamount', 'currencies'));
     }
     public function store(Request $request)
@@ -83,13 +66,38 @@ class StatisticsController extends Controller
         return view('centralbank.dashboard', compact('banks', 'balance', 'sdgamount', 'symbol', 'currencies'));
     }
 
-    public function getCurrenciesStatistics()
+    public function currencies_growth()
     {
-        $process = Process::all();
+        $year = request()->year ?? now()->year;
 
-        return ($process);
-        // $banks = DB::table('banks')->count();
-        // $sdgamount = DB::table('processes')->sum('sdgamount');
-        // $sdg = BankCurrency::get()->pluck('buy_price', 'currency_id');
+        $processes = DB::table('processes')
+            ->join('bank_currencies', 'bank_currencies.id', '=', 'processes.bank_currency_id')
+            ->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
+            ->select('currencies.currency_name', 'bank_currencies.id', 'currency_id', DB::raw('MONTHNAME(processes.created_at) as month, YEAR(processes.created_at) as year'))
+            ->get()
+            ->where('year', $year)
+            ->groupBy('month');
+        $data = [];
+
+        foreach ($processes as $key => $values) {
+            $data[] = [
+                'month' => $key,
+                'growth' => CurrencyGrowth::collection($values->groupBy('currency_name')),
+            ];
+        };
+
+        return $data;
     }
+
+    public function top_banks(){
+        $data = Process::select('id','bank_id','bank_currency_id')->orderBy('bank_id')->get()->groupBy('bank_id');
+        $records = TobBankUsed::collection($data);
+
+        return $records;
+        
+        // foreach($records as $record){
+        //     return $reco
+        // }
+    }
+
 }
