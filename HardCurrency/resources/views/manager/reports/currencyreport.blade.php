@@ -5,25 +5,19 @@
 <div class="col-xl-12">
     <div class="card mg-b-20">
         <div class="card-header ">
-            <h4>تقارير العملات
+            <h4>تقارير اسعار الصرف
                 <a href="bankreports" style="float: left;">رجوع </a>
-
                 <form action="searchcurrency" method="get" role="search" autocomplete="off">
                     @csrf
                     <div class="for-group row">
-
-
                         <div class="col-sm-3 ">
-
                             <select name="currency_id" id="" class="form-select" onchange="select()">
                                 <option value=""> العملة </option>
-
                                 @foreach($bankcurrenies as $currency)
                                 <option value="{{$currency->id}}">{{$currency->currency_name}}</option>
                                 @endforeach
                             </select>
                         </div>
-
                         <div class="col-lg-3" id="start_at">
                             
                             <div class="input-group">

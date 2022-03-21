@@ -5,7 +5,7 @@
 <div class="col-xl-12">
     <div class="card mg-b-20">
         <div class="card-header ">
-            <h4>تقارير العملات
+            <h4>تقارير خزينة البنك من العملات الاجنبية
         <a href="bankreports" style="float: left;">رجوع </a>
 
         </h4>   

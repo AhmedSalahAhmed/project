@@ -72,11 +72,12 @@
             </div>
 
             <div class="nav-profile-text d-flex flex-column " style="color: white;font-weight:bold;">
-            @foreach($branches as $branch)
-            
-            <span class="font-weight-bold mb-2">{{ $branch->branch_name}}</span>
+                @foreach($banks as $branch)
+
+                <span class="font-weight-bold mb-2"> {{ $branch->bank_name}} </span>
                 @endforeach
             </div>
+
 
 
             </p>
@@ -103,6 +104,13 @@
 
                 </ul>
 
+            </div>
+
+            <div class="nav-profile-text d-flex flex-column " style="color: white;font-weight:bold;">
+                @foreach($branches as $branch)
+
+                <span class="font-weight-bold mb-2 "> فرع {{ $branch->branch_name}}</span>
+                @endforeach
             </div>
             <form method="get" action="{{ route('employee.logout') }}">
                 @csrf
@@ -154,7 +162,7 @@
             // Avoid the link click from loading a new page
             event.preventDefault();
             // Load the content from the link's href attribute
-            window.history.pushState('','',$(this).attr('href'))
+            window.history.pushState('', '', $(this).attr('href'))
             $('.page-body-wrapper').load($(this).attr('href'));
         });
 

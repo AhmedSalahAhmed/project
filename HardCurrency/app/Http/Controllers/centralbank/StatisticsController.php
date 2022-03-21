@@ -107,7 +107,6 @@ class StatisticsController extends Controller
     {
         $data = Process::select('id', 'bank_id', 'bank_currency_id')->orderBy('bank_id')->get()->groupBy('bank_id');
         $records = TobBankUsed::collection($data);
-
         return $records;
     }
 

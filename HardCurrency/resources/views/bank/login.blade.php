@@ -3,7 +3,7 @@
 
 if (!isset($bank)) {
   $bank = [
-    'bank_name' => ' شاشة دخول موظف البنك',
+    'bank_name' => '  تسجيل دخول موظف البنك',
     'logo' => 'images/fisal.jpeg',
   ];
 

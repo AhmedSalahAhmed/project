@@ -6,18 +6,8 @@
       method: "GET",
       headers: { "Content-Type": "application/json" }
     }
-
-    const top_banks = await fetch("top_banks", options)
-      .then((response) => response.json())
-
-    const data = top_banks.data
-    const process = []
-    const banks = []
-    Object.entries(data).map(bank => {
-      process.push(bank[1].processes)
-      banks.push(bank[1].bank.bank_name)
-    });
-
+// console.log(process)
+// console.log("ajaj")
 
     const currencies_growth = await fetch("currencygrowth", options)
       .then((response) => response.json())
@@ -26,17 +16,17 @@
 
     console.log(topCurrencies);
     
-    const months = []
-    const datasets = []
-    const total = []
-    Object.entries(currencies_growth.data).map(currency => {
-      months.push(currency[1].month)
-      Object.entries(currency[1].growth).map(growth => {
-        let length = Object.entries(currencies_growth).length
-        currencies.push(growth[1].name)
-        total.push(growth[1].total)
-      });
-    });
+    // const months = []
+    // const datasets = []
+    // const total = []
+    // Object.entries(currencies_growth.data).map(currency => {
+    //   months.push(currency[1].month)
+    //   Object.entries(currency[1].growth).map(growth => {
+    //     let length = Object.entries(currencies_growth).length
+    //     currencies.push(growth[1].name)
+    //     total.push(growth[1].total)
+    //   });
+    // });
 
 
     Chart.defaults.global.legend.labels.usePointStyle = true;
@@ -255,8 +245,8 @@
       var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          // labels: ['يناير', 'فبراير', 'مارس', 'ابريل', 'مايو', 'يونيو', 'يوليو', 'اغسطس'],
-          labels: months,
+          labels: ['يناير', 'فبراير', 'مارس', 'ابريل', 'مايو', 'يونيو', 'يوليو', 'اغسطس'],
+          // labels: months,
           datasets: [
             {
               label: "دولار امريكي",
@@ -490,7 +480,16 @@
 
 
 
+      const top_banks = await fetch("top_banks", options)
+      .then((response) => response.json())
 
+      const data = top_banks.data
+      const process = []
+      const banks = []
+      Object.entries(data).map(bank => {
+        process.push(bank[1].processes)
+        banks.push(bank[1].bank.bank_name)
+      });
       // console.log(process)
       // console.log(banks)
 
