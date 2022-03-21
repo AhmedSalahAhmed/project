@@ -53,6 +53,11 @@ class Employee extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(Bank::class)->withDefault();
     }
+
+    public function branch(): BelongsTo
+    {
+        return $this->belongsTo(Branch::class)->withDefault();
+    }
      /**
      * Get all of the transactions for the Bank
      *

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Branch extends Model
 {
@@ -36,6 +37,11 @@ class Branch extends Model
     public function bank(): BelongsTo
     {
         return $this->belongsTo(Bank::class)->withDefault();
+    }
+
+    public function employee(): HasMany
+    {
+        return $this->HasMany(Employee::class)->withDefault();
     }
     
 }

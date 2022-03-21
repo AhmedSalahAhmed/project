@@ -69,6 +69,7 @@ Route::group(['prefix' => 'manager'], function () {
         Route::get('/searchcurrency', [App\Http\Controllers\manager\CurrencyReportController::class, 'searchcurrency']);
         Route::get('/processreport', [App\Http\Controllers\manager\CurrencyReportController::class, 'searchprocess']);
         Route::get('/bankaccountreport', [App\Http\Controllers\manager\CurrencyReportController::class, 'bankaccountreport']);
+        Route::get('/top_branches', [App\Http\Controllers\centralbank\StatisticsController::class, 'top_branches']);
 
     });
 });

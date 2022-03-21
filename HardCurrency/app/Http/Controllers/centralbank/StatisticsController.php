@@ -5,11 +5,13 @@ namespace App\Http\Controllers\centralbank;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CurrencyGrowth;
 use App\Http\Resources\TobBankUsed;
+use App\Http\Resources\TobBranchUsed;
 use App\Models\Account;
 use App\Models\BankCurrency;
 use App\Models\Currency;
 use App\Models\Process;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class StatisticsController extends Controller
@@ -82,11 +84,14 @@ class StatisticsController extends Controller
 
         // return $processes;
         $currencies = [];
+        $currenciesAr = [];
 
         foreach ($processes as $key => $values) {
             foreach ($values as $value) {
-                if (!in_array($value->currency_id, $currencies)) {
-                    array_push($currencies, $value->currency_id);
+                // return $value;
+                if (!in_array($value->currency_id, $currenciesAr)) {
+                    array_push($currencies, collect(["id" => $value->currency_id, "name" => $value->currency_name]));
+                    array_push($currenciesAr, $value->currency_id);
                 }
             }
             $data[] = [
@@ -107,6 +112,16 @@ class StatisticsController extends Controller
     {
         $data = Process::select('id', 'bank_id', 'bank_currency_id')->orderBy('bank_id')->get()->groupBy('bank_id');
         $records = TobBankUsed::collection($data);
+        return $records;
+    }
+
+    public function top_Branches()
+    {
+        $bank_id = Auth::user()->bank_id;
+        $data = Process::where("processes.bank_id", $bank_id )->
+        join('employees', 'employees.id', '=', 'processes.employee_id')
+        ->orderBy('branch_id')->get(['employees.*'])->groupBy('branch_id');
+        $records = TobBranchUsed::collection($data);
         return $records;
     }
 

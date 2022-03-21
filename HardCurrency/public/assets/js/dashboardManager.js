@@ -6,16 +6,16 @@
       method: "GET",
       headers: { "Content-Type": "application/json" }
     }
-    // console.log(process)
-    // console.log("ajaj")
+// console.log(process)
+// console.log("ajaj")
 
-    const currencies_growth = await fetch("currencygrowth", options)
-      .then((response) => response.json())
+    // const currencies_growth = await fetch("currencygrowth", options)
+    //   .then((response) => response.json())
 
-    let topCurrencies = currencies_growth.currencies.slice(0, 3)
+    // let topCurrencies = currencies_growth.currencies.slice(0, 3)
 
-    console.log(topCurrencies);
-
+    // console.log(topCurrencies);
+    
     // const months = []
     // const datasets = []
     // const total = []
@@ -27,36 +27,6 @@
     //     total.push(growth[1].total)
     //   });
     // });
-
-
-    const labels = []
-
-    const datasets = []
-
-    currencies_growth.data.forEach(element => {
-      labels.push(element.month)
-    })
-
-    topCurrencies.map(currency => {
-      const currency_amount = []
-      currencies_growth.data.forEach(element => {
-        if (element.growth) {
-          const growth = Object.entries(element.growth)
-          growth.forEach(grow => {
-            if(currency.id == grow[1].currency_id){
-              currency_amount.push(grow[1].total)
-            }
-          });
-        }
-      });
-      datasets.push({
-        label: currency.name,
-        data: currency_amount
-      })
-    })
-
-    console.log("datasets");
-    console.log(datasets);
 
 
     Chart.defaults.global.legend.labels.usePointStyle = true;
@@ -83,12 +53,11 @@
       var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          // labels: ['يناير', 'فبراير', 'مارس', 'ابريل', 'مايو', 'يونيو', 'يوليو', 'اغسطس'],
-          labels,
+          labels: ['يناير', 'فبراير', 'مارس', 'ابريل', 'مايو', 'يونيو', 'يوليو', 'اغسطس'],
+          // labels: months,
           datasets: [
             {
-              // label: "دولار امريكي",
-              label: datasets[0].label,
+              label: "دولار امريكي",
               borderColor: gradientStrokeViolet,
               backgroundColor: gradientStrokeViolet,
               hoverBackgroundColor: gradientStrokeViolet,
@@ -97,12 +66,10 @@
               fill: false,
               borderWidth: 1,
               fill: 'origin',
-              // data: [20, 40, 15, 35, 25, 50, 30, 20]
-              data: datasets[0].data,
+              data: [20, 40, 15, 35, 25, 50, 30, 20]
             },
             {
-              // label: "ريال سعودي",
-              label: datasets[1].label,
+              label: "ريال سعودي",
               borderColor: gradientStrokeRed,
               backgroundColor: gradientStrokeRed,
               hoverBackgroundColor: gradientStrokeRed,
@@ -111,12 +78,10 @@
               fill: false,
               borderWidth: 1,
               fill: 'origin',
-              // data: [40, 30, 20, 10, 50, 15, 35, 40]
-              data: datasets[1].data,
+              data: [40, 30, 20, 10, 50, 15, 35, 40]
             },
             {
-              // label: "درهم اماراتي",
-              label: datasets[2].label,
+              label: "درهم اماراتي",
               borderColor: gradientStrokeBlue,
               backgroundColor: gradientStrokeBlue,
               hoverBackgroundColor: gradientStrokeBlue,
@@ -125,8 +90,7 @@
               fill: false,
               borderWidth: 1,
               fill: 'origin',
-              // data: [70, 10, 30, 40, 25, 50, 15, 30]
-              data: datasets[2].data,
+              data: [70, 10, 30, 40, 25, 50, 15, 30]
             }
           ]
         },
@@ -205,18 +169,19 @@
 
 
 
-      const top_banks = await fetch("top_banks", options)
-        .then((response) => response.json())
+      const top_branches = await fetch("top_branches", options)
+      .then((response) => response.json())
 
-      const data = top_banks.data
+      const data = top_branches.data
       const process = []
-      const banks = []
-      Object.entries(data).map(bank => {
-        process.push(bank[1].processes)
-        banks.push(bank[1].bank.bank_name)
+      const branches = []
+      Object.entries(data).map(branch => {
+        console.log("branch")
+        console.log(branch)
+        process.push(branch[1].processes)
+        branches.push(branch[1].branch.branch_name)
       });
-      // console.log(process)
-      // console.log(banks)
+      console.log(branches)
 
       var trafficChartData = {
         datasets: [{
@@ -244,7 +209,7 @@
         }],
 
         // These labels appear in the legend and in the tooltips when hovering different arcs
-        labels: banks
+        labels: branches
       };
       var trafficChartOptions = {
         responsive: true,

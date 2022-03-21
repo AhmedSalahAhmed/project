@@ -174,7 +174,7 @@
     <script src="{{asset('assets/js/misc.js')}}"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
-    <script src="{{asset('assets/js/dashboard.js')}}"></script>
+    <script src="{{asset('assets/js/dashboardManager.js')}}"></script>
     <script src="{{asset('js/custom.js')}}"></script>
     <script src="{{asset('assets/js/todolist.js')}}"></script>
     <!-- End custom js for this page -->
