@@ -119,8 +119,7 @@ class CurrencyController extends Controller
         $request->validate([
             'abbreviation' => 'required',
             'symbol' => 'required',
-
-
+            'currency_name' => 'required',
         ]);
 
         $currency->update($request->all());

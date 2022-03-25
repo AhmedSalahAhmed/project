@@ -128,7 +128,7 @@
                                                 @method('put')
 
 
-                                                <input id="currency_name{{$currency->id}}" type="text" name="currency_name" class="form-control mb-3" placeholder=" العملة " value="{{$currency->currency_name}}" disabled="disabled"/>
+                                                <input id="currency_name{{$currency->id}}" type="text" name="currency_name" class="form-control mb-3" placeholder=" العملة " value="{{$currency->currency_name}}"/>
                                                 <input id="abbreviation{{$currency->id}}" type="text" name="abbreviation" class="form-control mb-3" placeholder="سعر الشراء " value="{{$currency->abbreviation}}"/>
                                                 <input id="symbol{{$currency->id}}" type="text" name="symbol" class="form-control mb-3" placeholder="سعر البيع " value="{{$currency->symbol}}"/>
                                                 <input id="_token" type="hidden" value="{{ csrf_token() }}"/>
