@@ -50,13 +50,13 @@
                                         <div class="form-group row">
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> الإسم </label>
                                             <div class="col-sm-9">
-                                            <input type="text" name="branch_name" class="form-control"  placeholder=" اسم الفرع  ">
+                                            <input type="text" name="branch_name" class="form-control"  placeholder=" اسم الفرع  " required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> رقم االهاتف </label>
                                             <div class="col-sm-9">
-                                            <input type="text" name="phone_number" class="form-control"  placeholder=" رقم الهاتف   ">
+                                            <input type="text" name="phone_number" class="form-control"  placeholder=" رقم الهاتف   " required>
                                             </div>
                                         </div>
                                         <div class="form-group row">

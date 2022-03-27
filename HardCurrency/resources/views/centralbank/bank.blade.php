@@ -35,19 +35,19 @@
                         </div>
                         <div class="modal-body">
 
-                            <form action="{{ route('banks.store') }}" enctype="multipart/form-data" method="post" class="forms-sample">
+                            <form action="{{ route('banks.store') }}" enctype="multipart/form-data" method="post" class="forms-sample" autocomplete="off">
                                 @csrf
 
                                 <div class="form-group row">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label">إسم البنك </label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="bank_name" class="form-control" placeholder=" إسم البنك">
+                                        <input type="text" name="bank_name" class="form-control" placeholder=" إسم البنك" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> الاسم المختصر </label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="url" class="form-control" placeholder="الاسم المختصر لعنوان ال URL ">
+                                        <input type="text" name="url" class="form-control" placeholder="الاسم المختصر لعنوان ال URL " required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -155,7 +155,7 @@
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label">اسم البنك </label>
                                             <input type="text" id="bank_name{{$bank->id}}" name="bank_name" class="form-control mb-3" placeholder=" اسم البنك " value="{{$bank->bank_name}}" />
                                             <label for="exampleInputEmail2" class="col-sm-3 col-form-label">الولاية </label>
-                                            <select name="state" id="state{{$bank->id}}" class="form-select mySelect">
+                                            <select onchange="updateSelectChange('{{$bank->id}}', event)" name="state" id="state{{$bank->id}}" class="form-select mySelect">
                                                 <option value="">اختر الولاية</option>
                                                 @foreach($states as $state)
                                                 <option selected="{{$state['value'] == $bank->state?true: false}}" value="{{$state['value']}}" label="{{$state['label']}}"></option>
@@ -200,6 +200,21 @@
         var options = $(this).data('options').filter('[value=' + id + ']');
         $('#locale').html(options);
     });
+
+
+    function updateSelectChange(val, e){
+        e.preventDefault()
+        $("#state"+val).change(function() {
+            console.log("h");
+            if ($(this).data('options') === undefined) {
+                /*Taking an array of all options-2 and kind of embedding it on the select1*/
+                $(this).data('options', $('#locale'+val+' option').clone());
+            }
+            var id = $(this).val();
+            var options = $(this).data('options').filter('[value=' + id + ']');
+            $('#locale'+ val).html(options);
+        });
+    }
     
     function submitBanksForm(id, e) {
 

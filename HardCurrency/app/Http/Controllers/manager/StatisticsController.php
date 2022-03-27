@@ -27,7 +27,7 @@ class StatisticsController extends Controller
         // $sdgamount = DB::table('processes')->sum('sdgamount');
         $sdgamount = Process::where('bank_id', $bank_id)->sum('sdgamount');
         $currencies = Currency::all();
-        $branches = DB::table('branches')->count();
+        $branches = DB::table('branches')->where('bank_id', $bank_id)->count();
         $balance = Account::where('bank_id', $bank_id)->sum('balance');
         $proccesses = Process::where('bank_id', $bank_id)->count();
         if ($request->ajax()) {

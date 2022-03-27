@@ -48,7 +48,7 @@
                                 <div class="form-group row">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> الإسم </label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="employee_name" class="form-control" placeholder=" اسم الموظف  ">
+                                        <input type="text" name="employee_name" class="form-control" placeholder=" اسم الموظف  " required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -68,7 +68,7 @@
                                 <div class="form-group row">
                                     <label for="floatingInput" class="col-sm-3 col-form-label"> البريد الإلكتروني</label>
                                     <div class="col-sm-9">
-                                        <input type="email" name="email" class="form-control" id="floatingInput" placeholder="البريد الالكتروني ">
+                                        <input type="email" name="email" class="form-control" id="floatingInput" placeholder="البريد الالكتروني " required>
                                     </div>
                                 </div>
                                 <div class="form-group row">

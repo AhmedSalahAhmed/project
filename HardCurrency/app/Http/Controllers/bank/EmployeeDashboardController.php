@@ -28,7 +28,14 @@ class EmployeeDashboardController extends Controller
         $branch_id = Auth::user()->branch_id;
         $banks = Bank::where('id', $bank_id)->get();
         $branches = Branch::where('id', $branch_id)->get();
+        $last_process = Process::orderBy('id', 'DESC')->where("bank_id", $bank_id)->first();
 
+        $last_currency= null;
+        if($last_process){
+            $bankCurr = BankCurrency::find($last_process->bank_currency_id);
+            $last_currency= $bankCurr->currency;
+        }
+// return($last_currency_id->currency_name);
       
         // dd($bank_id);
 
@@ -39,9 +46,9 @@ class EmployeeDashboardController extends Controller
         // ->get(['transaction.*', 'bank_currencies.currency_name']);
         // return $transactions;
         if ($request->ajax()) {
-            return view('bank.dashboard', compact('bankcurrencies', 'currencies', 'banks', 'branches'))->renderSections()['content'];
+            return view('bank.dashboard', compact('bankcurrencies', 'currencies', 'banks', 'branches' , 'last_process' ,'last_currency'))->renderSections()['content'];
         }
-        return view('bank.dashboard', compact('bankcurrencies', 'currencies', 'banks', 'branches'));
+        return view('bank.dashboard', compact('bankcurrencies', 'currencies', 'banks', 'branches' , 'last_process' ,'last_currency'));
     }
 
     /**

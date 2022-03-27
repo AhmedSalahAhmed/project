@@ -32,7 +32,7 @@
             </form>
         </div>
         <div class="col-sm-1 col-md-1">
-            <button id="print" class="btn btn-success">طباعة</button>
+            <button id="printBtn" class="btn btn-success">طباعة</button>
         </div>
         <div class="card-body">
             <div class="table-responsive">

@@ -78,21 +78,22 @@
                     <tbody>
                       
 
-                        <tr>
-
-
-                            @foreach ($accounts as $account)
-                            <td>{{$account->currency_name}}</td>
-                            <td>{{$account->abbreviation}}</td>
-                            <td>{{$account->bank_name}}</td>
-
-                            <td>{{$account->balance}} {{$account->symbol}}</td>
-
-
-                        </tr>
-
-
+                        
+                        
+                        @foreach ($accounts as $account)
+                            <tr>
+                                <td>{{$account->currency_name}}</td>
+                                <td>{{$account->abbreviation}}</td>
+                                <td>{{$account->bank_name}}</td>
+                                <td>{{$account->balance}} {{$account->symbol}}</td>
+                            </tr>
                         @endforeach
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>المجموع</td>
+                            <td> {{$total}} {{$account->symbol}} </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

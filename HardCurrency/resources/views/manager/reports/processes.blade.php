@@ -81,7 +81,7 @@
         <div class="table-responsive">
             @if (isset($details))
 
-            <div id="print">
+            <div class="print">
                 <table class="table">
                     <thead>
                         <tr>
@@ -91,8 +91,6 @@
                             <th> الموظف </th>
                             <th> الفرع</th>
                             <th> تاريخ المعاملة </th>
-
-
                         </tr>
                     </thead>
                     <tbody>

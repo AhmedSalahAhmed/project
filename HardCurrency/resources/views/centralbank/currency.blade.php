@@ -58,9 +58,9 @@
 
                                     @csrf
 
-                                    <input type="text" name="currency_name" class="form-control mb-3" placeholder=" العملة ">
-                                    <input type="text" name="abbreviation" class="form-control mb-3" placeholder=" الرمز ">
-                                    <input type="text" name="symbol" class="form-control mb-3" placeholder="العلامة  ">
+                                    <input type="text" name="currency_name" class="form-control mb-3" placeholder=" العملة " required>
+                                    <input type="text" name="abbreviation" class="form-control mb-3" placeholder=" الرمز " required>
+                                    <input type="text" name="symbol" class="form-control mb-3" placeholder="العلامة  " required>
                                     <button class="btn btn-twitter float-end px-5" type="submit">تم</button>
 
                                 </form>

@@ -8,6 +8,7 @@ use App\Http\Resources\States;
 use App\Models\Account;
 use App\Models\Bank;
 use App\Models\BankCurrency;
+use App\Models\Currency;
 use App\Models\CurrencyPrice;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -28,7 +29,6 @@ class BankController extends Controller
         if ($request->ajax()) {
             return view('centralbank.bank', compact('banks', 'states', 'locales'))->renderSections()['content'];
         }
-
 
         // foreach($locales as $locale){
         //     return $locale["1"];
@@ -61,10 +61,11 @@ class BankController extends Controller
         $locales = StaticFunctionController::locales();
         foreach ($states as $state) {
             // dd($state['value']);
-            if($request->state == $state['value'])
-            $storedState = $state['label'];
+            if ($request->state == $state['value']) {
+                $storedState = $state['label'];
+            }
+
         }
-        
 
         $request->validate([
             'bank_name' => 'required',
@@ -85,23 +86,21 @@ class BankController extends Controller
             "logo" => $request->file("logo")->store("images", "public"),
         ]);
 
-
         $process = new Process(["cd", "/media/siddig/windows/websites/project/HardCurrency"]);
         $process = new Process(["valet", "link", $bank->url]);
         $process->run();
 
         $process = new Process(["cd", "/media/siddig/windows/websites/project/HardCurrency"]);
-        $process = new Process(["valet", "link", "admin".$bank->url]);
+        $process = new Process(["valet", "link", "admin" . $bank->url]);
         $process->run();
 
         $process = new Process(["cd", "/media/siddig/windows/websites/project/HardCurrency"]);
-        $process = new Process(["valet", "link", "teller".$bank->url]);
+        $process = new Process(["valet", "link", "teller" . $bank->url]);
         $process->run();
 
         $process = new Process(["cd", "/media/siddig/windows/websites/project/HardCurrency"]);
-        $process = new Process(["valet", "link", "teller".$bank->url]);
+        $process = new Process(["valet", "link", "teller" . $bank->url]);
         $process->run();
-
 
         // $bank = Bank::create($request->all());
 
@@ -119,9 +118,15 @@ class BankController extends Controller
                 "sale_price" => $price->sale_price,
                 "balance" => 0,
             ]);
+            
+        }
+
+        $currencies =Currency::all();
+
+        foreach($currencies as $currency){
             Account::create([
                 "bank_id" => $bank->id,
-                "currency_id" => $price->currency_id,
+                "currency_id" => $currency->id,
                 "balance" => 0,
             ]);
         }
@@ -169,6 +174,33 @@ class BankController extends Controller
             'state' => 'required',
             'district' => 'required',
         ]);
+        $states = StaticFunctionController::states();
+        $locales = StaticFunctionController::locales();
+
+        $stats = $request->state;
+
+        foreach ($states as $state) {
+            // dd($state['value']);
+            if ($request->state == $state['value']) {
+                $request["state"] = $state['label'];
+            }
+
+        }
+
+        // foreach ($locales[0][$stats] as $locale) {
+        //     // dd($state['value']);
+        //     if ($request->district == $locale['value']) {
+                // $storedDistrict = $locale['label'];
+        //     }
+        // }
+
+        // $bank = Bank::create();
+
+        // $bank->update([
+        //     "bank_name" => $request->bank_name,
+        //     "state" => $storedState,
+        //     "district" => $$request->district,
+        // ]);
 
         $bank->update($request->all());
         Alert::success('تهانينا !!', 'تم تعديل بيانات البنك بنجاح');

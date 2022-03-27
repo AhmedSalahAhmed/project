@@ -89,10 +89,10 @@
 
                                             @csrf
 
-                                            <input id="currency_id{{$price->id}}" type="hidden" name="currency_id" class="form-control mb-3" placeholder=" العملة  " value="{{$price->currency_id}}">
+                                            <input id="currency_id{{$price->id}}" type="hidden" name="currency_id" class="form-control mb-3" placeholder=" العملة  " value="{{$price->currency_id}}" required>
                                             <input name="currency_id" type="text" class="form-control mb-3" placeholder=" العملة  " value="{{$price->currency->currency_name}}" disabled>
-                                            <input id="buy_price{{$price->id}}" type="text" name="buy_price" class="form-control mb-3" placeholder="سعر الشراء " value="{{$price->buy_price}}">
-                                            <input id="sale_price{{$price->id}}" type="text" name="sale_price" class="form-control mb-3" placeholder="سعر البيع " value="{{$price->sale_price}}">
+                                            <input id="buy_price{{$price->id}}" type="number" name="buy_price" class="form-control mb-3" placeholder="سعر الشراء " value="{{$price->buy_price}}" required>
+                                            <input id="sale_price{{$price->id}}" type="number" name="sale_price" class="form-control mb-3" placeholder="سعر البيع " value="{{$price->sale_price}}" required>
                                             <input id="_token" type="hidden" value="{{ csrf_token() }}" />
 
 

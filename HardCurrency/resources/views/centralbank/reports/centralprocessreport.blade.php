@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-sm-3 ">
+                        <!-- <div class="col-sm-3 ">
 
                             <select name="bank_id" id="" class="form-select" onchange="select()">
                                 <option value=""> البنك </option>
@@ -43,7 +43,7 @@
                                 <option value="{{$currency->id}}">{{$currency->currency_name}}</option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div> -->
                         <div class="col-sm-3 ">
 
                             <button class="btn btn-twitter">بحث</button>
@@ -69,11 +69,11 @@
                     </thead>
                     <tbody>
                         <tr>
-                            @foreach ($accounts as $account)
+                            @foreach ($process as $account)
                             <td>{{$account->currency_name}}</td>
                             <td>{{$account->abbreviation}}</td>
                             <td>{{$account->bank_name}}</td>
-                            <td>{{$account->balance}} {{$account->symbol}}</td>
+                            <td>{{$account->amount}} {{$account->symbol}}</td>
                         </tr>
                         @endforeach
                     </tbody>

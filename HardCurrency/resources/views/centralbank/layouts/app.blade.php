@@ -89,7 +89,7 @@
                     </li>
                     @if(Auth::user()->type == 'admin')
                     <li class="nav-item">
-                        <a class="nav-link" href="users"><i class="far fa-calendar-alt"></i>المستخدمين </a>
+                        <a class="nav-link" href="users"><i class="far fa-calendar-alt"></i>الموظفين </a>
                     </li>
                     @endif
 
@@ -98,7 +98,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="managers"><i class="far fa-calendar-alt"></i>الموظفين </a>
+                        <a class="nav-link" href="managers"><i class="far fa-calendar-alt"></i> مدراء البنوك</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="currency"><i class="fas fa-tachometer-alt"></i> العملات</a>
@@ -190,16 +190,7 @@
                 copyTagClasses: false,
             });
         });
-        $(".mySelect").change(function() {
-            console.log("h");
-            if ($(this).data('options') === undefined) {
-                /*Taking an array of all options-2 and kind of embedding it on the select1*/
-                $(this).data('options', $('.mySelect2 option').clone());
-            }
-            var id = $(this).val();
-            var options = $(this).data('options').filter('[value=' + id + ']');
-            $('.mySelect2').html(options);
-        });
+       
         
     </script>
 

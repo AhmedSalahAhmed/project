@@ -29,6 +29,8 @@ class CentralReportController extends Controller
                 $accounts = Account::join('currencies', 'accounts.currency_id', '=', 'currencies.id')
                     ->join('banks', 'accounts.bank_id', '=', 'banks.id')
                     ->get(['accounts.*', 'currencies.*', 'banks.bank_name']);
+                    $total = $accounts->sum("balance");
+                    // return $total;
             } elseif ($request->bank_id == '' or $request->currency_id == '') {
                 $accounts = Account::where('bank_id', $request->bank_id)
                     ->orwhere('currency_id', $request->currency_id)
@@ -38,6 +40,8 @@ class CentralReportController extends Controller
 
 
                     ->get(['accounts.*', 'currencies.*', 'banks.bank_name']);
+                    $total = $accounts->sum("balance");
+                    // return $total;
             } elseif ($request->bank_id != '' and $request->currency_id != '') {
                 $accounts = Account::where('bank_id', $request->bank_id)
                     ->where('currency_id', $request->currency_id)
@@ -45,6 +49,8 @@ class CentralReportController extends Controller
                     ->join('banks', 'accounts.bank_id', '=', 'banks.id')
 
                     ->get(['accounts.*', 'currencies.*', 'banks.bank_name']);
+                    $total = $accounts->sum("balance");
+                    // return $total;
             }
         } else {
             if ($request->bank_id == '' && $request->currency_id == '') {
@@ -53,6 +59,8 @@ class CentralReportController extends Controller
                     ->get(['accounts.*', 'currencies.*', 'banks.bank_name'])
                     ->whereBetween('created_at', [$start_at, $end_at])
                     ;
+                    $total = $accounts->sum("balance");
+                    // return $total;
             } elseif ($request->bank_id == '' or $request->currency_id == '') {
                 $accounts = Account::where('bank_id', $request->bank_id)
                     ->orwhere('currency_id', $request->currency_id)
@@ -63,6 +71,8 @@ class CentralReportController extends Controller
 
                     ->get(['accounts.*', 'currencies.*', 'banks.bank_name'])
                     ->whereBetween('created_at', [$start_at, $end_at]);
+                    $total = $accounts->sum("balance");
+                    // return $total;
             } elseif ($request->bank_id != '' and $request->currency_id != '') {
                 $accounts = Account::where('bank_id', $request->bank_id)
                     ->where('currency_id', $request->currency_id)
@@ -71,13 +81,16 @@ class CentralReportController extends Controller
 
                     ->get(['accounts.*', 'currencies.*', 'banks.bank_name'])
                     ->whereBetween('created_at', [$start_at, $end_at]);
+
+                    $total = $accounts->sum("balance");
+                    // return $total;
             }
         }
         if ($request->ajax()) {
-            return view('centralbank.reports.centralaccountreport', compact('accounts', 'currencies', 'banks'))
+            return view('centralbank.reports.centralaccountreport', compact('accounts', 'currencies', 'banks', 'total'))
                 ->renderSections()['content'];
         }
-        return view('centralbank.reports.centralaccountreport', compact('accounts', 'currencies', 'banks'));
+        return view('centralbank.reports.centralaccountreport', compact('accounts', 'currencies', 'banks', 'total'));
     }
     public function processesreport(Request $request)
     {
@@ -91,63 +104,70 @@ class CentralReportController extends Controller
         $end_at = date($request->end_at);
         // $processes = Process::with('currencies:id,currency_name,abbreviation')->get();
         // return $processes;
+        $currency_id  = Process::
+        join('bank_currencies', 'bank_currencies.id', '=', 'processes.bank_currency_id')
+        ->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')->get('currencies.id');
         if ($request->start_at == '' && $request->end_at == '') {
             if ($request->bank_id == '' && $request->currency_id == '') {
-                $accounts = Account::join('currencies', 'accounts.currency_id', '=', 'currencies.id')
-                    ->join('banks', 'accounts.bank_id', '=', 'banks.id')
+                $process = Process::
+                join('bank_currencies', 'bank_currencies.id', '=', 'processes.bank_currency_id')
+                ->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
+                ->join('banks', 'processes.bank_id', '=', 'banks.id')
                     // ->join('processes', 'processes.currency_id', '=', 'currencies.id')
-                    ->get(['accounts.*', 'currencies.*', 'banks.bank_name']);
+                    ->get(['processes.*', 'currencies.*', 'banks.bank_name']);
             } elseif ($request->bank_id == '' or $request->currency_id == '') {
-                $accounts = Account::where('bank_id', $request->bank_id)
-                    ->orwhere('currency_id', $request->currency_id)
+                $process = Process::where('bank_id', $request->bank_id)
+                    ->orwhere($currency_id  , $request->currency_id)
 
-                    ->join('currencies', 'accounts.currency_id', '=', 'currencies.id')
-                    ->join('banks', 'accounts.bank_id', '=', 'banks.id')
+                    ->join('currencies', 'processes.currency_id', '=', 'currencies.id')
+                    ->join('banks', 'processes.bank_id', '=', 'banks.id')
 
 
-                    ->get(['accounts.*', 'currencies.*', 'banks.bank_name']);
+                    ->get(['processes.*', 'currencies.*', 'banks.bank_name']);
             } elseif ($request->bank_id != '' and $request->currency_id != '') {
-                $accounts = Account::where('bank_id', $request->bank_id)
-                    ->where('currency_id', $request->currency_id)
-                    ->join('currencies', 'accounts.currency_id', '=', 'currencies.id')
-                    ->join('banks', 'accounts.bank_id', '=', 'banks.id')
+                $process = Process::where('bank_id', $request->bank_id)
+                    ->where($currency_id  , $request->currency_id)
+                    ->join('currencies', 'processes.currency_id', '=', 'currencies.id')
+                    ->join('banks', 'processes.bank_id', '=', 'banks.id')
 
-                    ->get(['accounts.*', 'currencies.*', 'banks.bank_name']);
+                    ->get(['processes.*', 'currencies.*', 'banks.bank_name']);
             }
         } else {
             if ($request->bank_id == '' && $request->currency_id == '') {
-                $accounts = Account::join('currencies', 'accounts.currency_id', '=', 'currencies.id')
-                    ->join('banks', 'accounts.bank_id', '=', 'banks.id')
-                    ->get(['accounts.*', 'currencies.*', 'banks.bank_name',
+                $process = Process::
+                join('bank_currencies', 'bank_currencies.id', '=', 'processes.bank_currency_id')
+                ->join('currencies', 'bank_currencies.currency_id', '=', 'currencies.id')
+                    ->join('banks', 'processes.bank_id', '=', 'banks.id')
+                    ->get(['processes.*', 'currencies.*', 'banks.bank_name',
                     
                     ])
                     ->whereBetween('created_at', [$start_at, $end_at])
                     ;
             } elseif ($request->bank_id == '' or $request->currency_id == '') {
-                $accounts = Account::where('bank_id', $request->bank_id)
-                    ->orwhere('currency_id', $request->currency_id)
+                $process = Process::where('bank_id', $request->bank_id)
+                    ->orwhere($currency_id  , $request->currency_id)
 
-                    ->join('currencies', 'accounts.currency_id', '=', 'currencies.id')
-                    ->join('banks', 'accounts.bank_id', '=', 'banks.id')
+                    ->join('currencies', 'processes.currency_id', '=', 'currencies.id')
+                    ->join('banks', 'processes.bank_id', '=', 'banks.id')
 
 
-                    ->get(['accounts.*', 'currencies.*', 'banks.bank_name'])
+                    ->get(['processes.*', 'currencies.*', 'banks.bank_name'])
                     ->whereBetween('created_at', [$start_at, $end_at]);
             } elseif ($request->bank_id != '' and $request->currency_id != '') {
-                $accounts = Account::where('bank_id', $request->bank_id)
+                $process = Process::where('bank_id', $request->bank_id)
                     ->where('currency_id', $request->currency_id)
-                    ->join('currencies', 'accounts.currency_id', '=', 'currencies.id')
-                    ->join('banks', 'accounts.bank_id', '=', 'banks.id')
+                    ->join('currencies', 'processes.currency_id', '=', 'currencies.id')
+                    ->join('banks', 'processes.bank_id', '=', 'banks.id')
 
-                    ->get(['accounts.*', 'currencies.*', 'banks.bank_name'])
+                    ->get(['processes.*', 'currencies.*', 'banks.bank_name'])
                     ->whereBetween('created_at', [$start_at, $end_at]);
             }
         }
 
         if ($request->ajax()) {
-            return view('centralbank.reports.centralaccountreport', compact('accounts', 'currencies', 'banks'))
+            return view('centralbank.reports.centralprocessreport', compact('process', 'currencies', 'banks'))
                 ->renderSections()['content'];
         }
-        return view('centralbank.reports.centralaccountreport', compact('accounts', 'currencies', 'banks'));
+        return view('centralbank.reports.centralprocessreport', compact('process', 'currencies', 'banks'));
     }
 }

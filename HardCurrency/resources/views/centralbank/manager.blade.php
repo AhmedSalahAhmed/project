@@ -61,13 +61,13 @@
                                 <div class="form-group row">
                                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label"> الإسم </label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="manager_name" class="form-control" placeholder=" اسم مدير البنك ">
+                                        <input type="text" name="manager_name" class="form-control" placeholder=" اسم مدير البنك " required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="floatingInput" class="col-sm-3 col-form-label"> البريد الإلكتروني</label>
                                     <div class="col-sm-9">
-                                        <input type="email" name="email" class="form-control" id="floatingInput" placeholder="البريد الالكتروني ">
+                                        <input type="email" name="email" class="form-control" id="floatingInput" placeholder="البريد الالكتروني " required>
                                     </div>
                                 </div>
 
